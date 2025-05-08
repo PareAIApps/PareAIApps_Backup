@@ -1,0 +1,41 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Pare_ai_pk" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/green_light</item>
+        <item name="colorPrimaryVariant">@color/green_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/sky_blue</item>
+        <item name="colorSecondaryVariant">@color/sun_yellow</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">@color/green_dark</item>
+    </style>
+
+    <!-- Tema tanpa action bar -->
+    <style name="Theme.Pare_ai_pk.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item> <!-- Ikon status bar hitam -->
+        <item name="android:colorBackground">@color/white</item> <!-- Background app putih -->
+    </style>
+
+    <style name="Theme.Pare_ai_pk.DarkGreenStatusBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@color/green_dark</item>
+        <!-- Tidak menyetel android:windowLightStatusBar agar ikon status bar tetap putih -->
+        <item name="android:colorBackground">@color/white</item>
+    </style>
+
+
+    <style name="RoundedImageView">
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.RoundedImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "910333591798",
+    "project_id": "pare-ai",
+    "storage_bucket": "pare-ai.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:910333591798:android:346d844d75f080f066acd7",
+        "android_client_info": {
+          "package_name": "pnj.pk.pareaipk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "910333591798-fgrb1mlvu4ugdv83n5sajqu3jmpfjde4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pnj.pk.pareaipk",
+            "certificate_hash": "25e9e7b53758b236702942b40784b9bdd879ac1a"
+          }
+        },
+        {
+          "client_id": "910333591798-k2nap1mdpicksmf8nn6g8eq6qd2v1jbh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1QfQfAkB4npxlqCRRDNtjFCgG4KcVECk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "910333591798-k2nap1mdpicksmf8nn6g8eq6qd2v1jbh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

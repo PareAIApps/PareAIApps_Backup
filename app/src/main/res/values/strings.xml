@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Pare AI</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="web_client_id">910333591798-k2nap1mdpicksmf8nn6g8eq6qd2v1jbh.apps.googleusercontent.com</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Lupa Password?</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="illustration">Ilustrasi</string>
+
+    <!--  Login  -->
+    <string name="sign_in_google">Masuk Dengan Google</string>
+    <string name="option_sign_in">Atau Login Dengan</string>
+    <string name="email_invalid">Invalid email format</string>
+    <string name="password_short">Password cannot be less than 6 characters</string>
+    <string name="not_have_account">Belum punya akun?&#160;</string>
+
+    <!--  Register   -->
+    <string name="confirm_password">Konfirmasi Password</string>
+    <string name="have_account">Sudah punya akun?&#160;</string>
+
+    <!--  Forgot Passoword  -->
+    <string name="change_password">Ganti Password</string>
+    <string name="forgot_password_description">Masukkan email Anda untuk menerima tautan reset password</string>
+
+    <!--  Scam  -->
+    <string name="img_cant_found">Image not found</string>
+    <string name="camera_permission">Camera permission is required to proceed</string>
+    <string name="uri_photo_fail">Failed to get the photo URI</string>
+    <string name="img_empty">Please insert the image file first</string>
+
+
+</resources>

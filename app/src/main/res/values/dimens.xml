@@ -1,0 +1,17 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <style name="CircularShape">
+        <!-- Mengatur radius untuk membuat bentuk lingkaran -->
+        <item name="shapeAppearanceOverlay">@style/CircularCornerShape</item>
+    </style>
+
+    <style name="CircularCornerShape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item> <!-- Mengatur menjadi lingkaran -->
+    </style>
+
+
+</resources>

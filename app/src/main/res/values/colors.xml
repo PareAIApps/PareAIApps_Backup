@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="green_dark">#2F6D4F</color>
+    <color name="green_light">#3C9D6D</color>
+    <color name="green_third">#6BD4B1</color>
+    <color name="sky_blue">#B4D5EB</color>
+    <color name="sun_yellow">#F5D76E</color>
+    <color name="black">#000000</color>
+    <color name="white_primary">#FFFFFF</color>
+    <color name="white">#F2F5F1</color>
+    <color name="red">#E53935</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="black_secondary">#1A1A1A</color>
+    <color name="black_third">#333333</color>
+    <color name="black_quaternary">#4D4D4D</color>
+    <color name="black_disabled">#666666</color>
+    <color name="black_hint">#808080</color>
+    <color name="white_secondary">#E6E9E5</color>
+    <color name="white_third">#D9DDD8</color>
+    <color name="white_quaternary">#CCD2CB</color>
+    <color name="white_disabled">#BFC6BE</color>
+    <color name="white_hint">#B0B7AF</color>
+
+
+    <color name="switch_track_inactive">#B0BEC5</color>
+    <color name="thumb_tint_active">#A3C583</color>
+    <color name="thumb_tint_inactive">#888888</color>
+</resources>

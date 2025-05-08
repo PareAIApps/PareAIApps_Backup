@@ -1,0 +1,36 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="160dp"
+    android:layout_height="160dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="16dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageStory"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_gravity="top"
+            android:contentDescription="Story Image"
+            android:scaleType="centerCrop"
+            android:src="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/textStory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="7dp"
+            android:text="Lorem Ipsum dolor"
+            android:textAlignment="center"
+            android:textColor="@color/black_hint"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </FrameLayout>
+</androidx.cardview.widget.CardView>
