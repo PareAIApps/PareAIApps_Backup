@@ -1,10 +1,7 @@
 package pnj.pk.pareaipk.ui.scan
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -14,12 +11,11 @@ import pnj.pk.pareaipk.data.response.ModelMLResponse
 import pnj.pk.pareaipk.data.retrofit.ApiConfig
 import pnj.pk.pareaipk.database.entity.HistoryEntity
 import pnj.pk.pareaipk.ui.history.HistoryViewModel
+import pnj.pk.pareaipk.utils.Event
 import pnj.pk.pareaipk.utils.reduceFileImage
 import java.io.File
 import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
-import kotlin.text.toInt
+import java.util.*
 
 class HasilScanViewModel(application: Application) : AndroidViewModel(application) {
     private val apiService = ApiConfig.getApiService()
@@ -28,6 +24,9 @@ class HasilScanViewModel(application: Application) : AndroidViewModel(applicatio
     private val _predictionResult = MutableLiveData<Result<ModelMLResponse>>()
     val predictionResult: LiveData<Result<ModelMLResponse>> = _predictionResult
 
+    private val _popupMessage = MutableLiveData<Event<String>>()
+    val popupMessage: LiveData<Event<String>> = _popupMessage
+
     fun predictImage(imageFile: File, description: String = "Apple classification") {
         viewModelScope.launch {
             try {
@@ -35,9 +34,7 @@ class HasilScanViewModel(application: Application) : AndroidViewModel(applicatio
 
                 val requestImageFile = compressedFile.asRequestBody("image/jpeg".toMediaType())
                 val imageMultipart = MultipartBody.Part.createFormData(
-                    "image",
-                    compressedFile.name,
-                    requestImageFile
+                    "image", compressedFile.name, requestImageFile
                 )
 
                 val descriptionRequestBody = description.toRequestBody("text/plain".toMediaType())
@@ -48,6 +45,12 @@ class HasilScanViewModel(application: Application) : AndroidViewModel(applicatio
                 if (response.isSuccessful) {
                     val mlResponse = response.body()
                     if (mlResponse != null) {
+                        if (mlResponse.classLabel == "Objek Tidak Tersedia.") {
+                            _popupMessage.value = Event("Objek Tidak Tersedia. Silakan scan ulang.")
+                            _predictionResult.value = Result.success(mlResponse)
+                            return@launch
+                        }
+
                         val scanHistory = HistoryEntity(
                             imageUri = imageFile.toString(),
                             result = mlResponse.classLabel,
@@ -62,7 +65,6 @@ class HasilScanViewModel(application: Application) : AndroidViewModel(applicatio
                         )
 
                         historyScanViewModel.insertScanHistory(scanHistory)
-
                         _predictionResult.value = Result.success(mlResponse)
                     } else {
                         _predictionResult.value = Result.failure(Exception("Empty response body"))

@@ -32,5 +32,18 @@
     <string name="uri_photo_fail">Failed to get the photo URI</string>
     <string name="img_empty">Please insert the image file first</string>
 
+    <!--   About   -->
+    <string name="about_us_content">
+    PareAI (Padi Rice Expert AI) adalah sebuah aplikasi berbasis teknologi Machine Learning dan Large Language Models (LLMs) yang dikembangkan untuk membantu petani dalam mendeteksi dan mengidentifikasi penyakit tanaman padi secara otomatis dan akurat. Aplikasi ini merupakan hasil dari proyek kolaboratif mahasiswa Program Studi Teknik Informatika, Jurusan Teknik Informatika dan Komputer, Politeknik Negeri Jakarta.\n\nLatar belakang pengembangan PareAI berasal dari permasalahan nyata yang dihadapi oleh petani dalam mengenali gejala penyakit tanaman. Kesalahan diagnosis sering kali menyebabkan penggunaan pestisida berlebihan, yang berdampak pada lingkungan dan hasil panen. Oleh karena itu, PareAI hadir sebagai solusi pertanian cerdas berbasis teknologi.\n\n
+    Fitur utama aplikasi:\n
+    • Deteksi penyakit padi berbasis citra daun menggunakan CNN (Convolutional Neural Network)\n
+    • ChatBot berbasis LLMs untuk memberikan informasi dan rekomendasi penanganan kepada petani secara interaktif\n
+    • Antarmuka sederhana dan ramah pengguna, mudah digunakan oleh petani di berbagai daerah.\n\n
+    Teknologi yang digunakan:\n
+    - Android Studio (Kotlin)\n
+    - Firebase (Database dan Autentikasi)\n
+    - Google Cloud Platform (Pemrosesan model Machine Learning).\n\nInstitusi:\nProgram Studi Teknik Informatika Politeknik Negeri Jakarta Tahun 2025.\n\nKami berharap PareAI dapat menjadi solusi nyata yang berdampak positif bagi petani, serta mendukung pertanian yang lebih efisien, berkelanjutan, dan berbasis data.
+</string>
+
 
 </resources>

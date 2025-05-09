@@ -1,18 +1,18 @@
 package pnj.pk.pareaipk.ui.scan
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import pnj.pk.pareaipk.R
+import pnj.pk.pareaipk.MainActivity
 import pnj.pk.pareaipk.databinding.ActivityHasilScanBinding
 import pnj.pk.pareaipk.utils.uriToFile
 import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import java.util.*
 
 class HasilScanActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHasilScanBinding
@@ -53,17 +53,16 @@ class HasilScanActivity : AppCompatActivity() {
             binding.historyContainer.visibility = View.VISIBLE
 
             result.onSuccess { mlResponse ->
-                // Update UI with result
                 binding.historyTitle.text = mlResponse.classLabel
+                val confidencePercent = (mlResponse.confidence * 100).toInt()
                 binding.confidenceText.text = " %.2f%%".format(mlResponse.confidence * 100)
+                binding.confidenceProgressBar.progress = confidencePercent
+
                 binding.historyDescription.text = mlResponse.description.ifEmpty { "No description." }
                 binding.suggestionText.text = mlResponse.suggestion.ifEmpty { "No suggestion." }
                 binding.receiptText.text = mlResponse.tools_receipt.ifEmpty { "No receipt." }
                 binding.tutorialText.text = mlResponse.tutorial.ifEmpty { "No tutorial." }
 
-
-
-                // Show current timestamp
                 val createdAt = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(Date())
                 binding.createdAt.text = "Created at: $createdAt"
             }
@@ -72,6 +71,26 @@ class HasilScanActivity : AppCompatActivity() {
                 Toast.makeText(this, "Prediction failed: ${exception.message}", Toast.LENGTH_SHORT).show()
                 binding.historyTitle.text = "Prediction Error"
                 binding.historyDescription.text = exception.message ?: "Unknown error occurred"
+            }
+        }
+
+        // 🚨 AlertDialog untuk "Objek Tidak Tersedia." dan navigasi ke ScanFragment
+        viewModel.popupMessage.observe(this) { event ->
+            event.getContentIfNotHandled()?.let { message ->
+                androidx.appcompat.app.AlertDialog.Builder(this)
+                    .setTitle("Peringatan")
+                    .setMessage(message)
+                    .setCancelable(false)
+                    .setPositiveButton("OK") { dialog, _ ->
+                        dialog.dismiss()
+                        // Kirim intent ke MainActivity untuk membuka ScanFragment
+                        val intent = Intent(this, MainActivity::class.java)
+                        intent.putExtra("navigateToScan", true)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                        startActivity(intent)
+                        finish()
+                    }
+                    .show()
             }
         }
     }

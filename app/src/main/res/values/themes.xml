@@ -22,13 +22,6 @@
         <item name="android:colorBackground">@color/white</item> <!-- Background app putih -->
     </style>
 
-    <style name="Theme.Pare_ai_pk.DarkGreenStatusBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:statusBarColor">@color/green_dark</item>
-        <!-- Tidak menyetel android:windowLightStatusBar agar ikon status bar tetap putih -->
-        <item name="android:colorBackground">@color/white</item>
-    </style>
-
-
     <style name="RoundedImageView">
         <item name="cornerSize">12dp</item>
     </style>
