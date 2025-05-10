@@ -17,6 +17,7 @@ import pnj.pk.pareaipk.database.room.UserRoomDatabase
 
 class LoginActivityViewModel(application: Application) : AndroidViewModel(application) {
 
+    private val TAG = "LoginViewModel"
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val userRepository: UserRepository
 
@@ -41,24 +42,26 @@ class LoginActivityViewModel(application: Application) : AndroidViewModel(applic
                         if (task.isSuccessful) {
                             val currentUser = auth.currentUser
 
-                            // Verify if user profile exists in Room, if not create it
+                            // Check if user profile exists in Room
                             viewModelScope.launch {
                                 try {
                                     val existingProfile = userRepository.getUserProfileSync(email)
                                     if (existingProfile == null) {
-                                        // Create a basic profile if none exists
+                                        // Only create a new profile if one doesn't exist
+                                        Log.d(TAG, "No profile found for $email, creating new profile")
                                         val userProfile = UserProfile(
                                             email = email,
                                             name = email.substringBefore("@"),
                                             profileImageUri = null
                                         )
                                         userRepository.saveUserProfile(userProfile)
+                                    } else {
+                                        Log.d(TAG, "Using existing profile for $email: $existingProfile")
                                     }
                                     _user.postValue(currentUser)
                                     _loginError.postValue(null)
                                 } catch (e: Exception) {
-                                    Log.e("LoginViewModel", "Error checking/creating user profile", e)
-                                    // Still set the user, as authentication succeeded
+                                    Log.e(TAG, "Error checking/creating user profile", e)
                                     _user.postValue(currentUser)
                                     _loginError.postValue(null)
                                 }
@@ -66,12 +69,12 @@ class LoginActivityViewModel(application: Application) : AndroidViewModel(applic
                         } else {
                             _user.postValue(null)
                             _loginError.postValue("Email atau password salah.")
-                            Log.w("LoginViewModel", "signInWithEmail:failure", task.exception)
+                            Log.w(TAG, "signInWithEmail:failure", task.exception)
                         }
                     }
             } catch (e: Exception) {
                 _loginError.postValue("Terjadi kesalahan: ${e.localizedMessage}")
-                Log.e("LoginViewModel", "Error during sign-in", e)
+                Log.e(TAG, "Error during sign-in", e)
             }
         }
     }
@@ -86,26 +89,30 @@ class LoginActivityViewModel(application: Application) : AndroidViewModel(applic
                         if (task.isSuccessful) {
                             val currentUser = auth.currentUser
 
-                            // For Google sign-in, create or update the user profile in Room
                             viewModelScope.launch {
                                 try {
                                     val email = currentUser?.email ?: return@launch
 
-                                    // Use Firebase user display name, email, and photo URL
-                                    val userProfile = UserProfile(
-                                        email = email,
-                                        name = currentUser.displayName ?: email.substringBefore("@"),
-                                        profileImageUri = currentUser.photoUrl?.toString()
-                                    )
+                                    // Check if user profile exists in Room first
+                                    val existingProfile = userRepository.getUserProfileSync(email)
 
-                                    // Save to Room database
-                                    userRepository.saveUserProfile(userProfile)
+                                    if (existingProfile == null) {
+                                        // Only create a new profile if one doesn't exist
+                                        Log.d(TAG, "No profile found for Google user $email, creating new profile")
+                                        val userProfile = UserProfile(
+                                            email = email,
+                                            name = currentUser.displayName ?: email.substringBefore("@"),
+                                            profileImageUri = currentUser.photoUrl?.toString()
+                                        )
+                                        userRepository.saveUserProfile(userProfile)
+                                    } else {
+                                        Log.d(TAG, "Using existing profile for Google user $email: $existingProfile")
+                                    }
 
                                     _user.postValue(currentUser)
                                     _loginError.postValue(null)
                                 } catch (e: Exception) {
-                                    Log.e("LoginViewModel", "Error saving Google user profile", e)
-                                    // Still set the user, as authentication succeeded
+                                    Log.e(TAG, "Error checking/saving Google user profile", e)
                                     _user.postValue(currentUser)
                                     _loginError.postValue(null)
                                 }
@@ -113,12 +120,12 @@ class LoginActivityViewModel(application: Application) : AndroidViewModel(applic
                         } else {
                             _user.postValue(null)
                             _loginError.postValue("Google Sign-In gagal.")
-                            Log.w("LoginViewModel", "signInWithCredential:failure", task.exception)
+                            Log.w(TAG, "signInWithCredential:failure", task.exception)
                         }
                     }
             } catch (e: Exception) {
                 _loginError.postValue("Terjadi kesalahan: ${e.localizedMessage}")
-                Log.e("LoginViewModel", "Error during Google sign-in", e)
+                Log.e(TAG, "Error during Google sign-in", e)
             }
         }
     }
@@ -132,18 +139,21 @@ class LoginActivityViewModel(application: Application) : AndroidViewModel(applic
                     val existingProfile = userRepository.getUserProfileSync(email)
 
                     if (existingProfile == null) {
-                        // Create a profile if none exists for currently logged in user
+                        // Create a profile only if none exists
+                        Log.d(TAG, "No profile found for current user $email, creating new profile")
                         val userProfile = UserProfile(
                             email = email,
                             name = currentUser.displayName ?: email.substringBefore("@"),
                             profileImageUri = currentUser.photoUrl?.toString()
                         )
                         userRepository.saveUserProfile(userProfile)
+                    } else {
+                        Log.d(TAG, "Using existing profile for current user $email: $existingProfile")
                     }
 
                     _user.postValue(currentUser)
                 } catch (e: Exception) {
-                    Log.e("LoginViewModel", "Error in checkCurrentUser", e)
+                    Log.e(TAG, "Error in checkCurrentUser", e)
                     _user.postValue(currentUser)
                 }
             }
