@@ -8,7 +8,7 @@ data class HistoryEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val imageUri: String,
-    val result: String,
+    val class_label: String,
     val confidenceScore: Int,
     val scanDate: String,
     val explanation: String,

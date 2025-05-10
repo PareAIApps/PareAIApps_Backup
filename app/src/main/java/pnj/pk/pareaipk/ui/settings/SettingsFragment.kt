@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import pnj.pk.pareaipk.R
 import pnj.pk.pareaipk.databinding.FragmentSettingsBinding
 import pnj.pk.pareaipk.ui.about.AboutActivity
+import pnj.pk.pareaipk.ui.account.AccountActivity
 import pnj.pk.pareaipk.ui.login.LoginActivity
 
 class SettingsFragment : Fragment() {
@@ -27,12 +28,19 @@ class SettingsFragment : Fragment() {
         val settingsViewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
+        // Setting up onClickListeners
         binding.btnLogout.setOnClickListener {
             logOut()
         }
 
         binding.btnAbout.setOnClickListener {
             val intent = Intent(activity, AboutActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Add this code to open the AccountActivity
+        binding.btnAccount.setOnClickListener {
+            val intent = Intent(activity, AccountActivity::class.java)
             startActivity(intent)
         }
 

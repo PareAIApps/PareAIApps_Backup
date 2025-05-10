@@ -20,7 +20,7 @@ class HistoryHorizontalAdapter(
         private val image: ImageView = itemView.findViewById(R.id.imageStory)
 
         fun bind(item: HistoryEntity) {
-            title.text = item.result
+            title.text = item.class_label
             Glide.with(itemView.context)
                 .load(item.imageUri)
                 .into(image)

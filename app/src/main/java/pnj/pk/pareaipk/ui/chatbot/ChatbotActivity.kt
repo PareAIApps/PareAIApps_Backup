@@ -1,5 +1,6 @@
 package pnj.pk.pareaipk.ui.chatbot
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.webkit.ConsoleMessage
@@ -13,6 +14,7 @@ import pnj.pk.pareaipk.databinding.ActivityChatbotBinding
 class ChatbotActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityChatbotBinding
+    private var webViewState: Bundle? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +28,20 @@ class ChatbotActivity : AppCompatActivity() {
         supportActionBar?.title = "Chatbot Nara"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        setupWebView()
+
+        // Restore WebView state if available
+        savedInstanceState?.let { savedState ->
+            savedState.getBundle("webViewState")?.let { webViewBundle ->
+                binding.webview.restoreState(webViewBundle)
+            }
+        } ?: run {
+            // Load URL only if there's no saved state
+            binding.webview.loadUrl("file:///android_asset/chatbot.html")
+        }
+    }
+
+    private fun setupWebView() {
         val webView = binding.webview
         webView.settings.javaScriptEnabled = true
         webView.settings.domStorageEnabled = true
@@ -61,9 +77,20 @@ class ChatbotActivity : AppCompatActivity() {
                 return super.shouldOverrideUrlLoading(view, request)
             }
         }
+    }
 
-        // Load the local HTML file or remote URL for the chatbot
-        webView.loadUrl("file:///android_asset/chatbot.html")
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        // Save WebView state
+        val webViewBundle = Bundle()
+        binding.webview.saveState(webViewBundle)
+        outState.putBundle("webViewState", webViewBundle)
+    }
+
+    // Handle configuration changes manually
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        // No need to reload anything as the activity won't be recreated
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -75,4 +75,7 @@ dependencies {
 
     implementation (libs.material.v140)
 
+    implementation (libs.circleimageview)
+
+
 }

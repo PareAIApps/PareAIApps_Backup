@@ -38,6 +38,16 @@ class UserRepository(
         userProfileDao.insertProfile(updatedProfile)
     }
 
+    // Add this method to save a user profile directly
+    suspend fun saveUserProfile(userProfile: UserProfile) = withContext(Dispatchers.IO) {
+        userProfileDao.insertProfile(userProfile)
+    }
+
+    // Add this method to check if a profile exists synchronously
+    suspend fun getUserProfileSync(email: String): UserProfile? = withContext(Dispatchers.IO) {
+        userProfileDao.getUserProfileSync(email)
+    }
+
     fun logout() {
         auth.signOut()
     }

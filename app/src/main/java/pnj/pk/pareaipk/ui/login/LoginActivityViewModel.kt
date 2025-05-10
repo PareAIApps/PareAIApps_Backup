@@ -11,10 +11,19 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.coroutines.launch
+import pnj.pk.pareaipk.database.entity.UserProfile
+import pnj.pk.pareaipk.database.repository.UserRepository
+import pnj.pk.pareaipk.database.room.UserRoomDatabase
 
 class LoginActivityViewModel(application: Application) : AndroidViewModel(application) {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val userRepository: UserRepository
+
+    init {
+        val database = UserRoomDatabase.getDatabase(application)
+        userRepository = UserRepository(database, auth)
+    }
 
     // LiveData untuk user
     private val _user = MutableLiveData<FirebaseUser?>()
@@ -31,11 +40,32 @@ class LoginActivityViewModel(application: Application) : AndroidViewModel(applic
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             val currentUser = auth.currentUser
-                            _user.postValue(currentUser)
-                            _loginError.postValue(null)
+
+                            // Verify if user profile exists in Room, if not create it
+                            viewModelScope.launch {
+                                try {
+                                    val existingProfile = userRepository.getUserProfileSync(email)
+                                    if (existingProfile == null) {
+                                        // Create a basic profile if none exists
+                                        val userProfile = UserProfile(
+                                            email = email,
+                                            name = email.substringBefore("@"),
+                                            profileImageUri = null
+                                        )
+                                        userRepository.saveUserProfile(userProfile)
+                                    }
+                                    _user.postValue(currentUser)
+                                    _loginError.postValue(null)
+                                } catch (e: Exception) {
+                                    Log.e("LoginViewModel", "Error checking/creating user profile", e)
+                                    // Still set the user, as authentication succeeded
+                                    _user.postValue(currentUser)
+                                    _loginError.postValue(null)
+                                }
+                            }
                         } else {
                             _user.postValue(null)
-                            _loginError.postValue("Email atau password salah.") // <<< custom error
+                            _loginError.postValue("Email atau password salah.")
                             Log.w("LoginViewModel", "signInWithEmail:failure", task.exception)
                         }
                     }
@@ -55,11 +85,34 @@ class LoginActivityViewModel(application: Application) : AndroidViewModel(applic
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             val currentUser = auth.currentUser
-                            _user.postValue(currentUser)
-                            _loginError.postValue(null)
+
+                            // For Google sign-in, create or update the user profile in Room
+                            viewModelScope.launch {
+                                try {
+                                    val email = currentUser?.email ?: return@launch
+
+                                    // Use Firebase user display name, email, and photo URL
+                                    val userProfile = UserProfile(
+                                        email = email,
+                                        name = currentUser.displayName ?: email.substringBefore("@"),
+                                        profileImageUri = currentUser.photoUrl?.toString()
+                                    )
+
+                                    // Save to Room database
+                                    userRepository.saveUserProfile(userProfile)
+
+                                    _user.postValue(currentUser)
+                                    _loginError.postValue(null)
+                                } catch (e: Exception) {
+                                    Log.e("LoginViewModel", "Error saving Google user profile", e)
+                                    // Still set the user, as authentication succeeded
+                                    _user.postValue(currentUser)
+                                    _loginError.postValue(null)
+                                }
+                            }
                         } else {
                             _user.postValue(null)
-                            _loginError.postValue("Google Sign-In gagal.") // <<< custom error
+                            _loginError.postValue("Google Sign-In gagal.")
                             Log.w("LoginViewModel", "signInWithCredential:failure", task.exception)
                         }
                     }
@@ -71,6 +124,31 @@ class LoginActivityViewModel(application: Application) : AndroidViewModel(applic
     }
 
     fun checkCurrentUser() {
-        _user.value = auth.currentUser
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            viewModelScope.launch {
+                try {
+                    val email = currentUser.email ?: return@launch
+                    val existingProfile = userRepository.getUserProfileSync(email)
+
+                    if (existingProfile == null) {
+                        // Create a profile if none exists for currently logged in user
+                        val userProfile = UserProfile(
+                            email = email,
+                            name = currentUser.displayName ?: email.substringBefore("@"),
+                            profileImageUri = currentUser.photoUrl?.toString()
+                        )
+                        userRepository.saveUserProfile(userProfile)
+                    }
+
+                    _user.postValue(currentUser)
+                } catch (e: Exception) {
+                    Log.e("LoginViewModel", "Error in checkCurrentUser", e)
+                    _user.postValue(currentUser)
+                }
+            }
+        } else {
+            _user.postValue(null)
+        }
     }
 }

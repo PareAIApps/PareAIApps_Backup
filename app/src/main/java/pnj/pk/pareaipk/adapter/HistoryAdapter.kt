@@ -28,7 +28,7 @@ class HistoryAdapter(
 
         fun bind(scanHistory: HistoryEntity) {
             binding.apply {
-                textTitle.text = scanHistory.result
+                textTitle.text = scanHistory.class_label
                 textScanDate.text = scanHistory.scanDate
 
                 // Assuming you have a method to load image from URI

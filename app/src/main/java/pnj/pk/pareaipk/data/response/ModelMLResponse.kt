@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ModelMLResponse(
     @SerializedName("class_label")
-    val classLabel: String,
+    val class_label: String,
 
     @SerializedName("confidence")
     val confidence: Double,

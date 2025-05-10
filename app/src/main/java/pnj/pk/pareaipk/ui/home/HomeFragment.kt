@@ -1,6 +1,7 @@
 package pnj.pk.pareaipk.ui.home
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -79,6 +80,15 @@ class HomeFragment : Fragment() {
         binding.buttonChat.setOnClickListener {
             val intent = Intent(requireContext(), ChatbotActivity::class.java)
             startActivity(intent)
+        }
+
+        // Setup Hubungi Kami click listener
+        binding.card2.setOnClickListener {
+            val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:pareaiproject@gmail.com")
+                putExtra(Intent.EXTRA_SUBJECT, "Hubungi Kami")
+            }
+            startActivity(Intent.createChooser(emailIntent, "Kirim email ke kami"))
         }
 
         // Dummy artikel

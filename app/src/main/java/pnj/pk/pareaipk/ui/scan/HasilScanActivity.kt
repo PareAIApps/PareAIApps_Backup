@@ -53,7 +53,7 @@ class HasilScanActivity : AppCompatActivity() {
             binding.historyContainer.visibility = View.VISIBLE
 
             result.onSuccess { mlResponse ->
-                binding.historyTitle.text = mlResponse.classLabel
+                binding.historyTitle.text = mlResponse.class_label
                 val confidencePercent = (mlResponse.confidence * 100).toInt()
                 binding.confidenceText.text = " %.2f%%".format(mlResponse.confidence * 100)
                 binding.confidenceProgressBar.progress = confidencePercent

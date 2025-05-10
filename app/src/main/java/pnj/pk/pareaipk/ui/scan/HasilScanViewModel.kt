@@ -45,7 +45,7 @@ class HasilScanViewModel(application: Application) : AndroidViewModel(applicatio
                 if (response.isSuccessful) {
                     val mlResponse = response.body()
                     if (mlResponse != null) {
-                        if (mlResponse.classLabel == "Objek Tidak Tersedia.") {
+                        if (mlResponse.class_label == "Objek Tidak Tersedia.") {
                             _popupMessage.value = Event("Objek Tidak Tersedia. Silakan scan ulang.")
                             _predictionResult.value = Result.success(mlResponse)
                             return@launch
@@ -53,7 +53,7 @@ class HasilScanViewModel(application: Application) : AndroidViewModel(applicatio
 
                         val scanHistory = HistoryEntity(
                             imageUri = imageFile.toString(),
-                            result = mlResponse.classLabel,
+                            class_label = mlResponse.class_label,
                             confidenceScore = (mlResponse.confidence * 100).toInt(),
                             scanDate = currentDateTime,
                             explanation = "No explanation from server",

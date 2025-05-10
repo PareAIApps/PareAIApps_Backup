@@ -10,6 +10,8 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="illustration">Ilustrasi</string>
+    <string name="welcome">Selamat Datang di Pare AI</string>
+    <string name="home_description">Aplikasi untuk deteksi penyakit, hama, dan solusi perawatan padi.</string>
 
     <!--  Login  -->
     <string name="sign_in_google">Masuk Dengan Google</string>
@@ -43,7 +45,7 @@
     - Android Studio (Kotlin)\n
     - Firebase (Database dan Autentikasi)\n
     - Google Cloud Platform (Pemrosesan model Machine Learning).\n\nInstitusi:\nProgram Studi Teknik Informatika Politeknik Negeri Jakarta Tahun 2025.\n\nKami berharap PareAI dapat menjadi solusi nyata yang berdampak positif bagi petani, serta mendukung pertanian yang lebih efisien, berkelanjutan, dan berbasis data.
-</string>
+    </string>
 
 
 </resources>

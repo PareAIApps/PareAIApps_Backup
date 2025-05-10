@@ -21,7 +21,7 @@ abstract class UserRoomDatabase : RoomDatabase() {
                 Room.databaseBuilder(
                     context.applicationContext,
                     UserRoomDatabase::class.java,
-                    "cek_apel_database"
+                    "pare_ai_database"
                 ).build().also { INSTANCE = it }
             }
         }

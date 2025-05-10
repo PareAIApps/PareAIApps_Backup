@@ -24,6 +24,14 @@
         android:theme="@style/Theme.Pare_ai_pk"
         tools:targetApi="31">
         <activity
+            android:name=".ui.change_profile.ChangeProfileActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Pare_ai_pk.NoActionBar" />
+        <activity
+            android:name=".ui.account.AccountActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Pare_ai_pk.NoActionBar" />
+        <activity
             android:name=".ui.article.ArticleActivity"
             android:exported="false" />
         <activity
@@ -36,6 +44,7 @@
             android:theme="@style/Theme.Pare_ai_pk.NoActionBar" />
         <activity
             android:name=".ui.chatbot.ChatbotActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="false"
             android:theme="@style/Theme.Pare_ai_pk.NoActionBar" />
         <activity

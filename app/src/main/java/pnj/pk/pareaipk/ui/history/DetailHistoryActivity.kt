@@ -40,7 +40,7 @@ class DetailHistoryActivity : AppCompatActivity() {
         detailViewModel.scanHistoryItem.observe(this, Observer { scanHistory ->
             scanHistory?.let {
                 // Populate UI with scan history details
-                binding.historyTitle.text = scanHistory.result
+                binding.historyTitle.text = scanHistory.class_label
 
                 // Parse confidence score from String to Float for ProgressBar
                 val confidenceStr = scanHistory.confidenceScore.toString()
