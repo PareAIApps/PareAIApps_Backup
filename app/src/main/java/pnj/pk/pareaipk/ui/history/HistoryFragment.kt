@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import pnj.pk.pareaipk.adapter.HistoryAdapter
+import pnj.pk.pareaipk.adapter.HistoryFilterAdapter
 import pnj.pk.pareaipk.databinding.FragmentHistoryBinding
 
 class HistoryFragment : Fragment() {
@@ -17,6 +18,20 @@ class HistoryFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: HistoryViewModel by viewModels()
     private lateinit var scanHistoryAdapter: HistoryAdapter
+    private lateinit var filterAdapter: HistoryFilterAdapter
+    private val filterLabels = listOf(
+        "Semua",
+        "Bacterial Leaf Blight",
+        "Brown Spot",
+        "False Smut",
+        "Healthy Plant",
+        "Hispa",
+        "Neck Blast",
+        "Sheath Blight Rot",
+        "Stemborer",
+        "Wereng"
+    )
+    private var currentFilter = "Semua"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,11 +44,24 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupRecyclerView()
+        setupFilterRecyclerView()
+        setupHistoryRecyclerView()
         observeScanHistory()
     }
 
-    private fun setupRecyclerView() {
+    private fun setupFilterRecyclerView() {
+        filterAdapter = HistoryFilterAdapter(filterLabels) { selectedFilter ->
+            currentFilter = selectedFilter
+            filterHistoryItems()
+        }
+
+        binding.recyclerViewFilter.apply {
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = filterAdapter
+        }
+    }
+
+    private fun setupHistoryRecyclerView() {
         scanHistoryAdapter = HistoryAdapter(
             onDeleteClick = { scanHistory ->
                 viewModel.deleteScanHistory(scanHistory)
@@ -54,12 +82,26 @@ class HistoryFragment : Fragment() {
 
     private fun observeScanHistory() {
         viewModel.allScanHistory.observe(viewLifecycleOwner) { scanHistoryList ->
-            scanHistoryAdapter.submitList(scanHistoryList)
+            // Store the full list in the ViewModel
+            viewModel.setFullHistoryList(scanHistoryList)
 
-            // Toggle empty state visibility
-            binding.emptyStateLayout.visibility =
-                if (scanHistoryList.isEmpty()) View.VISIBLE else View.GONE
+            // Apply current filter
+            filterHistoryItems()
         }
+    }
+
+    private fun filterHistoryItems() {
+        val filteredList = if (currentFilter == "Semua") {
+            viewModel.fullHistoryList.value ?: emptyList()
+        } else {
+            viewModel.fullHistoryList.value?.filter { it.class_label == currentFilter } ?: emptyList()
+        }
+
+        scanHistoryAdapter.submitList(filteredList)
+
+        // Toggle empty state visibility
+        binding.emptyStateLayout.visibility =
+            if (filteredList.isEmpty()) View.VISIBLE else View.GONE
     }
 
     override fun onDestroyView() {
