@@ -13,5 +13,12 @@
         <item name="cornerSize">50%</item> <!-- Mengatur menjadi lingkaran -->
     </style>
 
+    <style name="SwitchCompatGreen" parent="Theme.AppCompat.Light">
+        <!-- Warna thumb switch saat aktif -->
+        <item name="colorControlActivated">#4CAF50</item>
+        <!-- Warna track switch saat aktif (lebih transparan) -->
+        <item name="android:colorForeground">#42000000</item>
+        <item name="android:colorControlActivated">#4CAF50</item>
+    </style>
 
 </resources>

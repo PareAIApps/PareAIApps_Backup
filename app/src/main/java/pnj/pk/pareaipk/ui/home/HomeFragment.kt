@@ -9,14 +9,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.launch
 import pnj.pk.pareaipk.R
 import pnj.pk.pareaipk.adapter.ArticleAdapter
 import pnj.pk.pareaipk.adapter.HistoryHorizontalAdapter
 import pnj.pk.pareaipk.data.response.ArticleResponse
+import pnj.pk.pareaipk.data.retrofit.ApiConfig
 import pnj.pk.pareaipk.databinding.FragmentHomeBinding
+import pnj.pk.pareaipk.ui.article.ArticleActivity
 import pnj.pk.pareaipk.ui.chatbot.ChatbotActivity
 import pnj.pk.pareaipk.ui.history.DetailHistoryActivity
 import pnj.pk.pareaipk.ui.history.HistoryViewModel
@@ -91,15 +95,23 @@ class HomeFragment : Fragment() {
             startActivity(Intent.createChooser(emailIntent, "Kirim email ke kami"))
         }
 
-        // Dummy artikel
-        val articleList = listOf(
-            ArticleResponse("Penyakit Daun", "Cara mengenali dan mengatasi penyakit daun.", "5 Mei 2024", R.drawable.ic_launcher_background),
-            ArticleResponse("Hama Tikus", "Tips mengusir hama tikus dari sawah.", "3 Mei 2024", R.drawable.ic_launcher_background),
-            ArticleResponse("Pemupukan Efektif", "Waktu dan teknik pemupukan yang tepat.", "1 Mei 2024", R.drawable.ic_launcher_background)
-        )
+        // Setup artikel dari API
+        setupArticles()
 
-        articleAdapter = ArticleAdapter(articleList) { article ->
-            Toast.makeText(requireContext(), "Klik artikel: ${article.title}", Toast.LENGTH_SHORT).show()
+        return root
+    }
+
+    private fun setupArticles() {
+        // Inisialisasi adapter kosong terlebih dahulu
+        articleAdapter = ArticleAdapter(emptyList()) { article ->
+            // Handle article click - navigasi ke ArticleActivity
+            val intent = Intent(requireContext(), ArticleActivity::class.java).apply {
+                putExtra(ArticleActivity.EXTRA_ARTICLE_TITLE, article.label)
+                putExtra(ArticleActivity.EXTRA_ARTICLE_DATE, article.createdAt)
+                putExtra(ArticleActivity.EXTRA_ARTICLE_DESCRIPTION, article.description)
+                putExtra(ArticleActivity.EXTRA_ARTICLE_IMAGE, article.imageUrl)
+            }
+            startActivity(intent)
         }
 
         binding.recyclerViewArticle.apply {
@@ -107,7 +119,49 @@ class HomeFragment : Fragment() {
             adapter = articleAdapter
         }
 
-        return root
+        // Ambil data artikel dari API
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                val apiService = ApiConfig.getApiService()
+                val response = apiService.getArticles()
+
+                if (response.isSuccessful) {
+                    val articlesMap = response.body()
+                    if (articlesMap != null) {
+                        // Convert map values to list
+                        val articlesList = articlesMap.values.toList()
+
+                        // Update adapter dengan data dari API
+                        articleAdapter = ArticleAdapter(articlesList) { article ->
+                            // Handle article click - navigasi ke ArticleActivity
+                            val intent = Intent(requireContext(), ArticleActivity::class.java).apply {
+                                putExtra(ArticleActivity.EXTRA_ARTICLE_TITLE, article.label)
+                                putExtra(ArticleActivity.EXTRA_ARTICLE_DATE, article.createdAt)
+                                putExtra(ArticleActivity.EXTRA_ARTICLE_DESCRIPTION, article.description)
+                                putExtra(ArticleActivity.EXTRA_ARTICLE_IMAGE, article.imageUrl)
+                            }
+                            startActivity(intent)
+                        }
+                        binding.recyclerViewArticle.adapter = articleAdapter
+                    }
+                } else {
+                    // Handle error
+                    Toast.makeText(
+                        requireContext(),
+                        "Gagal memuat artikel: " + response.message(),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } catch (e: Exception) {
+                // Handle exception
+                Toast.makeText(
+                    requireContext(),
+                    "Terjadi kesalahan: " + e.message,
+                    Toast.LENGTH_SHORT
+                ).show()
+                e.printStackTrace() // Log error for debugging
+            }
+        }
     }
 
     override fun onDestroyView() {

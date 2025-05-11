@@ -3,6 +3,8 @@ package pnj.pk.pareaipk.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import pnj.pk.pareaipk.R
 import pnj.pk.pareaipk.data.response.ArticleResponse
 import pnj.pk.pareaipk.databinding.ItemArticleBinding
 
@@ -15,11 +17,19 @@ class ArticleAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(article: ArticleResponse) {
-            binding.imageArticle.setImageResource(article.imageResId) // ID diperbaiki
-            binding.textTitle.text = article.title
-            binding.textDescription.text = article.description
-            binding.textDate.text = article.date
+            // Load image using Glide from imageUrl
+            Glide.with(binding.root.context)
+                .load(article.imageUrl)
+                .placeholder(R.drawable.logo)
+                .error(R.drawable.logo)
+                .into(binding.imageArticle)
 
+            // Set text data from ArticleResponse
+            binding.textTitle.text = article.label
+            binding.textDescription.text = article.subtitle
+            binding.textDate.text = article.createdAt
+
+            // Article click listener
             binding.root.setOnClickListener {
                 onItemClick(article)
             }

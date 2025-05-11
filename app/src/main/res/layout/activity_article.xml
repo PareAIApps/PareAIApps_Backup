@@ -5,30 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/green_light">
-
-        <TextView
-            android:id="@+id/toolbarTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Detail Artikel"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="16dp" />
-    </androidx.appcompat.widget.Toolbar>
-
     <!-- Konten Scroll -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:padding="16dp">
+        android:padding="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,39 +20,39 @@
                 android:id="@+id/imageDetailArticle"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:scaleType="centerCrop"
-                android:contentDescription="Gambar Detail Artikel"
-                android:src="@drawable/logo"
                 android:background="@drawable/rounded"
-                android:clipToOutline="true" />
+                android:clipToOutline="true"
+                android:contentDescription="Gambar Detail Artikel"
+                android:scaleType="centerCrop"
+                android:src="@drawable/logo" />
 
             <TextView
                 android:id="@+id/textDetailTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Judul Artikel"
-                android:textSize="20sp"
-                android:textStyle="bold"
                 android:textColor="@color/black"
-                android:layout_marginTop="16dp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textDetailDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:text="07 Mei 2025"
-                android:textSize="14sp"
                 android:textColor="@color/black_disabled"
-                android:layout_marginTop="4dp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/textDetailDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:text="Ini adalah deskripsi lengkap dari artikel. Konten ini menjelaskan secara rinci isi artikel yang dipilih oleh pengguna."
-                android:textSize="16sp"
                 android:textColor="@color/black"
-                android:layout_marginTop="12dp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
     </ScrollView>
@@ -86,6 +67,7 @@
         app:backgroundTint="@color/white"
         app:tint="@color/green_light"
         android:layout_gravity="bottom|end"
-        android:layout_margin="16dp" />
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="56dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

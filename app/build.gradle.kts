@@ -77,5 +77,10 @@ dependencies {
 
     implementation (libs.circleimageview)
 
+    // WorkManager for notification scheduling
+    implementation (libs.androidx.work.runtime.ktx)
+
+    // DataStore Preferences for settings storage
+    implementation (libs.androidx.datastore.preferences)
 
 }
