@@ -3,6 +3,7 @@ package pnj.pk.pareaipk.database.repository
 import android.net.Uri
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -15,6 +16,11 @@ class UserRepository(
 ) {
     private val TAG = "UserRepository"
     private val userProfileDao = database.userProfileDao()
+
+    // Add missing getCurrentUser method
+    fun getCurrentUser(): FirebaseUser? {
+        return auth.currentUser
+    }
 
     fun getCurrentUserProfile(): Flow<UserProfile?> {
         val currentUser = auth.currentUser

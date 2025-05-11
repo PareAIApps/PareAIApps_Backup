@@ -1,10 +1,10 @@
 package pnj.pk.pareaipk.ui.forgot_password
 
-import android.content.DialogInterface
-import androidx.appcompat.app.AlertDialog
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import pnj.pk.pareaipk.R
 import pnj.pk.pareaipk.databinding.ActivityForgotPasswordBinding
@@ -19,41 +19,42 @@ class ForgotPasswordActivity : AppCompatActivity() {
         binding = ActivityForgotPasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Observing reset status from ViewModel
-        forgotPasswordViewModel.resetStatus.observe(this) { message ->
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        supportActionBar?.hide()
 
-            if (message.contains("Tautan reset")) {
-                // Show confirmation dialog after sending the reset link
-                showConfirmationDialog()
-            }
-        }
-
-        // Send Reset Link button click listener
         binding.sendResetLinkButton.setOnClickListener {
             val email = binding.emailInput.text.toString().trim()
 
-            // Show progress bar when sending reset email
-            binding.progressBar.visibility = android.view.View.VISIBLE
+            if (email.isEmpty()) {
+                Toast.makeText(this, getString(R.string.enter_email), Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-            // Send reset password request through ViewModel
-            forgotPasswordViewModel.sendPasswordResetEmail(email)
+            binding.progressBar.visibility = View.VISIBLE
 
-            // Hide progress bar after operation is completed
-            binding.progressBar.visibility = android.view.View.GONE
+            forgotPasswordViewModel.sendPasswordResetEmail(
+                email = email,
+                onSuccess = { emailAddress ->
+                    binding.progressBar.visibility = View.GONE
+                    val message = getString(R.string.reset_link_sent, emailAddress)
+                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                    showConfirmationDialog()
+                },
+                onFailure = { errorMessage ->
+                    binding.progressBar.visibility = View.GONE
+                    val message = getString(R.string.reset_link_failed, errorMessage)
+                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                }
+            )
         }
-
-        supportActionBar?.hide()
     }
 
     private fun showConfirmationDialog() {
-        // Create AlertDialog to confirm email reset request
         AlertDialog.Builder(this)
-            .setTitle("Email Reset Sent")
-            .setMessage("A password reset link has been sent to your email. Please check your inbox.")
-            .setPositiveButton("OK") { dialog, _ ->
+            .setTitle(getString(R.string.email_reset_title))
+            .setMessage(getString(R.string.email_reset_message))
+            .setPositiveButton(getString(R.string.ok)) { dialog, _ ->
                 dialog.dismiss()
-                finish()  // Close ForgotPasswordActivity and go back to login screen
+                finish()
             }
             .setCancelable(false)
             .show()

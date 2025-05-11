@@ -36,7 +36,7 @@ class HistoryFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -64,6 +64,7 @@ class HistoryFragment : Fragment() {
     private fun setupHistoryRecyclerView() {
         scanHistoryAdapter = HistoryAdapter(
             onDeleteClick = { scanHistory ->
+                // The confirmation dialog is now handled in the adapter
                 viewModel.deleteScanHistory(scanHistory)
             },
             onDetailClick = { scanHistory ->

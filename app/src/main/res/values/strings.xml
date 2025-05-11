@@ -3,6 +3,8 @@
     <string name="title_home">Beranda</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifikasi</string>
+    <string name="title_history">Riwayat</string>
+    <string name="title_scan">Scan</string>
     <string name="title_settings">Pengaturan</string>
     <string name="web_client_id">910333591798-k2nap1mdpicksmf8nn6g8eq6qd2v1jbh.apps.googleusercontent.com</string>
     <string name="email">Email</string>
@@ -11,15 +13,43 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="illustration">Ilustrasi</string>
+    <string name="icon">Icon</string>
+    <string name="button">Tombol</string>
+    <string name="image">Gambar</string>
+    <string name="contact_us_subject">Hubungi Kami</string>
+    <string name="send_email_to_us">Kirim email ke kami</string>
+    <string name="contact_email">pareaiproject@gmail.com</string>
+    <string name="error_loading_articles">Gagal memuat artikel: </string>
+    <string name="error_occurred">Terjadi kesalahan: </string>
+
+<!--  Home  -->
     <string name="welcome">Selamat Datang di Pare AI</string>
     <string name="home_description">Aplikasi untuk deteksi penyakit, hama, dan solusi perawatan padi.</string>
+    <string name="tutorial">Tutorial Aplikasi</string>
+    <string name="contact_us">Hubungi Kami</string>
+    <string name="history_list">Daftar Riwayat</string>
+    <string name="see_all">Lihat Semua</string>
+    <string name="article_list">Daftar Artikel</string>
 
     <!--  Login  -->
     <string name="sign_in_google">Masuk Dengan Google</string>
     <string name="option_sign_in">Atau Login Dengan</string>
-    <string name="email_invalid">Invalid email format</string>
-    <string name="password_short">Password cannot be less than 6 characters</string>
+    <string name="email_invalid">Format email tidak valid</string>
+    <string name="password_short">Kata sandi tidak boleh kurang dari 6 karakter</string>
     <string name="not_have_account">Belum punya akun?&#160;</string>
+    <string name="login_title">Masuk</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Kata Sandi</string>
+    <string name="login_button">Masuk</string>
+    <string name="google_sign_in">Masuk dengan Google</string>
+    <string name="register_link">Belum punya akun? Daftar di sini</string>
+    <string name="login_failed">Email atau password salah.</string>
+    <string name="login_success">Berhasil masuk.</string>
+    <string name="empty_fields">Email dan password tidak boleh kosong.</string>
+    <string name="google_sign_in_failed">Google Sign-In gagal.</string>
+    <string name="login_error_dialog_title">Login Gagal</string>
+    <string name="register_title">Daftar</string>
+    <string name="forgot_password_title">Reset Kata Sandi</string>
 
     <!--  Register   -->
     <string name="confirm_password">Konfirmasi Password</string>
@@ -28,6 +58,17 @@
     <!--  Forgot Passoword  -->
     <string name="change_password">Ganti Password</string>
     <string name="forgot_password_description">Masukkan email Anda untuk menerima tautan reset password</string>
+    <string name="enter_your_email">Harap masukkan email Anda.</string>
+    <string name="reset_link_sent">Tautan reset kata sandi telah dikirim ke %1$s</string>
+    <string name="failed_to_send_link">Gagal mengirim tautan: %1$s</string>
+    <string name="reset_link_keyword">Tautan reset</string>
+    <string name="reset_email_sent_title">Email Reset Terkirim</string>
+    <string name="reset_email_sent_message">Tautan reset kata sandi telah dikirim ke email Anda. Silakan periksa kotak masuk Anda.</string>
+    <string name="ok">OK</string>
+    <string name="enter_email">Harap masukkan email Anda.</string>
+    <string name="reset_link_failed">Gagal mengirim tautan: %1$s</string>
+    <string name="email_reset_title">Email Reset Terkirim</string>
+    <string name="email_reset_message">Tautan untuk mengatur ulang kata sandi telah dikirim ke email Anda. Silakan periksa kotak masuk Anda.</string>
 
     <!--  Scam  -->
     <string name="img_cant_found">Image not found</string>
@@ -48,5 +89,18 @@
     - Google Cloud Platform (Pemrosesan model Machine Learning).\n\nInstitusi:\nProgram Studi Teknik Informatika Politeknik Negeri Jakarta Tahun 2025.\n\nKami berharap PareAI dapat menjadi solusi nyata yang berdampak positif bagi petani, serta mendukung pertanian yang lebih efisien, berkelanjutan, dan berbasis data.
     </string>
 
+<!--  History   -->
+    <string name="delete_confirmation_title">Konfirmasi Hapus</string>
+    <string name="delete_confirmation_message">Apakah Anda yakin ingin menghapus histori ini?</string>
+    <string name="delete_confirmation_positive">Ya</string>
+    <string name="delete_confirmation_negative">Batal</string>
+
+
+<!--  Settings   -->
+    <!-- Tambahkan di file strings.xml -->
+    <string name="logout_dialog_title">Konfirmasi Keluar</string>
+    <string name="logout_dialog_message">Apakah Anda yakin ingin keluar dari aplikasi?</string>
+    <string name="logout_dialog_positive">Ya</string>
+    <string name="logout_dialog_negative">Tidak</string>
 
 </resources>

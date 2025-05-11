@@ -17,8 +17,6 @@ import kotlinx.coroutines.launch
 import pnj.pk.pareaipk.R
 import pnj.pk.pareaipk.adapter.ArticleAdapter
 import pnj.pk.pareaipk.adapter.HistoryHorizontalAdapter
-import pnj.pk.pareaipk.data.response.ArticleResponse
-import pnj.pk.pareaipk.data.retrofit.ApiConfig
 import pnj.pk.pareaipk.databinding.FragmentHomeBinding
 import pnj.pk.pareaipk.ui.article.ArticleActivity
 import pnj.pk.pareaipk.ui.chatbot.ChatbotActivity
@@ -33,6 +31,7 @@ class HomeFragment : Fragment() {
     private lateinit var historyHorizontalAdapter: HistoryHorizontalAdapter
     private lateinit var articleAdapter: ArticleAdapter
     private val historyViewModel: HistoryViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by viewModels() // Add HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -89,22 +88,21 @@ class HomeFragment : Fragment() {
         // Setup Hubungi Kami click listener
         binding.card2.setOnClickListener {
             val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
-                data = Uri.parse("mailto:pareaiproject@gmail.com")
-                putExtra(Intent.EXTRA_SUBJECT, "Hubungi Kami")
+                data = Uri.parse("mailto:${getString(R.string.contact_email)}")
+                putExtra(Intent.EXTRA_SUBJECT, getString(R.string.contact_us_subject))
             }
-            startActivity(Intent.createChooser(emailIntent, "Kirim email ke kami"))
+            startActivity(Intent.createChooser(emailIntent, getString(R.string.send_email_to_us)))
         }
 
-        // Setup artikel dari API
+        // Setup articles using ViewModel
         setupArticles()
 
         return root
     }
 
     private fun setupArticles() {
-        // Inisialisasi adapter kosong terlebih dahulu
+        // Initialize empty adapter
         articleAdapter = ArticleAdapter(emptyList()) { article ->
-            // Handle article click - navigasi ke ArticleActivity
             val intent = Intent(requireContext(), ArticleActivity::class.java).apply {
                 putExtra(ArticleActivity.EXTRA_ARTICLE_TITLE, article.label)
                 putExtra(ArticleActivity.EXTRA_ARTICLE_DATE, article.createdAt)
@@ -119,49 +117,34 @@ class HomeFragment : Fragment() {
             adapter = articleAdapter
         }
 
-        // Ambil data artikel dari API
-        viewLifecycleOwner.lifecycleScope.launch {
-            try {
-                val apiService = ApiConfig.getApiService()
-                val response = apiService.getArticles()
-
-                if (response.isSuccessful) {
-                    val articlesMap = response.body()
-                    if (articlesMap != null) {
-                        // Convert map values to list
-                        val articlesList = articlesMap.values.toList()
-
-                        // Update adapter dengan data dari API
-                        articleAdapter = ArticleAdapter(articlesList) { article ->
-                            // Handle article click - navigasi ke ArticleActivity
-                            val intent = Intent(requireContext(), ArticleActivity::class.java).apply {
-                                putExtra(ArticleActivity.EXTRA_ARTICLE_TITLE, article.label)
-                                putExtra(ArticleActivity.EXTRA_ARTICLE_DATE, article.createdAt)
-                                putExtra(ArticleActivity.EXTRA_ARTICLE_DESCRIPTION, article.description)
-                                putExtra(ArticleActivity.EXTRA_ARTICLE_IMAGE, article.imageUrl)
-                            }
-                            startActivity(intent)
-                        }
-                        binding.recyclerViewArticle.adapter = articleAdapter
-                    }
-                } else {
-                    // Handle error
-                    Toast.makeText(
-                        requireContext(),
-                        "Gagal memuat artikel: " + response.message(),
-                        Toast.LENGTH_SHORT
-                    ).show()
+        // Observe articles from ViewModel
+        homeViewModel.articles.observe(viewLifecycleOwner) { articles ->
+            articleAdapter = ArticleAdapter(articles) { article ->
+                val intent = Intent(requireContext(), ArticleActivity::class.java).apply {
+                    putExtra(ArticleActivity.EXTRA_ARTICLE_TITLE, article.label)
+                    putExtra(ArticleActivity.EXTRA_ARTICLE_DATE, article.createdAt)
+                    putExtra(ArticleActivity.EXTRA_ARTICLE_DESCRIPTION, article.description)
+                    putExtra(ArticleActivity.EXTRA_ARTICLE_IMAGE, article.imageUrl)
                 }
-            } catch (e: Exception) {
-                // Handle exception
-                Toast.makeText(
-                    requireContext(),
-                    "Terjadi kesalahan: " + e.message,
-                    Toast.LENGTH_SHORT
-                ).show()
-                e.printStackTrace() // Log error for debugging
+                startActivity(intent)
+            }
+            binding.recyclerViewArticle.adapter = articleAdapter
+        }
+
+        // Observe loading state
+        homeViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            // You can show/hide a progress indicator here if needed
+        }
+
+        // Observe error messages
+        homeViewModel.error.observe(viewLifecycleOwner) { errorMsg ->
+            if (errorMsg.isNotEmpty()) {
+                Toast.makeText(requireContext(), errorMsg, Toast.LENGTH_SHORT).show()
             }
         }
+
+        // Fetch articles
+        homeViewModel.fetchArticles()
     }
 
     override fun onDestroyView() {

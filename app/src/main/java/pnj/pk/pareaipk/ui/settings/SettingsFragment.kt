@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import pnj.pk.pareaipk.R
 import pnj.pk.pareaipk.databinding.FragmentSettingsBinding
 import pnj.pk.pareaipk.database.repository.UserRepository
 import pnj.pk.pareaipk.database.room.UserRoomDatabase
@@ -150,16 +151,28 @@ class SettingsFragment : Fragment() {
 
     private fun logout() {
         try {
-            Log.d(TAG, "Logging out user")
-            // Important: We're just calling logout() which now just signs out from Firebase
-            // User data remains in Room database
-            viewModel.logout()
+            // Tampilkan dialog konfirmasi menggunakan strings dari resources
+            androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                .setTitle(getString(R.string.logout_dialog_title))
+                .setMessage(getString(R.string.logout_dialog_message))
+                .setPositiveButton(getString(R.string.logout_dialog_positive)) { _, _ ->
+                    Log.d(TAG, "Logging out user")
+                    // Important: We're just calling logout() which now just signs out from Firebase
+                    // User data remains in Room database
+                    viewModel.logout()
 
-            // Navigate to login screen
-            val intent = Intent(requireContext(), LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-            activity?.finish()
+                    // Navigate to login screen
+                    val intent = Intent(requireContext(), LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    activity?.finish()
+                }
+                .setNegativeButton(getString(R.string.logout_dialog_negative)) { dialog, _ ->
+                    // User memilih tidak keluar, tutup dialog
+                    dialog.dismiss()
+                }
+                .setCancelable(true)
+                .show()
         } catch (e: Exception) {
             Log.e(TAG, "Error during logout: ${e.message}", e)
         }

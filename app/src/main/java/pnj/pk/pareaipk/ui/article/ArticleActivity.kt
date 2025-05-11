@@ -3,6 +3,9 @@ package pnj.pk.pareaipk.ui.article
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import pnj.pk.pareaipk.R
@@ -11,6 +14,7 @@ import pnj.pk.pareaipk.databinding.ActivityArticleBinding
 class ArticleActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityArticleBinding
+    private val viewModel: ArticleViewModel by viewModels()
 
     companion object {
         const val EXTRA_ARTICLE_TITLE = "extra_article_title"
@@ -35,27 +39,58 @@ class ArticleActivity : AppCompatActivity() {
         val description = intent.getStringExtra(EXTRA_ARTICLE_DESCRIPTION) ?: ""
         val imageUrl = intent.getStringExtra(EXTRA_ARTICLE_IMAGE) ?: ""
 
-        // Set data to views
-        // No longer using toolbar title, using ActionBar instead
-        binding.textDetailTitle.text = title
-        binding.textDetailDate.text = date
-        binding.textDetailDescription.text = description
+        // Set data to ViewModel
+        viewModel.setArticleData(title, date, description, imageUrl)
 
-        // Load image with Glide
-        Glide.with(this)
-            .load(imageUrl)
-            .placeholder(R.drawable.logo)
-            .error(R.drawable.logo)
-            .into(binding.imageDetailArticle)
+        // Setup observers
+        setupObservers()
 
         // Setup share button
         binding.buttonShare.setOnClickListener {
             val shareIntent = Intent(Intent.ACTION_SEND).apply {
                 type = "text/plain"
-                putExtra(Intent.EXTRA_SUBJECT, title)
-                putExtra(Intent.EXTRA_TEXT, "$title\n\n$description\n\nDibagikan dari aplikasi PAREAI")
+                putExtra(Intent.EXTRA_SUBJECT, viewModel.title.value)
+                putExtra(Intent.EXTRA_TEXT, viewModel.getShareText())
             }
             startActivity(Intent.createChooser(shareIntent, "Bagikan Artikel"))
+        }
+    }
+
+    private fun setupObservers() {
+        // Observe title
+        viewModel.title.observe(this) { title ->
+            binding.textDetailTitle.text = title
+        }
+
+        // Observe date
+        viewModel.date.observe(this) { date ->
+            binding.textDetailDate.text = date
+        }
+
+        // Observe description
+        viewModel.description.observe(this) { description ->
+            binding.textDetailDescription.text = description
+        }
+
+        // Observe imageUrl
+        viewModel.imageUrl.observe(this) { imageUrl ->
+            Glide.with(this)
+                .load(imageUrl)
+                .placeholder(R.drawable.logo)
+                .error(R.drawable.logo)
+                .into(binding.imageDetailArticle)
+        }
+
+        // Optional: Observe loading state
+        viewModel.isLoading.observe(this) { isLoading ->
+            // You could add a progress indicator if needed
+        }
+
+        // Optional: Observe error messages
+        viewModel.error.observe(this) { errorMsg ->
+            if (errorMsg.isNotEmpty()) {
+                Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

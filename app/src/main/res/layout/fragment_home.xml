@@ -73,14 +73,14 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:src="@drawable/ic_play"
-                        android:contentDescription="Icon 1"
+                        android:contentDescription="@string/icon"
                         android:scaleType="center"
                         app:tint="@color/black_quaternary"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tutorial Aplikasi"
+                        android:text="@string/tutorial"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:textColor="@color/black_disabled"/>
@@ -113,14 +113,14 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:src="@drawable/ic_chat"
-                        android:contentDescription="Icon 2"
+                        android:contentDescription="@string/icon"
                         android:scaleType="center"
                         app:tint="@color/black_quaternary"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hubungi Kami"
+                        android:text="@string/contact_us"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:textColor="@color/black_disabled"/>
@@ -141,7 +141,7 @@
                     android:id="@+id/textTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Daftar Histori"
+                    android:text="@string/history_list"
                     android:textStyle="bold"
                     android:textSize="22sp"
                     android:textColor="@color/black"
@@ -153,7 +153,7 @@
                     android:id="@+id/textSeeAll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Lihat Semua"
+                    android:text="@string/see_all"
                     android:textStyle="bold"
                     android:textSize="14sp"
                     android:textColor="@color/green_light"
@@ -190,7 +190,7 @@
                     android:id="@+id/textArticleTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Daftar Artikel"
+                    android:text="@string/article_list"
                     android:textStyle="bold"
                     android:textSize="22sp"
                     android:textColor="@color/black"
@@ -226,7 +226,7 @@
         app:tint="@color/green_light"
         android:scaleType="centerInside"
         android:background="@drawable/bg_image_button"
-        android:contentDescription="Chatbot Button"
+        android:contentDescription="@string/button"
         android:clickable="true"
         android:focusable="true"
         android:elevation="8dp"
