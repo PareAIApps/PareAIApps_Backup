@@ -1,0 +1,128 @@
+<resources>
+    <string name="app_name">PARE AI</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_history">History</string>
+    <string name="title_scan">Scan</string>
+    <string name="title_settings">Settings</string>
+    <string name="web_client_id">910333591798-k2nap1mdpicksmf8nn6g8eq6qd2v1jbh.apps.googleusercontent.com</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="illustration">Illustration</string>
+    <string name="icon">Icon</string>
+    <string name="button">Button</string>
+    <string name="image">Image</string>
+    <string name="contact_us_subject">Contact Us</string>
+    <string name="send_email_to_us">Send email to us</string>
+    <string name="contact_email">pareaiproject@gmail.com</string>
+    <string name="error_loading_articles">Failed to load articles: </string>
+    <string name="error_occurred">An error occurred: </string>
+    <string name="date">December 14, 2003</string>
+    <string name="text">This is text</string>
+    <string name="lorem">Lorem Ipsum dolor</string>
+
+    <!--  Home  -->
+    <string name="welcome">Welcome to Pare AI</string>
+    <string name="home_description">Application for detection of diseases, pests, and rice care solutions.</string>
+    <string name="tutorial">Application Tutorial</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="history_list">History List</string>
+    <string name="see_all">See All</string>
+    <string name="article_list">Article List</string>
+
+    <!--  Article   -->
+    <string name="detail_article">Article Detail</string>
+    <string name="title_article">Article Title</string>
+    <string name="description_article">This is the complete description of the article. This content explains in detail the content of the article selected by the user.</string>
+    <string name="share_article">Share Article</string>
+    <string name="notification_share_article">Shared from PAREAI application</string>
+    <string name="subtitle">Brief description of the article.</string>
+
+    <!--  Login  -->
+    <string name="sign_in_google">Sign In With Google</string>
+    <string name="option_sign_in">Or Login With</string>
+    <string name="email_invalid">Invalid email format</string>
+    <string name="password_short">Password must not be less than 6 characters</string>
+    <string name="not_have_account">Dont have an account?&#160;</string>
+    <string name="login_title">Login</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="login_button">Login</string>
+    <string name="google_sign_in">Sign in with Google</string>
+    <string name="register_link">Dont have an account? Register here</string>
+    <string name="login_failed">Incorrect email or password.</string>
+    <string name="login_success">Login successful.</string>
+    <string name="empty_fields">Email and password cannot be empty.</string>
+    <string name="google_sign_in_failed">Google Sign-In failed.</string>
+    <string name="login_error_dialog_title">Login Failed</string>
+    <string name="register_title">Register</string>
+    <string name="forgot_password_title">Reset Password</string>
+
+    <!--  Register   -->
+    <string name="confirm_password">Confirm Password</string>
+    <string name="have_account">Already have an account?&#160;</string>
+
+    <!--  Forgot Password  -->
+    <string name="change_password">Change Password</string>
+    <string name="forgot_password_description">Enter your email to receive a password reset link</string>
+    <string name="enter_your_email">Please enter your email.</string>
+    <string name="reset_link_sent">Password reset link has been sent to %1$s</string>
+    <string name="failed_to_send_link">Failed to send link: %1$s</string>
+    <string name="reset_link_keyword">Reset link</string>
+    <string name="reset_email_sent_title">Reset Email Sent</string>
+    <string name="reset_email_sent_message">Password reset link has been sent to your email. Please check your inbox.</string>
+    <string name="ok">OK</string>
+    <string name="enter_email">Please enter your email.</string>
+    <string name="reset_link_failed">Failed to send link: %1$s</string>
+    <string name="email_reset_title">Reset Email Sent</string>
+    <string name="email_reset_message">A link to reset your password has been sent to your email. Please check your inbox.</string>
+
+    <!--  Scan  -->
+    <string name="img_cant_found">Image not found</string>
+    <string name="camera_permission">Camera permission is required to proceed</string>
+    <string name="uri_photo_fail">Failed to get the photo URI</string>
+    <string name="img_empty">Please insert the image file first</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="check_padi">Check Rice</string>
+
+    <!--   About   -->
+    <string name="about_us_content">
+    PareAI (Padi Rice Expert AI) is an application based on Machine Learning technology and Large Language Models (LLMs) developed to help farmers automatically and accurately detect and identify rice plant diseases. This application is the result of a collaborative project by students of the Informatics Engineering Study Program, Department of Informatics and Computer Engineering, Jakarta State Polytechnic.\n\nThe background of PareAI development stems from real problems faced by farmers in recognizing plant disease symptoms. Misdiagnosis often leads to excessive pesticide use, which impacts the environment and crop yields. Therefore, PareAI presents as a smart agricultural solution based on technology.\n\n
+    Main application features:\n
+    • Rice disease detection based on leaf images using CNN (Convolutional Neural Network)\n
+    • LLMs-based ChatBot to provide information and handling recommendations to farmers interactively\n
+    • Simple and user-friendly interface, easy to use by farmers in various regions.\n\n
+    Technologies used:\n
+    - Android Studio (Kotlin)\n
+    - Firebase (Database and Authentication)\n
+    - Google Cloud Platform (Machine Learning model processing).\n\nInstitution:\nInformatics Engineering Study Program, Jakarta State Polytechnic, 2025.\n\nWe hope PareAI can be a real solution that positively impacts farmers, and supports more efficient, sustainable, and data-driven agriculture.
+    </string>
+
+    <!--  History   -->
+    <string name="delete_confirmation_title">Delete Confirmation</string>
+    <string name="delete_confirmation_message">Are you sure you want to delete this history?</string>
+    <string name="delete_confirmation_positive">Yes</string>
+    <string name="delete_confirmation_negative">Cancel</string>
+    <string name="scan_result">Scan Result</string>
+    <string name="detail_scan">Scan Detail</string>
+    <string name="delete_history">Delete History</string>
+
+    <!--  Settings   -->
+    <!-- Add to strings.xml file -->
+    <string name="logout_dialog_title">Logout Confirmation</string>
+    <string name="logout_dialog_message">Are you sure you want to log out of the application?</string>
+    <string name="logout_dialog_positive">Yes</string>
+    <string name="logout_dialog_negative">No</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="notification">Notifications</string>
+    <string name="translate">Translation</string>
+    <string name="share_apps">Share Application</string>
+    <string name="logout">Logout</string>
+    <string name="about_us">About Us</string>
+    <string name="title_home">Home</string>
+
+</resources>

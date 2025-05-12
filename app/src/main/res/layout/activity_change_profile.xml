@@ -13,6 +13,8 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/green_light"
         android:elevation="4dp"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:contentInsetStartWithNavigation="0dp"
         app:titleTextColor="@android:color/white">
 
         <RelativeLayout

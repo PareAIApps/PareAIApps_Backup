@@ -42,6 +42,9 @@ class AccountActivity : AppCompatActivity() {
             insets
         }
 
+        // Setup toolbar dengan back button
+        setupToolbar()
+
         // Inisialisasi repository untuk mendapatkan data pengguna
         val database = UserRoomDatabase.getDatabase(applicationContext)
         userRepository = UserRepository(database, FirebaseAuth.getInstance())
@@ -56,6 +59,16 @@ class AccountActivity : AppCompatActivity() {
         binding.layoutEditProfile.setOnClickListener {
             // Menavigasi ke activity untuk mengubah profil
             startActivity(Intent(this, ChangeProfileActivity::class.java))
+        }
+    }
+
+    private fun setupToolbar() {
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false) // Menyembunyikan judul default
+
+        // Mengatur fungsi navigasi back
+        binding.toolbar.setNavigationOnClickListener {
+            onBackPressed() // Kembali ke halaman sebelumnya
         }
     }
 

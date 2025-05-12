@@ -45,6 +45,9 @@ class HasilScanActivity : AppCompatActivity() {
         // Show progress bar initially
         binding.progressBar.visibility = View.VISIBLE
         binding.historyContainer.visibility = View.GONE
+        binding.topAppBar.setNavigationOnClickListener {
+            finish()
+        }
 
         viewModel.predictImage(imageFile)
 

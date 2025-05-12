@@ -27,7 +27,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:gravity="center"
-                android:text="PARE AI"
+                android:text="@string/app_name"
                 android:textColor="#FFFFFF"
                 android:textSize="28sp"
                 android:textStyle="bold"
@@ -85,7 +85,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
-                        android:text="Pengaturan Akun"
+                        android:text="@string/account_settings"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -122,7 +122,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
-                        android:text="Notifikasi"
+                        android:text="@string/notification"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -160,7 +160,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
-                        android:text="Terjemahan"
+                        android:text="@string/translate"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -197,7 +197,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
-                        android:text="Share Aplikasi"
+                        android:text="@string/share_apps"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -234,7 +234,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
-                        android:text="Tentang Kami"
+                        android:text="@string/about_us"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -271,7 +271,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
-                        android:text="Keluar"
+                        android:text="@string/logout"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 

@@ -40,7 +40,7 @@
                     android:scaleType="centerCrop"
                     android:background="#E9F0F4"
                     tools:src="@drawable/ic_launcher_foreground"
-                    android:contentDescription="Ilustrasi"/>
+                    android:contentDescription="@string/illustration"/>
             </com.google.android.material.card.MaterialCardView>
 
             <LinearLayout
@@ -61,7 +61,7 @@
                     android:layout_weight="1"
                     android:layout_marginEnd="8dp"
                     android:textStyle="bold"
-                    android:text="Kamera"
+                    android:text="@string/camera"
                     app:cornerRadius="10dp"
                     app:icon="@drawable/ic_camera"
                     app:iconGravity="textStart"
@@ -78,7 +78,7 @@
                     android:layout_weight="1"
                     android:layout_marginStart="8dp"
                     android:textStyle="bold"
-                    android:text="Galeri"
+                    android:text="@string/gallery"
                     app:cornerRadius="10dp"
                     app:icon="@drawable/ic_gallery"
                     app:iconGravity="textStart"
@@ -94,7 +94,7 @@
                 android:layout_width="0dp"
                 android:layout_height="55dp"
                 android:layout_marginTop="24dp"
-                android:text="Cek Padi"
+                android:text="@string/check_padi"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 app:cornerRadius="10dp"

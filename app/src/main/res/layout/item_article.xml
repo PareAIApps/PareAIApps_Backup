@@ -22,7 +22,7 @@
             android:scaleType="centerCrop"
             android:background="@drawable/rounded"
             android:src="@drawable/logo"
-            android:contentDescription="Gambar Artikel"
+            android:contentDescription="@string/image"
             android:clipToOutline="true" />
 
         <LinearLayout
@@ -36,7 +36,7 @@
                 android:id="@+id/textTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Judul Artikel"
+                android:text="@string/title_article"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/black" />
@@ -45,7 +45,7 @@
                 android:id="@+id/textDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Deskripsi singkat artikel."
+                android:text="@string/subtitle"
                 android:textSize="14sp"
                 android:textColor="@color/black_secondary"
                 android:maxLines="2"
@@ -56,7 +56,7 @@
                 android:id="@+id/textDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="07 Mei 2025"
+                android:text="@string/date"
                 android:textSize="12sp"
                 android:textColor="@color/black_disabled"
                 android:layout_marginTop="6dp" />

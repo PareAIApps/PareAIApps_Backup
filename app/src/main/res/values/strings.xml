@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">PARE AI</string>
-    <string name="title_home">Beranda</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifikasi</string>
     <string name="title_history">Riwayat</string>
@@ -21,6 +20,9 @@
     <string name="contact_email">pareaiproject@gmail.com</string>
     <string name="error_loading_articles">Gagal memuat artikel: </string>
     <string name="error_occurred">Terjadi kesalahan: </string>
+    <string name="date">14 Desmber 2003</string>
+    <string name="text">Ini text</string>
+    <string name="lorem">Lorem Ipsum dolor</string>
 
 <!--  Home  -->
     <string name="welcome">Selamat Datang di Pare AI</string>
@@ -30,6 +32,14 @@
     <string name="history_list">Daftar Riwayat</string>
     <string name="see_all">Lihat Semua</string>
     <string name="article_list">Daftar Artikel</string>
+
+<!--  Article   -->
+    <string name="detail_article">Detail Artikel</string>
+    <string name="title_article">Judul Artikel</string>
+    <string name="description_article">Ini adalah deskripsi lengkap dari artikel. Konten ini menjelaskan secara rinci isi artikel yang dipilih oleh pengguna.</string>
+    <string name="share_article">Bagikan Artikel</string>
+    <string name="notification_share_article">Dibagikan dari aplikasi PAREAI</string>
+    <string name="subtitle">Deskripsi singkat artikel.</string>
 
     <!--  Login  -->
     <string name="sign_in_google">Masuk Dengan Google</string>
@@ -75,6 +85,9 @@
     <string name="camera_permission">Camera permission is required to proceed</string>
     <string name="uri_photo_fail">Failed to get the photo URI</string>
     <string name="img_empty">Please insert the image file first</string>
+    <string name="camera">Kamera</string>
+    <string name="gallery">Galeri</string>
+    <string name="check_padi">Cek Padi</string>
 
     <!--   About   -->
     <string name="about_us_content">
@@ -94,7 +107,9 @@
     <string name="delete_confirmation_message">Apakah Anda yakin ingin menghapus histori ini?</string>
     <string name="delete_confirmation_positive">Ya</string>
     <string name="delete_confirmation_negative">Batal</string>
-
+    <string name="scan_result">Hasil Scan</string>
+    <string name="detail_scan">Detail Scan</string>
+    <string name="delete_history">Hapus History</string>
 
 <!--  Settings   -->
     <!-- Tambahkan di file strings.xml -->
@@ -102,5 +117,12 @@
     <string name="logout_dialog_message">Apakah Anda yakin ingin keluar dari aplikasi?</string>
     <string name="logout_dialog_positive">Ya</string>
     <string name="logout_dialog_negative">Tidak</string>
+    <string name="account_settings">Pengaturan Akun</string>
+    <string name="notification">Pemberitahuan</string>
+    <string name="translate">Terjemahan</string>
+    <string name="share_apps">Bagikan Aplikasi</string>
+    <string name="logout">Keluar</string>
+    <string name="about_us">Tentang Kami</string>
+    <string name="title_home">Beranda</string>
 
 </resources>

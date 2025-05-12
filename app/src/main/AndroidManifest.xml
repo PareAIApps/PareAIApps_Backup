@@ -36,6 +36,7 @@
             android:theme="@style/Theme.Pare_ai_pk.NoActionBar" />
         <activity
             android:name=".ui.article.ArticleActivity"
+            android:theme="@style/Theme.Pare_ai_pk.NoActionBar"
             android:exported="false" />
         <activity
             android:name=".ui.about.AboutActivity"

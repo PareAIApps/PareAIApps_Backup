@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -36,6 +37,12 @@ class SettingsFragment : Fragment() {
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
+
+    private fun setupAction() {
+        binding.btnTranslate.setOnClickListener {
+            startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+        }
+    }
 
     // Request notification permission
     private val requestPermissionLauncher = registerForActivityResult(
@@ -82,6 +89,7 @@ class SettingsFragment : Fragment() {
             startActivity(intent)
         }
 
+        setupAction()
         // Set up notification switch
         setupNotificationSwitch()
 

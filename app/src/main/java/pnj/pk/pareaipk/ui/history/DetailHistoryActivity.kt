@@ -29,8 +29,10 @@ class DetailHistoryActivity : AppCompatActivity() {
         // Hide ActionBar
         supportActionBar?.hide()
 
-        // Setup back navigation
-        binding.topAppBar.setNavigationOnClickListener { onBackPressed() }
+        binding.topAppBar.setNavigationOnClickListener {
+            finish()
+        }
+
 
         // Get scan history ID from intent
         val extraScanHistoryId = intent.getIntExtra("extra_scan_history_id", -1).toLong()

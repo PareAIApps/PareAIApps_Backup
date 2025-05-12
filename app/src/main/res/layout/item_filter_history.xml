@@ -10,4 +10,4 @@
     android:background="@drawable/filter_button_background"
     android:textColor="@drawable/filter_text_color"
     android:textSize="14sp"
-    android:text="Label" />
+    android:text="@string/text" />

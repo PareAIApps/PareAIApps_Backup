@@ -3,11 +3,9 @@ package pnj.pk.pareaipk.ui.article
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
-import pnj.pk.pareaipk.data.response.ArticleResponse
-import pnj.pk.pareaipk.data.retrofit.ApiConfig
-import java.io.IOException
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import pnj.pk.pareaipk.R
 
 class ArticleViewModel : ViewModel() {
     // Article details

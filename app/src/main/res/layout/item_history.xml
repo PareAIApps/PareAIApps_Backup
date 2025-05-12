@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="130dp"
             android:layout_gravity="top"
-            android:contentDescription="Story Image"
+            android:contentDescription="@string/image"
             android:scaleType="centerCrop"
             android:src="@drawable/logo" />
 
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|bottom"
             android:layout_marginBottom="7dp"
-            android:text="Lorem Ipsum dolor"
+            android:text="@string/lorem"
             android:textAlignment="center"
             android:textColor="@color/black_hint"
             android:textSize="16sp"

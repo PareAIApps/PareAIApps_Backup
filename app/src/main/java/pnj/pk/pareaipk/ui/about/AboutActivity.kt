@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.widget.ImageView
+import com.google.android.material.appbar.MaterialToolbar
 import pnj.pk.pareaipk.R
 
 class AboutActivity : AppCompatActivity() {
@@ -66,6 +67,12 @@ class AboutActivity : AppCompatActivity() {
         findViewById<ImageView>(R.id.iv_instagram_akhtar).setOnClickListener {
             openLink("https://instagram.com/akhtarerror")
         }
+
+        val topAppBar = findViewById<MaterialToolbar>(R.id.topAppBar)
+        topAppBar.setNavigationOnClickListener {
+            finish()
+        }
+
     }
 
     // Function to open URL in a browser
