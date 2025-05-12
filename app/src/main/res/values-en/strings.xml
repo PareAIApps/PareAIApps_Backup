@@ -23,11 +23,15 @@
     <string name="date">December 14, 2003</string>
     <string name="text">This is text</string>
     <string name="lorem">Lorem Ipsum dolor</string>
+    <string name="description">Description</string>
+    <string name="suggestion">Suggestion</string>
+    <string name="tutorial">Tutorial</string>
+    <string name="receipt">Receipt</string>
 
     <!--  Home  -->
     <string name="welcome">Welcome to Pare AI</string>
     <string name="home_description">Application for detection of diseases, pests, and rice care solutions.</string>
-    <string name="tutorial">Application Tutorial</string>
+    <string name="tutorial_apps">Application Tutorial</string>
     <string name="contact_us">Contact Us</string>
     <string name="history_list">History List</string>
     <string name="see_all">See All</string>
@@ -88,6 +92,8 @@
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
     <string name="check_padi">Check Rice</string>
+    <string name="confidence">Confidence:&#160;</string>
+
 
     <!--   About   -->
     <string name="about_us_content">
@@ -124,5 +130,12 @@
     <string name="logout">Logout</string>
     <string name="about_us">About Us</string>
     <string name="title_home">Home</string>
+
+<!--  Account Settings   -->
+    <string name="username">Username</string>
+    <string name="edit_profile">Edit Profile</string>
+
+    <!--  ChangeProfile   -->
+    <string name="savechanges">Save Changes</string>
 
 </resources>

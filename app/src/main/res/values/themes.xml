@@ -19,7 +19,6 @@
     <style name="Theme.Pare_ai_pk.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowLightStatusBar">true</item> <!-- Ikon status bar hitam -->
-        <item name="android:colorBackground">@color/white</item> <!-- Background app putih -->
     </style>
 
     <style name="RoundedImageView">

@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="-8dp"
-            android:text="Pengaturan Akun"
+            android:text="@string/account_settings"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -74,7 +74,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="Nama Pengguna"
+                        android:text="@string/username"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="@color/black_secondary"/>
@@ -85,7 +85,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="email@example.com"
+                        android:text="@string/email"
                         android:textSize="16sp"
                         android:textColor="@color/black_third"/>
 
@@ -126,7 +126,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:textColor="@color/black_secondary"
-                            android:text="Edit Profil"
+                            android:text="@string/edit_profile"
                             android:textSize="16sp"/>
                     </LinearLayout>
 

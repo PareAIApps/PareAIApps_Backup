@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/green_light"
-            app:title="Scan Result"
+            app:title="@string/scan_result"
             app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:titleTextColor="@color/white"
             app:navigationIcon="@drawable/ic_arrow_back"
@@ -54,7 +54,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_launcher_foreground"
-                    android:contentDescription="Ilustrasi"/>
+                    android:contentDescription="@string/illustration"/>
             </com.google.android.material.card.MaterialCardView>
 
             <ProgressBar
@@ -104,7 +104,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Confidence: "
+                            android:text="@string/confidence"
                             android:textStyle="bold"
                             android:textSize="14sp"
                             android:textColor="#4A5568"/>
@@ -146,7 +146,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Deskripsi"
+                            android:text="@string/description"
                             android:textStyle="bold"
                             android:textSize="18sp"
                             android:layout_marginBottom="5dp"
@@ -181,7 +181,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Saran"
+                            android:text="@string/suggestion"
                             android:textStyle="bold"
                             android:textSize="18sp"
                             android:textColor="#2D3748"
@@ -215,7 +215,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Resep"
+                            android:text="@string/receipt"
                             android:textStyle="bold"
                             android:textSize="18sp"
                             android:textColor="#2D3748"
@@ -249,7 +249,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Tutorial"
+                            android:text="@string/tutorial"
                             android:textStyle="bold"
                             android:textSize="18sp"
                             android:textColor="#2D3748"

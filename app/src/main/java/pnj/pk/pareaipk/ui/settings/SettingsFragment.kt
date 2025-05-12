@@ -26,6 +26,7 @@ import pnj.pk.pareaipk.ui.account.AccountActivity
 import pnj.pk.pareaipk.ui.account.AccountViewModel
 import pnj.pk.pareaipk.ui.account.AccountViewModelFactory
 import pnj.pk.pareaipk.ui.login.LoginActivity
+import pnj.pk.pareaipk.ui.share_apps.ShareAppsActivity
 
 class SettingsFragment : Fragment() {
 
@@ -81,6 +82,12 @@ class SettingsFragment : Fragment() {
         // Set click listeners for Account and About menu options
         binding.btnAccount.setOnClickListener {
             val intent = Intent(requireContext(), AccountActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Set click listeners for Account and About menu options
+        binding.btnShare.setOnClickListener {
+            val intent = Intent(requireContext(), ShareAppsActivity::class.java)
             startActivity(intent)
         }
 
