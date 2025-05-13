@@ -12,11 +12,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import pnj.pk.pareaipk.R
 import pnj.pk.pareaipk.database.repository.UserRepository
 import pnj.pk.pareaipk.database.room.UserRoomDatabase
 import pnj.pk.pareaipk.databinding.ActivityChangeProfileBinding
+import pnj.pk.pareaipk.utils.ProfileImageUtils
 
 class ChangeProfileActivity : AppCompatActivity() {
 
@@ -31,10 +34,7 @@ class ChangeProfileActivity : AppCompatActivity() {
         if (result.resultCode == Activity.RESULT_OK) {
             val uri = result.data?.data
             if (uri != null) {
-                selectedImageUri = uri
-                Glide.with(this)
-                    .load(uri)
-                    .into(binding.ivProfileImage)
+                processSelectedImage(uri)
             }
         }
     }
@@ -44,9 +44,9 @@ class ChangeProfileActivity : AppCompatActivity() {
         binding = ActivityChangeProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Mengatur fungsi navigasi back
+        // Configure back navigation
         binding.toolbar.setNavigationOnClickListener {
-            onBackPressed() // Kembali ke halaman sebelumnya
+            onBackPressedDispatcher.onBackPressed()
         }
 
         Log.d(TAG, "Activity created")
@@ -88,6 +88,58 @@ class ChangeProfileActivity : AppCompatActivity() {
         }
     }
 
+    private fun processSelectedImage(uri: Uri) {
+        // Show loading indicator
+        binding.progressBar.visibility = View.VISIBLE
+
+        // Process image in background
+        Thread {
+            try {
+                // First optimize the image
+                val optimizedUri = ProfileImageUtils.optimizeProfileImage(applicationContext, uri)
+
+                // Update UI on main thread
+                runOnUiThread {
+                    selectedImageUri = optimizedUri ?: uri
+
+                    // Setup Glide with proper error handling
+                    val requestOptions = RequestOptions()
+                        .centerCrop()
+                        .diskCacheStrategy(DiskCacheStrategy.NONE) // Don't cache during edit
+                        .skipMemoryCache(true) // Important for fresh edits
+                        .placeholder(R.drawable.logo)
+                        .error(R.drawable.logo)
+
+                    try {
+                        Glide.with(this)
+                            .load(selectedImageUri)
+                            .apply(requestOptions)
+                            .into(binding.ivProfileImage)
+                    } catch (e: Exception) {
+                        Log.e(TAG, "Error loading image with Glide: ${e.message}", e)
+                        binding.ivProfileImage.setImageResource(R.drawable.logo)
+                    }
+
+                    binding.progressBar.visibility = View.GONE
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Error processing selected image: ${e.message}", e)
+
+                // Update UI on main thread
+                runOnUiThread {
+                    selectedImageUri = uri // Use original if optimization fails
+                    binding.ivProfileImage.setImageResource(R.drawable.logo)
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(
+                        this@ChangeProfileActivity,
+                        "Error processing image: ${e.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }.start()
+    }
+
     private fun observeData() {
         // Observe user profile
         viewModel.userProfile.observe(this) { profile ->
@@ -97,22 +149,9 @@ class ChangeProfileActivity : AppCompatActivity() {
                 binding.etEmail.setText(it.email)
 
                 if (!it.profileImageUri.isNullOrEmpty()) {
-                    try {
-                        Glide.with(this)
-                            .load(Uri.parse(it.profileImageUri))
-                            .placeholder(R.drawable.logo)
-                            .error(R.drawable.logo)
-                            .into(binding.ivProfileImage)
-                    } catch (e: Exception) {
-                        Log.e(TAG, "Error loading image: ${e.message}", e)
-                        Glide.with(this)
-                            .load(R.drawable.logo)
-                            .into(binding.ivProfileImage)
-                    }
+                    loadProfileImage(it.profileImageUri)
                 } else {
-                    Glide.with(this)
-                        .load(R.drawable.logo)
-                        .into(binding.ivProfileImage)
+                    binding.ivProfileImage.setImageResource(R.drawable.logo)
                 }
             }
         }
@@ -134,6 +173,39 @@ class ChangeProfileActivity : AppCompatActivity() {
         }
     }
 
+    private fun loadProfileImage(imageUriString: String) {
+        try {
+            // Process in background
+            Thread {
+                val uri = Uri.parse(imageUriString)
+                val optimizedUri = ProfileImageUtils.optimizeProfileImage(applicationContext, uri)
+
+                // Update UI on main thread
+                runOnUiThread {
+                    try {
+                        val glideTarget = optimizedUri ?: uri
+
+                        val requestOptions = RequestOptions()
+                            .centerCrop()
+                            .placeholder(R.drawable.logo)
+                            .error(R.drawable.logo)
+
+                        Glide.with(this)
+                            .load(glideTarget)
+                            .apply(requestOptions)
+                            .into(binding.ivProfileImage)
+                    } catch (e: Exception) {
+                        Log.e(TAG, "Error loading profile image: ${e.message}", e)
+                        binding.ivProfileImage.setImageResource(R.drawable.logo)
+                    }
+                }
+            }.start()
+        } catch (e: Exception) {
+            Log.e(TAG, "Error processing profile image URI: ${e.message}", e)
+            binding.ivProfileImage.setImageResource(R.drawable.logo)
+        }
+    }
+
     private fun showConfirmationDialog() {
         val name = binding.etUsername.text.toString().trim()
         if (name.isEmpty()) {
@@ -145,11 +217,11 @@ class ChangeProfileActivity : AppCompatActivity() {
             .setTitle("Konfirmasi Perubahan")
             .setMessage("Apakah Anda yakin ingin mengubah data profil?")
             .setPositiveButton("Ya") { _, _ ->
-                // Jika user memilih Ya, lanjutkan dengan menyimpan profil
+                // If user selects Yes, proceed with saving profile
                 saveProfile()
             }
             .setNegativeButton("Tidak") { dialog, _ ->
-                // Jika user memilih Tidak, tutup dialog tanpa melakukan perubahan
+                // If user selects No, close dialog without changes
                 dialog.dismiss()
             }
             .setCancelable(false)
@@ -157,7 +229,7 @@ class ChangeProfileActivity : AppCompatActivity() {
 
         dialog.show()
 
-        // Mengubah warna tombol Ya dan Tidak menjadi green_light
+        // Change "Yes" and "No" button colors to green_light
         val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
         val negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
 

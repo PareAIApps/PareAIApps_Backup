@@ -37,7 +37,7 @@
         android:layout_marginEnd="16dp">
 
 
-    <LinearLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -74,16 +74,22 @@
                 android:gravity="center_vertical"
                 android:padding="16dp">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/user_image"
+                <!-- Optimized Profile Image View -->
+                <androidx.cardview.widget.CardView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/logo"
-                    android:scaleType="centerCrop"
-                    android:contentDescription="User profile image"
-                    app:shapeAppearanceOverlay="@style/CircularCornerShape" />
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="0dp">
 
-
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/user_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/logo"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="User profile image"
+                        app:shapeAppearanceOverlay="@style/CircularCornerShape" />
+                </androidx.cardview.widget.CardView>
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -126,7 +132,7 @@
         android:textSize="18sp"
         android:text="Bagikan Link Aplikasi"
         android:textAllCaps="false"
-       android:background="@drawable/rounded_button"
+        android:background="@drawable/rounded_button"
         android:textColor="@android:color/white"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"

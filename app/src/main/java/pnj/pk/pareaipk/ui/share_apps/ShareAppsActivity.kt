@@ -9,11 +9,13 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import pnj.pk.pareaipk.R
 import pnj.pk.pareaipk.database.repository.UserRepository
 import pnj.pk.pareaipk.database.room.UserRoomDatabase
-import java.io.File
+import pnj.pk.pareaipk.utils.ProfileImageUtils
 
 class ShareAppsActivity : AppCompatActivity() {
 
@@ -21,6 +23,7 @@ class ShareAppsActivity : AppCompatActivity() {
     private lateinit var userNameTextView: TextView
     private lateinit var userPhoneTextView: TextView
     private lateinit var userImageView: ImageView
+    private val TAG = "ShareAppsActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,82 +64,101 @@ class ShareAppsActivity : AppCompatActivity() {
                 val currentUser = FirebaseAuth.getInstance().currentUser
                 userPhoneTextView.text = currentUser?.email ?: "No email"
 
-                // Load image using Glide with robust error handling
+                // Load image using optimized method
                 val imageUri = userProfile.profileImageUri
-                loadProfileImage(imageUri)
+                loadProfileImageSafely(imageUri)
             }
         }
     }
 
-    private fun loadProfileImage(imageUriString: String?) {
+    private fun loadProfileImageSafely(imageUriString: String?) {
         try {
+            Log.d(TAG, "Attempting to load profile image: $imageUriString")
+
+            // Configure Glide request options
+            val requestOptions = RequestOptions()
+                .centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.drawable.logo)
+                .error(R.drawable.logo)
+
             if (!imageUriString.isNullOrBlank()) {
-                val uri = Uri.parse(imageUriString)
-
-                // Try different loading strategies
-                val loadImage: () -> Unit = {
-                    Glide.with(this)
-                        .load(uri)
-                        .placeholder(R.drawable.logo)
-                        .error(R.drawable.logo)
-                        .into(userImageView)
-                }
-
-                // Strategy 1: Check if it's a file URI and file exists
-                if (uri.scheme == "file") {
-                    val file = File(uri.path ?: "")
-                    if (file.exists()) {
-                        loadImage()
-                        return
-                    }
-                }
-
-                // Strategy 2: Try to get a file from content URI
+                // First attempt: Try with our custom ProfileImageUtils
                 try {
-                    val file = getFileFromContentUri(this, uri)
-                    if (file != null && file.exists()) {
-                        Glide.with(this)
-                            .load(file)
-                            .placeholder(R.drawable.logo)
-                            .error(R.drawable.logo)
-                            .into(userImageView)
-                        return
-                    }
-                } catch (e: Exception) {
-                    Log.e("ShareAppsActivity", "Error converting content URI to file: ${e.message}")
-                }
+                    val originalUri = Uri.parse(imageUriString)
 
-                // Strategy 3: Try direct content URI loading
-                loadImage()
+                    // Process the image in a background thread to avoid ANRs
+                    Thread {
+                        val optimizedUri = ProfileImageUtils.optimizeProfileImage(applicationContext, originalUri)
+
+                        // Update the UI on the main thread
+                        runOnUiThread {
+                            if (optimizedUri != null) {
+                                Glide.with(applicationContext)
+                                    .load(optimizedUri)
+                                    .apply(requestOptions)
+                                    .into(userImageView)
+                                Log.d(TAG, "Successfully loaded optimized image")
+                            } else {
+                                loadWithDefaultGlide(imageUriString, requestOptions)
+                            }
+                        }
+                    }.start()
+                } catch (e: Exception) {
+                    Log.e(TAG, "Error with custom image loading: ${e.message}", e)
+                    // Fall back to standard Glide loading
+                    loadWithDefaultGlide(imageUriString, requestOptions)
+                }
             } else {
                 // No image URI, set default
-                userImageView.setImageResource(R.drawable.logo)
+                Log.d(TAG, "No image URI provided, using default")
+                Glide.with(applicationContext)
+                    .load(R.drawable.logo)
+                    .apply(requestOptions)
+                    .into(userImageView)
             }
         } catch (e: Exception) {
-            Log.e("ShareAppsActivity", "Error loading profile image: ${e.message}")
-            userImageView.setImageResource(R.drawable.logo)
+            Log.e(TAG, "Error loading profile image: ${e.message}", e)
+
+            // Fallback to default image when there's an error
+            try {
+                Glide.with(applicationContext)
+                    .load(R.drawable.logo)
+                    .into(userImageView)
+            } catch (e: Exception) {
+                Log.e(TAG, "Even fallback image loading failed: ${e.message}", e)
+                // Last resort - set directly
+                userImageView.setImageResource(R.drawable.logo)
+            }
         }
     }
 
-    // Utility method to convert content URI to File
-    private fun getFileFromContentUri(context: Context, contentUri: Uri): File? {
-        return try {
-            // Create a temporary file
-            val tempFile = File.createTempFile("profile_image", ".jpg", context.cacheDir)
-            tempFile.deleteOnExit()
+    private fun loadWithDefaultGlide(imageUriString: String, requestOptions: RequestOptions) {
+        try {
+            Log.d(TAG, "Falling back to standard Glide loading")
+            val uri = Uri.parse(imageUriString)
 
-            // Open input stream from content URI
-            val inputStream = context.contentResolver.openInputStream(contentUri)
-            inputStream?.use { input ->
-                tempFile.outputStream().use { output ->
-                    input.copyTo(output)
-                }
-            }
+            // Apply additional transformations for small images
+            val updatedOptions = requestOptions.override(120, 120)
 
-            tempFile
+            Glide.with(applicationContext)
+                .load(uri)
+                .apply(updatedOptions)
+                .into(userImageView)
         } catch (e: Exception) {
-            Log.e("ShareAppsActivity", "Error converting content URI to file: ${e.message}")
-            null
+            Log.e(TAG, "Default Glide loading failed: ${e.message}", e)
+            setDefaultImage()
+        }
+    }
+
+    private fun setDefaultImage() {
+        try {
+            Glide.with(applicationContext)
+                .load(R.drawable.logo)
+                .into(userImageView)
+        } catch (e: Exception) {
+            // Direct fallback
+            userImageView.setImageResource(R.drawable.logo)
         }
     }
 
