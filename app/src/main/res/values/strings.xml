@@ -20,13 +20,14 @@
     <string name="contact_email">pareaiproject@gmail.com</string>
     <string name="error_loading_articles">Gagal memuat artikel: </string>
     <string name="error_occurred">Terjadi kesalahan: </string>
-    <string name="date">14 Desmber 2003</string>
+    <string name="date">15 Mei 2025</string>
     <string name="text">Ini text</string>
     <string name="lorem">Lorem Ipsum dolor</string>
     <string name="description">Deskripsi</string>
     <string name="suggestion">Saran</string>
     <string name="tutorial">Panduan</string>
     <string name="receipt">Resep</string>
+    <string name="example_email">example.gmail.com</string>
 
     <!--  Home  -->
     <string name="welcome">Selamat Datang di Pare AI</string>
@@ -95,17 +96,39 @@
     <string name="confidence">Tingkat Kepercayaan:&#160;</string>
 
     <!--   About   -->
-    <string name="about_us_content">
-    PareAI (Padi Rice Expert AI) adalah sebuah aplikasi berbasis teknologi Machine Learning dan Large Language Models (LLMs) yang dikembangkan untuk membantu petani dalam mendeteksi dan mengidentifikasi penyakit tanaman padi secara otomatis dan akurat. Aplikasi ini merupakan hasil dari proyek kolaboratif mahasiswa Program Studi Teknik Informatika, Jurusan Teknik Informatika dan Komputer, Politeknik Negeri Jakarta.\n\nLatar belakang pengembangan PareAI berasal dari permasalahan nyata yang dihadapi oleh petani dalam mengenali gejala penyakit tanaman. Kesalahan diagnosis sering kali menyebabkan penggunaan pestisida berlebihan, yang berdampak pada lingkungan dan hasil panen. Oleh karena itu, PareAI hadir sebagai solusi pertanian cerdas berbasis teknologi.\n\n
-    Fitur utama aplikasi:\n
-    • Deteksi penyakit padi berbasis citra daun menggunakan CNN (Convolutional Neural Network)\n
-    • ChatBot berbasis LLMs untuk memberikan informasi dan rekomendasi penanganan kepada petani secara interaktif\n
-    • Antarmuka sederhana dan ramah pengguna, mudah digunakan oleh petani di berbagai daerah.\n\n
-    Teknologi yang digunakan:\n
-    - Android Studio (Kotlin)\n
-    - Firebase (Database dan Autentikasi)\n
-    - Google Cloud Platform (Pemrosesan model Machine Learning).\n\nInstitusi:\nProgram Studi Teknik Informatika Politeknik Negeri Jakarta Tahun 2025.\n\nKami berharap PareAI dapat menjadi solusi nyata yang berdampak positif bagi petani, serta mendukung pertanian yang lebih efisien, berkelanjutan, dan berbasis data.
+    <string name="background">
+        Sektor pertanian memegang peranan penting dalam menjaga ketahanan pangan dan mendorong pertumbuhan ekonomi nasional.
+        Pada triwulan ketiga tahun 2023, sektor ini mencatat kontribusi sebesar 13,57% terhadap Produk Domestik Bruto (PDB).
+        Namun, tantangan serius masih dihadapi oleh para petani, terutama dalam hal deteksi penyakit tanaman yang akurat dan tepat waktu.
+        Metode tradisional yang masih digunakan sering kali menyebabkan kesalahan diagnosis, penggunaan pestisida berlebih, serta risiko gagal panen,
+        seperti yang terjadi di Lamongan akibat serangan penyakit blas leher pada tanaman padi.\n\nDengan berkembangnya teknologi kecerdasan buatan (AI), terutama Convolutional Neural Network (CNN),
+        deteksi penyakit tanaman dapat dilakukan secara otomatis dengan akurasi tinggi melalui pengolahan citra daun.
+        Ditambah lagi dengan pemanfaatan Large Language Models (LLMs) berbasis Natural Language Processing (NLP),
+        petani dapat dibantu oleh ChatBot interaktif yang memberikan saran dan informasi penanganan penyakit tanaman secara real-time.
+        Kombinasi teknologi ini tidak hanya meningkatkan efisiensi pertanian, tetapi juga mendukung praktik pertanian yang lebih berkelanjutan.
     </string>
+
+    <string name="objective">
+        1. Mengembangkan aplikasi PareAI berbasis Machine Learning dan Large Language Models untuk mendeteksi penyakit tanaman padi secara otomatis.\n2. Menyediakan fitur ChatBot interaktif berbasis NLP yang memberikan informasi dan rekomendasi penanganan penyakit kepada petani.\n3. Meningkatkan akurasi diagnosis penyakit tanaman serta mengurangi ketergantungan pada pestisida melalui pendekatan teknologi modern.\n4. Mendukung kesejahteraan petani dan produktivitas pertanian nasional melalui solusi teknologi yang mudah diakses.
+    </string>
+
+    <string name="about_us_text">
+        Kami adalah tim mahasiswa dari Program Studi Teknik Informatika, Politeknik Negeri Jakarta,
+        yang memiliki semangat untuk memberikan kontribusi nyata bagi sektor pertanian Indonesia melalui inovasi teknologi.
+        Dengan latar belakang di bidang pemrograman, kecerdasan buatan, dan pengembangan aplikasi,
+        kami mengembangkan PareAI, sebuah aplikasi pintar yang memanfaatkan Machine Learning dan ChatBot
+        untuk membantu petani mendeteksi penyakit tanaman secara cepat, akurat, dan berkelanjutan.
+    </string>
+
+    <string name="application_features">
+        1. Deteksi Penyakit Otomatis: Petani dapat mengunggah gambar daun padi untuk dideteksi secara otomatis oleh sistem berbasis Machine Learning (CNN).\n2. Rekomendasi Penanganan: Aplikasi memberikan informasi gejala penyakit, tingkat serangan, dan saran penanganan yang sesuai.\n3. ChatBot Interaktif: ChatBot berbasis Large Language Models (LLMs) memberikan jawaban atas pertanyaan petani secara real-time.\n4. Riwayat Deteksi: Menyimpan data deteksi penyakit dan interaksi ChatBot agar petani dapat melihat riwayat penggunaan.\n5. Dukungan Offline: Beberapa fitur aplikasi tetap dapat digunakan meskipun dalam kondisi jaringan tidak stabil melalui Firebase.\n6. Antarmuka Sederhana: Tampilan aplikasi dirancang agar mudah dipahami dan dioperasikan oleh petani.
+    </string>
+
+    <string name="title_background">Latar Belakang</string>
+    <string name="title_objective">Tujuan</string>
+    <string name="title_application_features">Fitur Aplikasi</string>
+    <string name="development_team">Tim Pengembang</string>
+
 
     <!--  History   -->
     <string name="delete_confirmation_title">Konfirmasi Hapus</string>
@@ -136,5 +159,38 @@
 
     <!--  ChangeProfile   -->
     <string name="savechanges">Simpan Perubahan</string>
+
+    <!--  ShareApps  -->
+    <string name="text_sqan_qr">Minta temenmu scan kode QR ini untuk mendapatkan aplikasi PARE AI</string>
+    <string name="share_app_link">Bagikan Link Aplikasi</string>
+
+<!--  Privacy   -->
+    <string name="privacy_policy">Kebijakan Privasi</string>
+
+    <string name="privacy_policy_description">PareAI menghargai privasi dan keamanan data pribadi pengguna. Kebijakan ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi akun pengguna dalam aplikasi kami.</string>
+
+    <string name="privacy_policy_title_1">Informasi yang dikumpulkan</string>
+
+    <string name="privacy_policy_title_2">Penggunaan informasi</string>
+
+    <string name="privacy_policy_title_3">Pembagian Data</string>
+
+    <string name="privacy_policy_title_4">Hak Pengguna</string>
+
+    <string name="privacy_policy_title_5">Perubahan Kebijakan</string>
+
+    <string name="privacy_info_1">
+        Saat Anda membuat akun dan menggunakan PareAI, kami dapat mengumpulkan informasi berikut:\n- Nama lengkap\n- Alamat email\n- Foto profil\n- Aktivitas penggunaan dalam aplikasi.
+    </string>
+
+    <string name="privacy_info_2">
+       Informasi pribadi yang dikumpulkan digunakan untuk:\n- Memverifikasi identitas dan memberikan akses ke fitur aplikasi\n- Menyimpan riwayat pembelajaran dan preferensi pengguna\n- Mengembangkan fitur dan meningkatkan pengalaman pengguna\n- Memberikan informasi atau pembaruan terkait aplikasi
+    </string>
+
+    <string name="privacy_info_3">Kami tidak akan membagikan data pribadi Anda kepada pihak ketiga tanpa persetujuan Anda, kecuali jika diwajibkan oleh hukum atau untuk tujuan penyelidikan keamanan.</string>
+
+    <string name="privacy_info_4"> Anda memiliki hak untuk:\n- Mengakses dan memperbarui informasi akun Anda\n- Menghapus akun dan data yang terkait\n- Menolak pemberitahuan atau email dari kami</string>
+
+    <string name="privacy_info_5">Kebijakan ini dapat diperbarui sewaktu-waktu. Perubahan signifikan akan diberitahukan kepada pengguna melalui email atau notifikasi aplikasi.</string>
 
 </resources>

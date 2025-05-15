@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/main"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/green_light"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:contentInsetStartWithNavigation="0dp"
+            app:title="@string/privacy_policy"
+            app:titleTextColor="@color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp">
+
+            <!-- Date and Introduction Section -->
+            <TextView
+                android:id="@+id/privacy_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/date"
+                android:textSize="14sp"
+                android:textColor="@color/black_secondary"
+                android:layout_marginBottom="8dp"
+                android:gravity="start" />
+
+            <TextView
+                android:id="@+id/privacy_intro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/privacy_policy_description"
+                android:textSize="16sp"
+                android:textColor="@color/black_secondary"
+                android:layout_marginBottom="16dp"
+                android:gravity="start|top"
+                android:lineSpacingExtra="4dp" />
+
+            <!-- Section 1 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/number_circle_1"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:text="1"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/circle_background_green"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/content_text_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/privacy_policy_title_1"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/black_secondary"
+                    android:layout_marginStart="8dp"
+                    android:gravity="start" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/content_description_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/privacy_info_1"
+                android:textSize="16sp"
+                android:textColor="@color/black_secondary"
+                android:layout_marginBottom="16dp"
+                android:gravity="start|top"
+                android:lineSpacingExtra="4dp"
+                android:ellipsize="end"/>
+
+            <!-- Section 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/number_circle_2"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:text="2"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/circle_background_green"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/content_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/privacy_policy_title_2"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/black_secondary"
+                    android:layout_marginStart="8dp"
+                    android:gravity="start" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/content_description_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/privacy_info_2"
+                android:textSize="16sp"
+                android:textColor="@color/black_secondary"
+                android:layout_marginBottom="16dp"
+                android:gravity="start|top"
+                android:lineSpacingExtra="4dp"
+                android:ellipsize="end"/>
+
+            <!-- Section 3 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/number_circle_3"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:text="3"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/circle_background_green"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/content_text_3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/privacy_policy_title_3"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/black_secondary"
+                    android:layout_marginStart="8dp"
+                    android:gravity="start" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/content_description_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/privacy_info_3"
+                android:textSize="16sp"
+                android:textColor="@color/black_secondary"
+                android:layout_marginBottom="16dp"
+                android:gravity="start|top"
+                android:lineSpacingExtra="4dp"
+                android:ellipsize="end"/>
+
+            <!-- Section 4 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/number_circle_4"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:text="4"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/circle_background_green"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/content_text_4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/privacy_policy_title_4"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/black_secondary"
+                    android:layout_marginStart="8dp"
+                    android:gravity="start" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/content_description_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/privacy_info_4"
+                android:textSize="16sp"
+                android:textColor="@color/black_secondary"
+                android:layout_marginBottom="16dp"
+                android:gravity="start|top"
+                android:lineSpacingExtra="4dp"
+                android:ellipsize="end"/>
+
+            <!-- Section 5 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/number_circle_5"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:text="5"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/circle_background_green"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/content_text_5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/privacy_policy_title_5"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/black_secondary"
+                    android:layout_marginStart="8dp"
+                    android:gravity="start" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/content_description_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/privacy_info_5"
+                android:textSize="16sp"
+                android:textColor="@color/black_secondary"
+                android:layout_marginBottom="16dp"
+                android:gravity="start|top"
+                android:lineSpacingExtra="4dp"
+                android:ellipsize="end"/>
+
+        </LinearLayout>
+    </FrameLayout>
+</androidx.core.widget.NestedScrollView>

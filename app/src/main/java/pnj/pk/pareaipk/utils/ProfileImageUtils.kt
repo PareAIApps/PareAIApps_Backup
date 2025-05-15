@@ -19,7 +19,7 @@ import java.io.InputStream
 object ProfileImageUtils {
     private const val TAG = "ProfileImageUtils"
     private const val PROFILE_IMAGE_SIZE = 200 // Target size in pixels for profile images
-    private const val SMALL_PROFILE_SIZE = 120 // For very small profile pictures (e.g., in headers)
+    private const val SMALL_PROFILE_SIZE = 300 // For very small profile pictures (e.g., in headers)
     private const val COMPRESSION_QUALITY = 100 // JPEG compression quality (0-100)
 
     /**

@@ -19,6 +19,7 @@ import pnj.pk.pareaipk.database.repository.UserRepository
 import pnj.pk.pareaipk.database.room.UserRoomDatabase
 import pnj.pk.pareaipk.databinding.ActivityAccountBinding
 import pnj.pk.pareaipk.ui.change_profile.ChangeProfileActivity
+import pnj.pk.pareaipk.ui.privacy.PrivacyActivity
 
 class AccountActivity : AppCompatActivity() {
 
@@ -56,9 +57,15 @@ class AccountActivity : AppCompatActivity() {
         observeUserProfile()
 
         // Mengatur aksi klik untuk mengedit profil
-        binding.layoutEditProfile.setOnClickListener {
+        binding.btnEditProfile.setOnClickListener {
             // Menavigasi ke activity untuk mengubah profil
             startActivity(Intent(this, ChangeProfileActivity::class.java))
+        }
+
+
+        binding.btnPrivacyPolicy.setOnClickListener {
+            // Menavigasi ke activity untuk mengubah profil
+            startActivity(Intent(this, PrivacyActivity::class.java))
         }
     }
 

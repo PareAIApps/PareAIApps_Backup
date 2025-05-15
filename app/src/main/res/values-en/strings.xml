@@ -20,13 +20,14 @@
     <string name="contact_email">pareaiproject@gmail.com</string>
     <string name="error_loading_articles">Failed to load articles: </string>
     <string name="error_occurred">An error occurred: </string>
-    <string name="date">December 14, 2003</string>
+    <string name="date">May 15, 2025</string>
     <string name="text">This is text</string>
     <string name="lorem">Lorem Ipsum dolor</string>
     <string name="description">Description</string>
     <string name="suggestion">Suggestion</string>
     <string name="tutorial">Tutorial</string>
     <string name="receipt">Receipt</string>
+    <string name="example_email">example.gmail.com</string>
 
     <!--  Home  -->
     <string name="welcome">Welcome to Pare AI</string>
@@ -91,22 +92,43 @@
     <string name="img_empty">Please insert the image file first</string>
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
-    <string name="check_padi">Check Rice</string>
+    <string name="check_padi">Check Padi</string>
     <string name="confidence">Confidence:&#160;</string>
 
 
     <!--   About   -->
-    <string name="about_us_content">
-    PareAI (Padi Rice Expert AI) is an application based on Machine Learning technology and Large Language Models (LLMs) developed to help farmers automatically and accurately detect and identify rice plant diseases. This application is the result of a collaborative project by students of the Informatics Engineering Study Program, Department of Informatics and Computer Engineering, Jakarta State Polytechnic.\n\nThe background of PareAI development stems from real problems faced by farmers in recognizing plant disease symptoms. Misdiagnosis often leads to excessive pesticide use, which impacts the environment and crop yields. Therefore, PareAI presents as a smart agricultural solution based on technology.\n\n
-    Main application features:\n
-    • Rice disease detection based on leaf images using CNN (Convolutional Neural Network)\n
-    • LLMs-based ChatBot to provide information and handling recommendations to farmers interactively\n
-    • Simple and user-friendly interface, easy to use by farmers in various regions.\n\n
-    Technologies used:\n
-    - Android Studio (Kotlin)\n
-    - Firebase (Database and Authentication)\n
-    - Google Cloud Platform (Machine Learning model processing).\n\nInstitution:\nInformatics Engineering Study Program, Jakarta State Polytechnic, 2025.\n\nWe hope PareAI can be a real solution that positively impacts farmers, and supports more efficient, sustainable, and data-driven agriculture.
+    <string name="background">
+       The agricultural sector plays a vital role in maintaining food security and driving national economic growth.
+    In the third quarter of 2023, this sector contributed 13.57% to the Gross Domestic Product (GDP).
+    However, farmers still face serious challenges, particularly in terms of accurate and timely plant disease detection.
+    Traditional methods that are still in use often lead to misdiagnosis, excessive pesticide use, and risk of crop failure,
+    as witnessed in Lamongan due to neck blast disease attacks on rice plants.\n\nWith the development of artificial intelligence (AI) technology, especially Convolutional Neural Networks (CNN),
+    plant disease detection can be performed automatically with high accuracy through leaf image processing.
+    Furthermore, with the utilization of Large Language Models (LLMs) based on Natural Language Processing (NLP),
+    farmers can be assisted by interactive ChatBots that provide real-time advice and information on plant disease management.
+    This combination of technologies not only improves agricultural efficiency but also supports more sustainable farming practices.
     </string>
+
+        <string name="objective">
+        1. Develop PareAI, a Machine Learning and Large Language Models-based application to automatically detect rice plant diseases.\n2. Provide an interactive NLP-based ChatBot feature that delivers information and disease management recommendations to farmers.\n3. Improve the accuracy of plant disease diagnosis and reduce dependence on pesticides through modern technological approaches.\n4. Support farmer welfare and national agricultural productivity through easily accessible technological solutions.
+    </string>
+
+        <string name="about_us_text">
+        We are a team of students from the Informatics Engineering Program at Jakarta State Polytechnic,
+    who are passionate about making real contributions to Indonesias agricultural sector through technological innovation.
+    With backgrounds in programming, artificial intelligence, and application development,
+    we have developed PareAI, a smart application that utilizes Machine Learning and ChatBot
+    to help farmers detect plant diseases quickly, accurately, and sustainably.
+    </string>
+
+        <string name="application_features">
+       1. Automatic Disease Detection: Farmers can upload images of rice leaves for automatic detection by a Machine Learning (CNN) based system.\n2. Treatment Recommendations: The application provides information on disease symptoms, severity levels, and appropriate treatment suggestions.\n3. Interactive ChatBot: A Large Language Models (LLMs) based ChatBot provides real-time answers to farmers questions.\n4. Detection History: Stores disease detection data and ChatBot interactions so farmers can view their usage history.\n5. Offline Support: Several application features remain usable even in unstable network conditions through Firebase.\n6. Simple Interface: The application interface is designed to be easily understood and operated by farmers.
+    </string>
+
+    <string name="title_background">Background</string>
+    <string name="title_objective">Objective</string>
+    <string name="title_application_features">Features Application</string>
+    <string name="development_team">Development Team</string>
 
     <!--  History   -->
     <string name="delete_confirmation_title">Delete Confirmation</string>
@@ -137,5 +159,40 @@
 
     <!--  ChangeProfile   -->
     <string name="savechanges">Save Changes</string>
+
+    <!--  ShareApps  -->
+    <string name="text_sqan_qr">Ask your friend to scan this QR code to get the PARE AI app.</string>
+    <string name="share_app_link">Share Application Link</string>
+
+<!--  Privacy   -->
+    ```
+    <string name="privacy_policy">Privacy Policy</string>
+
+    <string name="privacy_policy_description">PareAI values the privacy and security of users personal data. This policy explains how we collect, use, and protect user account information in our application.</string>
+
+    <string name="privacy_policy_title_1">Information Collected</string>
+
+    <string name="privacy_policy_title_2">Use of Information</string>
+
+    <string name="privacy_policy_title_3">Data Sharing</string>
+
+    <string name="privacy_policy_title_4">User Rights</string>
+
+    <string name="privacy_policy_title_5">Policy Changes</string>
+
+    <string name="privacy_info_1">
+    When you create an account and use PareAI, we may collect the following information:\n- Full name\n- Email address\n- Profile picture\n- In-app usage activity.
+</string>
+
+    <string name="privacy_info_2">
+   Personal information collected is used to:\n- Verify identity and provide access to application features\n- Store learning history and user preferences\n- Develop features and improve user experience\n- Provide information or updates related to the application
+</string>
+
+    <string name="privacy_info_3">We will not share your personal data with third parties without your consent, except when required by law or for security investigation purposes.</string>
+
+    <string name="privacy_info_4"> You have the right to:\n- Access and update your account information\n- Delete your account and associated data\n- Opt out of notifications or emails from us</string>
+
+    <string name="privacy_info_5">This policy may be updated at any time. Significant changes will be communicated to users via email or application notification.</string>
+
 
 </resources>
