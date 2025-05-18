@@ -46,7 +46,6 @@
 
             <!-- App Title -->
             <TextView
-                android:id="@+id/appTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/login"
@@ -86,7 +85,6 @@
 
             <!-- Password Label -->
             <TextView
-                android:id="@+id/tv_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/password"
@@ -97,7 +95,6 @@
 
             <!-- TextInputLayout for Password -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/passwordInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -177,7 +174,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/signInButton"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="@color/green_third"
                 android:text="@string/sign_in_google"

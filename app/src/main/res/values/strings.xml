@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">PARE AI</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifikasi</string>
     <string name="title_history">Riwayat</string>
     <string name="title_scan">Scan</string>
     <string name="title_settings">Pengaturan</string>
@@ -18,8 +16,6 @@
     <string name="contact_us_subject">Hubungi Kami</string>
     <string name="send_email_to_us">Kirim email ke kami</string>
     <string name="contact_email">pareaiproject@gmail.com</string>
-    <string name="error_loading_articles">Gagal memuat artikel: </string>
-    <string name="error_occurred">Terjadi kesalahan: </string>
     <string name="date">15 Mei 2025</string>
     <string name="text">Ini text</string>
     <string name="lorem">Lorem Ipsum dolor</string>
@@ -43,7 +39,6 @@
     <string name="title_article">Judul Artikel</string>
     <string name="description_article">Ini adalah deskripsi lengkap dari artikel. Konten ini menjelaskan secara rinci isi artikel yang dipilih oleh pengguna.</string>
     <string name="share_article">Bagikan Artikel</string>
-    <string name="notification_share_article">Dibagikan dari aplikasi PAREAI</string>
     <string name="subtitle">Deskripsi singkat artikel.</string>
 
     <!--  Login  -->
@@ -52,19 +47,6 @@
     <string name="email_invalid">Format email tidak valid</string>
     <string name="password_short">Kata sandi tidak boleh kurang dari 6 karakter</string>
     <string name="not_have_account">Belum punya akun?&#160;</string>
-    <string name="login_title">Masuk</string>
-    <string name="email_hint">Email</string>
-    <string name="password_hint">Kata Sandi</string>
-    <string name="login_button">Masuk</string>
-    <string name="google_sign_in">Masuk dengan Google</string>
-    <string name="register_link">Belum punya akun? Daftar di sini</string>
-    <string name="login_failed">Email atau password salah.</string>
-    <string name="login_success">Berhasil masuk.</string>
-    <string name="empty_fields">Email dan password tidak boleh kosong.</string>
-    <string name="google_sign_in_failed">Google Sign-In gagal.</string>
-    <string name="login_error_dialog_title">Login Gagal</string>
-    <string name="register_title">Daftar</string>
-    <string name="forgot_password_title">Reset Kata Sandi</string>
 
     <!--  Register   -->
     <string name="confirm_password">Konfirmasi Password</string>
@@ -73,12 +55,7 @@
     <!--  Forgot Passoword  -->
     <string name="change_password">Ganti Password</string>
     <string name="forgot_password_description">Masukkan email Anda untuk menerima tautan reset password</string>
-    <string name="enter_your_email">Harap masukkan email Anda.</string>
     <string name="reset_link_sent">Tautan reset kata sandi telah dikirim ke %1$s</string>
-    <string name="failed_to_send_link">Gagal mengirim tautan: %1$s</string>
-    <string name="reset_link_keyword">Tautan reset</string>
-    <string name="reset_email_sent_title">Email Reset Terkirim</string>
-    <string name="reset_email_sent_message">Tautan reset kata sandi telah dikirim ke email Anda. Silakan periksa kotak masuk Anda.</string>
     <string name="ok">OK</string>
     <string name="enter_email">Harap masukkan email Anda.</string>
     <string name="reset_link_failed">Gagal mengirim tautan: %1$s</string>
@@ -163,8 +140,9 @@
     <!--  ShareApps  -->
     <string name="text_sqan_qr">Minta temenmu scan kode QR ini untuk mendapatkan aplikasi PARE AI</string>
     <string name="share_app_link">Bagikan Link Aplikasi</string>
+    <string name="share_via">Bagikan melalui</string>
 
-<!--  Privacy   -->
+    <!--  Privacy   -->
     <string name="privacy_policy">Kebijakan Privasi</string>
 
     <string name="privacy_policy_description">PareAI menghargai privasi dan keamanan data pribadi pengguna. Kebijakan ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi akun pengguna dalam aplikasi kami.</string>

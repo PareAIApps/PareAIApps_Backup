@@ -5,8 +5,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import pnj.pk.pareaipk.database.entity.UserProfile  // ✅ Add this line
-import pnj.pk.pareaipk.database.room.UserProfileDao // Also ensure this import if you're using UserProfileDao
-
 
 @Database(entities = [UserProfile::class], version = 1, exportSchema = false)
 abstract class UserRoomDatabase : RoomDatabase() {

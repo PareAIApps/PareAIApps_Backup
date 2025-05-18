@@ -17,7 +17,6 @@
 
         <!-- TextView untuk judul (dengan margin yang lebih kecil) -->
         <TextView
-            android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="-8dp"
@@ -42,7 +41,6 @@
 
             <!-- Card untuk profil dan informasi akun -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/card_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -57,7 +55,7 @@
 
                     <!-- Foto profil akun menggunakan ShapeableImageView dari Material Components -->
                     <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/img_profile"
+                        android:id="@+id/imgProfile"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
                         android:padding="2dp"
@@ -70,7 +68,7 @@
 
                     <!-- Nama akun -->
                     <TextView
-                        android:id="@+id/tv_account_name"
+                        android:id="@+id/tvAccountName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -81,7 +79,7 @@
 
                     <!-- Email pengguna -->
                     <TextView
-                        android:id="@+id/tv_email"
+                        android:id="@+id/tvEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="24dp"
                         android:layout_marginTop="4dp"
@@ -95,7 +93,6 @@
 
             <!-- Settings Menu Items with a negative top margin to overlap with banner -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/menu_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="-10dp"
@@ -111,7 +108,7 @@
 
                     <!-- Account Settings -->
                     <LinearLayout
-                        android:id="@+id/btn_edit_profile"
+                        android:id="@+id/btnEditProfile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/menu_item_background"
@@ -148,9 +145,9 @@
                         android:layout_marginEnd="8dp"
                         android:background="#EEEEEE" />
 
-                    <!-- Translate -->
+                    <!-- Privacy Policy -->
                     <LinearLayout
-                        android:id="@+id/btn_privacy_policy"
+                        android:id="@+id/btnPrivacyPolicy"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/menu_item_background"

@@ -27,6 +27,9 @@ class ArticleActivity : AppCompatActivity() {
         binding = ActivityArticleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Sembunyikan ActionBar bawaan
+        supportActionBar?.hide()
+
         // Setup toolbar dengan back button
         setupToolbar()
 
@@ -54,10 +57,7 @@ class ArticleActivity : AppCompatActivity() {
     }
 
     private fun setupToolbar() {
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false) // Menyembunyikan judul default
-
-        // Menetapkan judul di TextView kustom
+        // Tidak perlu memanggil setSupportActionBar(binding.toolbar) karena ini menyebabkan konflik
         binding.toolbarTitle.text = getString(R.string.detail_article)
 
         // Mengatur fungsi navigasi back

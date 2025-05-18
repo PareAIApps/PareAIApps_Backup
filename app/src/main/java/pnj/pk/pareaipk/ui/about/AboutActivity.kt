@@ -26,35 +26,35 @@ class AboutActivity : AppCompatActivity() {
 
         // Fathir Ikhsan Links
         findViewById<ImageView>(R.id.iv_linkedin_fathir).setOnClickListener {
-            openLink("https://www.linkedin.com/in/fathirikhsan")
+            openLink("https://www.linkedin.com/in/fathir-ikhsan-292524223")
         }
         findViewById<ImageView>(R.id.iv_github_fathir).setOnClickListener {
-            openLink("https://github.com/fathirikhsan")
+            openLink("https://github.com/FireHR2004")
         }
         findViewById<ImageView>(R.id.iv_instagram_fathir).setOnClickListener {
-            openLink("https://www.instagram.com/fathirikhsan")
+            openLink("https://www.instagram.com/mufaik04_")
         }
 
         // Nabila Aulya Links
         findViewById<ImageView>(R.id.iv_linkedin_nabila).setOnClickListener {
-            openLink("https://www.linkedin.com/in/nabila-aulya")
+            openLink("https://www.linkedin.com/in/nabila-aulya-fakhrunnisaa")
         }
         findViewById<ImageView>(R.id.iv_github_nabila).setOnClickListener {
-            openLink("https://github.com/nabila-aulya")
+            openLink("https://github.com/nabilaulyaf")
         }
         findViewById<ImageView>(R.id.iv_instagram_nabila).setOnClickListener {
-            openLink("https://www.instagram.com/nabila_aulya")
+            openLink("https://www.instagram.com/nabilaulyaf")
         }
 
         // Haidar Aditya Baran Links
         findViewById<ImageView>(R.id.iv_linkedin_haidar).setOnClickListener {
-            openLink("https://www.linkedin.com/in/haidaraditya")
+            openLink("https://www.linkedin.com/in/haidar-aditya-baran")
         }
         findViewById<ImageView>(R.id.iv_github_haidar).setOnClickListener {
-            openLink("https://github.com/haidaraditya")
+            openLink("https://github.com/Githaidar")
         }
         findViewById<ImageView>(R.id.iv_instagram_haidar).setOnClickListener {
-            openLink("https://www.instagram.com/haidaraditya")
+            openLink("https://www.instagram.com/haidarsecret/")
         }
 
         // Akhtar Faizi Putra Links

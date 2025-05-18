@@ -22,7 +22,6 @@
 
     <!-- Combined QR and User Info Card -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_combined"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="24dp"
@@ -44,7 +43,6 @@
 
             <!-- Info Text (Now inside the card, above QR) -->
             <TextView
-                android:id="@+id/info_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/text_sqan_qr"
@@ -57,16 +55,14 @@
 
             <!-- QR Image -->
             <ImageView
-                android:id="@+id/qr_image"
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:src="@mipmap/exampe_qr"
+                android:src="@mipmap/qr_code_fix"
                 android:padding="0dp" />
 
             <!-- User Info Bottom (Now below image) -->
             <LinearLayout
-                android:id="@+id/user_info_top"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -115,7 +111,6 @@
                 </LinearLayout>
 
                 <ImageView
-                    android:id="@+id/gopay_icon"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:src="@mipmap/logo_png_fix" />
@@ -125,7 +120,7 @@
 
     <!-- Share Button -->
     <Button
-        android:id="@+id/btn_share"
+        android:id="@+id/share_button"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:textSize="18sp"

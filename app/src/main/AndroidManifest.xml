@@ -48,15 +48,9 @@
         <activity
             android:name=".ui.article.ArticleActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Pare_ai_pk.NoActionBar" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.about.AboutActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Pare_ai_pk.NoActionBar" />
-        <activity
-            android:name=".ui.onboarding.OnboardingActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Pare_ai_pk.NoActionBar" />

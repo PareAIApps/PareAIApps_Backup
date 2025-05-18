@@ -3,9 +3,6 @@ package pnj.pk.pareaipk.ui.article
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import pnj.pk.pareaipk.R
 
 class ArticleViewModel : ViewModel() {
     // Article details

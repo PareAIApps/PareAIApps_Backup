@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -49,7 +50,7 @@
                 app:layout_constraintEnd_toEndOf="parent">
 
                 <ImageView
-                    android:id="@+id/history_image"
+                    android:id="@+id/historyImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
@@ -68,7 +69,6 @@
                 app:layout_constraintEnd_toEndOf="parent"/>
 
             <LinearLayout
-                android:id="@+id/history_container"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -79,7 +79,7 @@
                 app:layout_constraintEnd_toEndOf="parent">
 
                 <TextView
-                    android:id="@+id/history_title"
+                    android:id="@+id/historyTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="24sp"
@@ -110,7 +110,7 @@
                             android:textColor="#4A5568"/>
 
                         <TextView
-                            android:id="@+id/confidence_text"
+                            android:id="@+id/confidenceText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
@@ -120,7 +120,7 @@
                     </LinearLayout>
 
                     <ProgressBar
-                        android:id="@+id/confidence_progress_bar"
+                        android:id="@+id/confidenceProgressBar"
                         style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="match_parent"
                         android:layout_height="12dp"
@@ -153,11 +153,12 @@
                             android:textColor="#2D3748" />
 
                         <TextView
-                            android:id="@+id/history_description"
+                            android:id="@+id/historyDescription"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
-                            android:justificationMode="inter_word"                            android:layout_margin="1dp"
+                            android:justificationMode="inter_word"
+                            android:layout_margin="1dp"
                             android:textColor="#4A5568"
                             tools:text="Detailed description of the classification and its unique characteristics."
                             android:layout_marginBottom="16dp"/> <!-- Same margin as Saran card -->
@@ -188,12 +189,12 @@
                             android:layout_marginBottom="5dp"/>
 
                         <TextView
-                            android:id="@+id/suggestion_text"
+                            android:id="@+id/suggestionText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
-                            android:justificationMode="inter_word"                            android:layout_margin="1dp"
-
+                            android:justificationMode="inter_word"
+                            android:layout_margin="1dp"
                             android:textColor="#4A5568"
                             tools:text="Personalized care tips and recommendations."/>
                     </LinearLayout>
@@ -222,7 +223,7 @@
                             android:layout_marginBottom="5dp"/>
 
                         <TextView
-                            android:id="@+id/receipt_text"
+                            android:id="@+id/receiptText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
@@ -256,7 +257,7 @@
                             android:layout_marginBottom="5dp"/>
 
                         <TextView
-                            android:id="@+id/tutorial_text"
+                            android:id="@+id/tutorialText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
@@ -269,7 +270,7 @@
 
 
                 <TextView
-                    android:id="@+id/created_at"
+                    android:id="@+id/createdAt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"

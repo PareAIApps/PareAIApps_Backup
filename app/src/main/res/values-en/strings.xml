@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">PARE AI</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="title_history">History</string>
     <string name="title_scan">Scan</string>
     <string name="title_settings">Settings</string>
@@ -18,8 +16,6 @@
     <string name="contact_us_subject">Contact Us</string>
     <string name="send_email_to_us">Send email to us</string>
     <string name="contact_email">pareaiproject@gmail.com</string>
-    <string name="error_loading_articles">Failed to load articles: </string>
-    <string name="error_occurred">An error occurred: </string>
     <string name="date">May 15, 2025</string>
     <string name="text">This is text</string>
     <string name="lorem">Lorem Ipsum dolor</string>
@@ -43,7 +39,6 @@
     <string name="title_article">Article Title</string>
     <string name="description_article">This is the complete description of the article. This content explains in detail the content of the article selected by the user.</string>
     <string name="share_article">Share Article</string>
-    <string name="notification_share_article">Shared from PAREAI application</string>
     <string name="subtitle">Brief description of the article.</string>
 
     <!--  Login  -->
@@ -52,19 +47,6 @@
     <string name="email_invalid">Invalid email format</string>
     <string name="password_short">Password must not be less than 6 characters</string>
     <string name="not_have_account">Dont have an account?&#160;</string>
-    <string name="login_title">Login</string>
-    <string name="email_hint">Email</string>
-    <string name="password_hint">Password</string>
-    <string name="login_button">Login</string>
-    <string name="google_sign_in">Sign in with Google</string>
-    <string name="register_link">Dont have an account? Register here</string>
-    <string name="login_failed">Incorrect email or password.</string>
-    <string name="login_success">Login successful.</string>
-    <string name="empty_fields">Email and password cannot be empty.</string>
-    <string name="google_sign_in_failed">Google Sign-In failed.</string>
-    <string name="login_error_dialog_title">Login Failed</string>
-    <string name="register_title">Register</string>
-    <string name="forgot_password_title">Reset Password</string>
 
     <!--  Register   -->
     <string name="confirm_password">Confirm Password</string>
@@ -73,12 +55,7 @@
     <!--  Forgot Password  -->
     <string name="change_password">Change Password</string>
     <string name="forgot_password_description">Enter your email to receive a password reset link</string>
-    <string name="enter_your_email">Please enter your email.</string>
     <string name="reset_link_sent">Password reset link has been sent to %1$s</string>
-    <string name="failed_to_send_link">Failed to send link: %1$s</string>
-    <string name="reset_link_keyword">Reset link</string>
-    <string name="reset_email_sent_title">Reset Email Sent</string>
-    <string name="reset_email_sent_message">Password reset link has been sent to your email. Please check your inbox.</string>
     <string name="ok">OK</string>
     <string name="enter_email">Please enter your email.</string>
     <string name="reset_link_failed">Failed to send link: %1$s</string>
@@ -163,8 +140,10 @@
     <!--  ShareApps  -->
     <string name="text_sqan_qr">Ask your friend to scan this QR code to get the PARE AI app.</string>
     <string name="share_app_link">Share Application Link</string>
+    <string name="share_via">Share Via</string>
 
-<!--  Privacy   -->
+
+    <!--  Privacy   -->
     ```
     <string name="privacy_policy">Privacy Policy</string>
 

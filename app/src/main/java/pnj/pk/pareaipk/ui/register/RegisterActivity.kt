@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import pnj.pk.pareaipk.MainActivity
 import pnj.pk.pareaipk.databinding.ActivityRegisterBinding
 import pnj.pk.pareaipk.ui.login.LoginActivity
 
@@ -23,11 +24,7 @@ class RegisterActivity : AppCompatActivity() {
         // Observe LiveData from ViewModel
         registerViewModel.user.observe(this, Observer { user ->
             user?.let {
-                Toast.makeText(this, "Registrasi berhasil! Silakan login.", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, LoginActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-                startActivity(intent)
-                finish()
+                showRegistrationSuccessAlert()
             }
         })
 
@@ -45,14 +42,6 @@ class RegisterActivity : AppCompatActivity() {
             val password = binding.passwordInputRegister.text.toString().trim()
             val confirmPassword = binding.confirmPasswordInput.text.toString().trim()
 
-            // You can add a name field to your registration layout if you want,
-            // or extract a username from the email as shown in the ViewModel
-
-            // If you have a name field:
-            // val name = binding.nameInputRegister.text.toString().trim()
-            // registerViewModel.registerWithEmail(email, password, confirmPassword, name)
-
-            // Otherwise:
             registerViewModel.registerWithEmail(email, password, confirmPassword)
         }
 
@@ -80,6 +69,21 @@ class RegisterActivity : AppCompatActivity() {
             .setTitle("Registrasi Gagal")
             .setMessage("Email sudah terdaftar. Silakan gunakan email lain atau login.")
             .setPositiveButton("OK", null)
+            .show()
+    }
+
+    private fun showRegistrationSuccessAlert() {
+        AlertDialog.Builder(this)
+            .setTitle("Registrasi Berhasil")
+            .setMessage("Akun Anda telah berhasil dibuat!")
+            .setPositiveButton("OK") { _, _ ->
+                // Navigate to MainActivity (which contains HomeFragment)
+                val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                finish()
+            }
+            .setCancelable(false) // Prevent dismissing by tapping outside
             .show()
     }
 }

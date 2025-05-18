@@ -7,7 +7,6 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import pnj.pk.pareaipk.ui.login.LoginActivity
-import pnj.pk.pareaipk.MainActivity
 
 class SplashScreenActivity : AppCompatActivity() {
 

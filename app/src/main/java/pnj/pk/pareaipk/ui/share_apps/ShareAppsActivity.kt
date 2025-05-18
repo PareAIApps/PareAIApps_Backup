@@ -1,9 +1,10 @@
 package pnj.pk.pareaipk.ui.share_apps
 
-import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,7 @@ class ShareAppsActivity : AppCompatActivity() {
     private lateinit var userNameTextView: TextView
     private lateinit var userPhoneTextView: TextView
     private lateinit var userImageView: ImageView
+    private lateinit var shareButton: Button
     private val TAG = "ShareAppsActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +36,7 @@ class ShareAppsActivity : AppCompatActivity() {
         userNameTextView = findViewById(R.id.user_name)
         userPhoneTextView = findViewById(R.id.user_phone)
         userImageView = findViewById(R.id.user_image)
+        shareButton = findViewById(R.id.share_button)
 
         // Initialize repository
         val database = UserRoomDatabase.getDatabase(applicationContext)
@@ -50,8 +53,25 @@ class ShareAppsActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
+        // Setup share button
+        setupShareButton()
+
         // Observe user profile
         observeUserProfile()
+    }
+
+    private fun setupShareButton() {
+        shareButton.setOnClickListener {
+            val appLink = "https://drive.google.com/file/d/1cn2II3JWlWXCMh60UbLT_h0tBzNBv7En/view?usp=sharing"
+
+            val shareIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, appLink)
+                type = "text/plain"
+            }
+
+            startActivity(Intent.createChooser(shareIntent, getString(R.string.share_via)))
+        }
     }
 
     private fun observeUserProfile() {
