@@ -226,7 +226,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
-                            android:justificationMode="inter_word"
                             android:layout_margin="1dp"
                             android:textColor="#4A5568"
                             tools:text="Recommended recipes based on the scan result."/>
@@ -260,7 +259,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
-                            android:justificationMode="inter_word"
                             android:layout_margin="1dp"
                             android:textColor="#4A5568"
                             tools:text="Step-by-step guide or educational material."/>

@@ -83,4 +83,7 @@ dependencies {
     // DataStore Preferences for settings storage
     implementation (libs.androidx.datastore.preferences)
 
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.inline)
+
 }

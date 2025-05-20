@@ -29,6 +29,7 @@
         <activity
             android:name=".ui.privacy.PrivacyActivity"
             android:theme="@style/Theme.Pare_ai_pk.NoActionBar"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".ui.share_apps.ShareAppsActivity"

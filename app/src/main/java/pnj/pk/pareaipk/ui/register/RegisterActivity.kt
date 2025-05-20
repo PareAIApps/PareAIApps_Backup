@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import pnj.pk.pareaipk.MainActivity
+import pnj.pk.pareaipk.R
 import pnj.pk.pareaipk.databinding.ActivityRegisterBinding
 import pnj.pk.pareaipk.ui.login.LoginActivity
 
@@ -29,10 +30,16 @@ class RegisterActivity : AppCompatActivity() {
         })
 
         registerViewModel.message.observe(this, Observer { message ->
-            if (message.contains("email sudah", ignoreCase = true)) {
-                showAlertEmailSudahTerdaftar()
-            } else {
-                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+            when {
+                message.contains("email sudah", ignoreCase = true) -> {
+                    showAlertEmailSudahTerdaftar()
+                }
+                message.contains("Password tidak cocok", ignoreCase = true) -> {
+                    showPasswordMismatchAlert()
+                }
+                else -> {
+                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                }
             }
         })
 
@@ -65,25 +72,38 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun showAlertEmailSudahTerdaftar() {
-        AlertDialog.Builder(this)
+        val dialog = AlertDialog.Builder(this)
             .setTitle("Registrasi Gagal")
             .setMessage("Email sudah terdaftar. Silakan gunakan email lain atau login.")
             .setPositiveButton("OK", null)
             .show()
+
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(getColor(R.color.green_light))
+    }
+
+    private fun showPasswordMismatchAlert() {
+        val dialog = AlertDialog.Builder(this)
+            .setTitle("Password Tidak Cocok")
+            .setMessage("Password dan Konfirmasi Password tidak cocok. Silakan periksa kembali.")
+            .setPositiveButton("OK", null)
+            .show()
+
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(getColor(R.color.green_light))
     }
 
     private fun showRegistrationSuccessAlert() {
-        AlertDialog.Builder(this)
+        val dialog = AlertDialog.Builder(this)
             .setTitle("Registrasi Berhasil")
             .setMessage("Akun Anda telah berhasil dibuat!")
             .setPositiveButton("OK") { _, _ ->
-                // Navigate to MainActivity (which contains HomeFragment)
                 val intent = Intent(this, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
                 finish()
             }
-            .setCancelable(false) // Prevent dismissing by tapping outside
+            .setCancelable(false)
             .show()
+
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(getColor(R.color.green_light))
     }
 }
