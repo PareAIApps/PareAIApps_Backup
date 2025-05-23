@@ -23,5 +23,4 @@ class LoginActivityViewModelTest {
     @Test
     fun checkCurrentUser() {
     }
-
 }

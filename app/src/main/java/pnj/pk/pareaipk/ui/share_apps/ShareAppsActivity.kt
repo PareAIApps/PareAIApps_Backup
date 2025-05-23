@@ -62,7 +62,7 @@ class ShareAppsActivity : AppCompatActivity() {
 
     private fun setupShareButton() {
         shareButton.setOnClickListener {
-            val appLink = "https://drive.google.com/file/d/1cn2II3JWlWXCMh60UbLT_h0tBzNBv7En/view?usp=sharing"
+            val appLink = "https://drive.google.com/drive/folders/1DfmnUKXM22Xy7fg2H36CSck1kQDuYH-3?usp=sharing"
 
             val shareIntent = Intent().apply {
                 action = Intent.ACTION_SEND
