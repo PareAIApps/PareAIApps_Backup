@@ -1,15 +1,20 @@
 package pnj.pk.pareaipk.ui.change_profile
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -20,14 +25,31 @@ import pnj.pk.pareaipk.database.repository.UserRepository
 import pnj.pk.pareaipk.database.room.UserRoomDatabase
 import pnj.pk.pareaipk.databinding.ActivityChangeProfileBinding
 import pnj.pk.pareaipk.utils.ProfileImageUtils
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ChangeProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityChangeProfileBinding
     private lateinit var viewModel: ChangeProfileViewModel
     private var selectedImageUri: Uri? = null
+    private var currentPhotoPath: String? = null
     private val TAG = "ChangeProfileActivity"
 
+    // Request permission launcher
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            openCamera()
+        } else {
+            Toast.makeText(this, "Izin kamera diperlukan untuk mengambil foto", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    // Pick image from gallery launcher
     private val pickImageLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -35,6 +57,19 @@ class ChangeProfileActivity : AppCompatActivity() {
             val uri = result.data?.data
             if (uri != null) {
                 processSelectedImage(uri)
+            }
+        }
+    }
+
+    // Take photo with camera launcher
+    private val takePictureLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            currentPhotoPath?.let { path ->
+                val photoFile = File(path)
+                val photoUri = Uri.fromFile(photoFile)
+                processSelectedImage(photoUri)
             }
         }
     }
@@ -77,14 +112,91 @@ class ChangeProfileActivity : AppCompatActivity() {
 
         // Set click listeners
         binding.btnChangeImage.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK).apply {
-                type = "image/*"
-            }
-            pickImageLauncher.launch(intent)
+            showImageSourceDialog()
         }
 
         binding.btnSaveProfile.setOnClickListener {
             showConfirmationDialog()
+        }
+    }
+
+    private fun showImageSourceDialog() {
+        val options = arrayOf("Kamera", "Galeri")
+
+        val dialog = AlertDialog.Builder(this)
+            .setTitle("Pilih Sumber Gambar")
+            .setItems(options) { _, which ->
+                when (which) {
+                    0 -> checkCameraPermissionAndOpen()
+                    1 -> openGallery()
+                }
+            }
+            .setNegativeButton("Batal") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+
+        dialog.show()
+
+        // Ubah warna tombol "Batal" setelah dialog muncul
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(
+            ContextCompat.getColor(this, R.color.green_light)
+        )
+    }
+
+
+    private fun checkCameraPermissionAndOpen() {
+        when {
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                openCamera()
+            }
+            else -> {
+                requestPermissionLauncher.launch(Manifest.permission.CAMERA)
+            }
+        }
+    }
+
+    private fun openCamera() {
+        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+        // Create the File where the photo should go
+        try {
+            val photoFile = createImageFile()
+            val photoURI = FileProvider.getUriForFile(
+                this,
+                "${applicationContext.packageName}.fileprovider",
+                photoFile
+            )
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+            takePictureLauncher.launch(takePictureIntent)
+        } catch (ex: IOException) {
+            Log.e(TAG, "Error creating image file: ${ex.message}", ex)
+            Toast.makeText(this, "Error creating image file", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK).apply {
+            type = "image/*"
+        }
+        pickImageLauncher.launch(intent)
+    }
+
+    @Throws(IOException::class)
+    private fun createImageFile(): File {
+        // Create an image file name
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        val storageDir: File? = getExternalFilesDir("Pictures")
+        return File.createTempFile(
+            "PROFILE_${timeStamp}_",
+            ".jpg",
+            storageDir
+        ).apply {
+            // Save a file: path for use with ACTION_VIEW intents
+            currentPhotoPath = absolutePath
         }
     }
 
