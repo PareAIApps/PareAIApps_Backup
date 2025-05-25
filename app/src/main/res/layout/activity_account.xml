@@ -177,13 +177,6 @@
                             android:src="@drawable/ic_arrow_right" />
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:background="#EEEEEE" />
-
                     <!-- Space filler to ensure content extends to bottom -->
                     <View
                         android:layout_width="match_parent"

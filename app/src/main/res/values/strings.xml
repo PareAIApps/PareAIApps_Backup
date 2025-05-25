@@ -24,6 +24,9 @@
     <string name="tutorial">Panduan</string>
     <string name="receipt">Resep</string>
     <string name="example_email">example.gmail.com</string>
+    <string name="delete">Hapus</string>
+    <string name="all">Semua</string>
+    <string name="cancel">Batal</string>
 
     <!--  Home  -->
     <string name="welcome">Selamat Datang di Pare AI</string>
@@ -115,6 +118,13 @@
     <string name="scan_result">Hasil Scan</string>
     <string name="detail_scan">Detail Scan</string>
     <string name="delete_history">Hapus Riwayat</string>
+    <string name="select_all">Pilih Semua</string>
+    <string name="select_category">Pilih Kategori</string>
+    <string name="no_history_found">Tidak Ada Riwayat Ditemukan</string>
+    <string name="items_selected">0 Item Dipilih</string>
+    <string name="item_selected_single">%d Item Dipilih</string>
+    <string name="delete_one_item_confirmation">Apakah Anda yakin ingin menghapus 1 item riwayat ini?</string>
+    <string name="delete_multiple_items_confirmation">Apakah Anda yakin ingin menghapus %d item riwayat ini?</string>
 
     <!--  Settings   -->
     <!-- Tambahkan di file strings.xml -->
@@ -136,6 +146,26 @@
 
     <!--  ChangeProfile   -->
     <string name="savechanges">Simpan Perubahan</string>
+    <string name="toolbar_change_profile_title">Ubah Profil</string>
+    <string name="hint_username">Nama Pengguna</string>
+    <string name="hint_email">Email</string>
+    <string name="button_change_image">Ubah Gambar</string>
+    <string name="button_save_profile">Simpan Profil</string>
+    <string name="dialog_image_source_title">Pilih Sumber Gambar</string>
+    <string name="dialog_option_camera">Kamera</string>
+    <string name="dialog_option_gallery">Galeri</string>
+    <string name="dialog_negative_button_cancel">Batal</string>
+    <string name="toast_permission_camera_required">Izin kamera diperlukan untuk mengambil foto</string>
+    <string name="toast_error_create_image_file">Error membuat file gambar</string>
+    <string name="toast_error_processing_image">Error memproses gambar: %s</string>
+    <string name="toast_error_initializing_viewmodel">Error inisialisasi: %s</string>
+    <string name="toast_name_empty">Nama tidak boleh kosong</string>
+    <string name="dialog_confirmation_title">Konfirmasi Perubahan</string>
+    <string name="dialog_confirmation_message">Apakah Anda yakin ingin mengubah data profil?</string>
+    <string name="dialog_positive_button_yes">Ya</string>
+    <string name="dialog_negative_button_no">Tidak</string>
+    <string name="profile_update_success_message">Profil berhasil diperbarui!</string>
+    <string name="profile_update_failure_message">Gagal memperbarui profil: %s</string>
 
     <!--  ShareApps  -->
     <string name="text_sqan_qr">Minta temenmu scan kode QR ini untuk mendapatkan aplikasi PARE AI</string>

@@ -21,19 +21,24 @@ class HistoryFragment : Fragment() {
     private val viewModel: HistoryViewModel by viewModels()
     private lateinit var scanHistoryAdapter: HistoryAdapter
 
-    private val filterLabels = listOf(
-        "Semua",
-        "Bacterial Leaf Blight",
-        "Brown Spot",
-        "False Smut",
-        "Healthy Plant",
-        "Hispa",
-        "Neck Blast",
-        "Sheath Blight Rot",
-        "Stemborer",
-        "Wereng"
-    )
-    private var currentFilter = "Semua"
+    // Use getString(R.string.all_filter) for "Semua"
+    private val filterLabels by lazy {
+        listOf(
+            getString(R.string.all), // Changed to string resource
+            "Bacterial Leaf Blight",
+            "Bacterial Leaf Streak",
+            "Bacterial Panicle Blight",
+            "Blast",
+            "Brown Spot",
+            "Dead Heart",
+            "Downy Mildew",
+            "False Smut",
+            "Healty",
+            "Hispa",
+            "Tungro"
+        )
+    }
+    private var currentFilter: String = "" // Initialize later after context is available
     private var isSelectionMode = false
 
     override fun onCreateView(
@@ -46,6 +51,12 @@ class HistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Initialize currentFilter here, after context is available
+        currentFilter = getString(R.string.all) // Initialize with the string resource
+
+        // Initially hide the fixedHeaderContainer
+        binding.fixedHeaderContainer.visibility = View.GONE
 
         setupFilterButton()
         setupHistoryRecyclerView()
@@ -65,11 +76,11 @@ class HistoryFragment : Fragment() {
     }
 
     private fun setupSelectionToggle() {
-        binding.topRightLabel.setOnClickListener {
+        binding.fabDelete.setOnClickListener {
             if (!isSelectionMode) {
                 toggleSelectionMode()
             } else {
-                // When in selection mode, "Pilih Semua" acts as select all
+                // When in selection mode, FAB acts as select all
                 toggleSelectAll()
             }
         }
@@ -80,65 +91,52 @@ class HistoryFragment : Fragment() {
 
         if (isSelectionMode) {
             // Switch to selection mode
-            binding.topRightLabel.text = "Pilih Semua"
+            binding.fixedHeaderContainer.visibility = View.VISIBLE // Make the header visible
             binding.historyCheckBox.visibility = View.VISIBLE
-            binding.leftCheckBox.visibility = View.VISIBLE
             binding.actionButton.visibility = View.VISIBLE
             binding.cancelButton.visibility = View.VISIBLE
+            binding.selectedCountTextView.visibility = View.VISIBLE
+            binding.fabDelete.visibility = View.GONE // **Hide FAB Delete**
 
             // Hide filter elements
-            binding.titleTextView.visibility = View.GONE
             binding.filterButton.visibility = View.GONE
 
-            // Remove margin end when in selection mode
-            val layoutParams = binding.topRightLabel.layoutParams as androidx.constraintlayout.widget.ConstraintLayout.LayoutParams
-            layoutParams.marginEnd = 0
-            binding.topRightLabel.layoutParams = layoutParams
+            // Enable selection mode in adapter
+            scanHistoryAdapter.setSelectionMode(true)
+
+            // Update selected count display
+            updateSelectedCountDisplay(0)
         } else {
             // Switch back to normal mode
-            binding.topRightLabel.text = "Pilih Riwayat"
+            binding.fixedHeaderContainer.visibility = View.GONE // Hide the header
             binding.historyCheckBox.visibility = View.GONE
-            binding.leftCheckBox.visibility = View.GONE
             binding.actionButton.visibility = View.GONE
             binding.cancelButton.visibility = View.GONE
+            binding.selectedCountTextView.visibility = View.GONE
+            binding.fabDelete.visibility = View.VISIBLE // **Show FAB Delete**
 
             // Show filter elements
-            binding.titleTextView.visibility = View.VISIBLE
             binding.filterButton.visibility = View.VISIBLE
 
             // Reset checkbox states
             binding.historyCheckBox.isChecked = false
-            binding.leftCheckBox.isChecked = false
 
-            // Restore margin end when back to normal mode
-            val layoutParams = binding.topRightLabel.layoutParams as androidx.constraintlayout.widget.ConstraintLayout.LayoutParams
-            layoutParams.marginEnd = (16 * resources.displayMetrics.density).toInt()
-            binding.topRightLabel.layoutParams = layoutParams
+            // Disable selection mode in adapter
+            scanHistoryAdapter.setSelectionMode(false)
         }
     }
 
     private fun setupSelectAllFunctionality() {
         // Handle select all checkbox
         binding.historyCheckBox.setOnCheckedChangeListener { _, isChecked ->
-            binding.leftCheckBox.isChecked = isChecked
-            // Here you can also update the adapter to select/deselect all items
-            // scanHistoryAdapter.selectAll(isChecked)
-        }
-
-        // Handle left checkbox
-        binding.leftCheckBox.setOnCheckedChangeListener { _, isChecked ->
-            binding.historyCheckBox.isChecked = isChecked
-            // Here you can also update the adapter to select/deselect all items
-            // scanHistoryAdapter.selectAll(isChecked)
+            scanHistoryAdapter.selectAll(isChecked)
         }
     }
 
     private fun toggleSelectAll() {
-        val newState = !binding.historyCheckBox.isChecked
+        val newState = !scanHistoryAdapter.areAllItemsSelected()
         binding.historyCheckBox.isChecked = newState
-        binding.leftCheckBox.isChecked = newState
-        // Here you can also update the adapter to select/deselect all items
-        // scanHistoryAdapter.selectAll(newState)
+        scanHistoryAdapter.selectAll(newState)
     }
 
     private fun showFilterPopup(anchorView: View) {
@@ -188,15 +186,49 @@ class HistoryFragment : Fragment() {
     private fun setupActionButtons() {
         // Delete button
         binding.actionButton.setOnClickListener {
-            // Handle delete selected items
-            // You can implement the delete logic here
-            // For example: deleteSelectedItems()
+            val selectedItems = scanHistoryAdapter.getSelectedItems()
+            if (selectedItems.isNotEmpty()) {
+                showDeleteSelectedConfirmationDialog(selectedItems)
+            }
         }
 
         // Cancel button
         binding.cancelButton.setOnClickListener {
             toggleSelectionMode() // Exit selection mode
         }
+    }
+
+    private fun showDeleteSelectedConfirmationDialog(selectedItems: List<pnj.pk.pareaipk.database.entity.HistoryEntity>) {
+        val message = if (selectedItems.size == 1) {
+            getString(R.string.delete_one_item_confirmation)
+        } else {
+            getString(R.string.delete_multiple_items_confirmation, selectedItems.size)
+        }
+
+        val dialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.delete_confirmation_title))
+            .setMessage(message)
+            .setPositiveButton(getString(R.string.delete)) { _, _ ->
+                deleteSelectedItems(selectedItems)
+            }
+            .setNegativeButton(getString(R.string.cancel), null)
+            .setIcon(R.drawable.ic_delete)
+            .create()
+
+        dialog.setOnShowListener {
+            // Ubah warna tombol "Delete" (positive button) menjadi merah
+            dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE)
+                ?.setTextColor(requireContext().getColor(R.color.red)) // pastikan warna merah ada di colors.xml
+        }
+        dialog.show()
+    }
+
+    private fun deleteSelectedItems(selectedItems: List<pnj.pk.pareaipk.database.entity.HistoryEntity>) {
+        selectedItems.forEach { item ->
+            viewModel.deleteScanHistory(item)
+        }
+        // Exit selection mode after deletion
+        toggleSelectionMode()
     }
 
     private fun setupHistoryRecyclerView() {
@@ -213,10 +245,31 @@ class HistoryFragment : Fragment() {
             }
         )
 
+        // Set up selection change listener
+        scanHistoryAdapter.setOnSelectionChangedListener { hasSelection ->
+            // Update the main checkbox based on adapter selection state
+            if (isSelectionMode) {
+                binding.historyCheckBox.isChecked = scanHistoryAdapter.areAllItemsSelected()
+
+                // Update selected count display
+                val selectedCount = scanHistoryAdapter.getSelectedItems().size
+                updateSelectedCountDisplay(selectedCount)
+            }
+        }
+
         binding.recyclerViewHistory.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = scanHistoryAdapter
         }
+    }
+
+    private fun updateSelectedCountDisplay(count: Int) {
+        val text = if (count == 1) {
+            binding.root.context.getString(R.string.item_selected_single, count)
+        } else {
+            binding.root.context.getString(R.string.item_selected_single, count)
+        }
+        binding.selectedCountTextView.text = text
     }
 
     private fun observeScanHistory() {
@@ -230,7 +283,7 @@ class HistoryFragment : Fragment() {
     }
 
     private fun filterHistoryItems() {
-        val filteredList = if (currentFilter == "Semua") {
+        val filteredList = if (currentFilter == getString(R.string.all)) { // Changed to string resource
             viewModel.fullHistoryList.value ?: emptyList()
         } else {
             viewModel.fullHistoryList.value?.filter { it.class_label == currentFilter } ?: emptyList()
@@ -238,9 +291,17 @@ class HistoryFragment : Fragment() {
 
         scanHistoryAdapter.submitList(filteredList)
 
-        // Toggle empty state visibility
-        binding.emptyStateLayout.visibility =
-            if (filteredList.isEmpty()) View.VISIBLE else View.GONE
+        // Toggle empty state visibility and FAB visibility
+        if (filteredList.isEmpty()) {
+            binding.emptyStateLayout.visibility = View.VISIBLE
+            binding.fabDelete.visibility = View.GONE // Hide FAB when no history
+        } else {
+            binding.emptyStateLayout.visibility = View.GONE
+            // Only show FAB if not in selection mode
+            if (!isSelectionMode) {
+                binding.fabDelete.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun onDestroyView() {

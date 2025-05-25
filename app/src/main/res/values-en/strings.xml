@@ -24,6 +24,9 @@
     <string name="tutorial">Tutorial</string>
     <string name="receipt">Receipt</string>
     <string name="example_email">example.gmail.com</string>
+    <string name="delete">Delete</string>
+    <string name="all">All</string>
+    <string name="cancel">Cancel</string>
 
     <!--  Home  -->
     <string name="welcome">Welcome to Pare AI</string>
@@ -115,6 +118,13 @@
     <string name="scan_result">Scan Result</string>
     <string name="detail_scan">Scan Detail</string>
     <string name="delete_history">Delete History</string>
+    <string name="select_all">Select All</string>
+    <string name="select_category">Select Category</string>
+    <string name="no_history_found">No History Found</string>
+    <string name="items_selected">0 Items Selected</string>
+    <string name="item_selected_single">%d Item Selected</string>
+    <string name="delete_one_item_confirmation">Are you sure you want to delete this 1 history item?</string>
+    <string name="delete_multiple_items_confirmation">Are you sure you want to delete %d history items?</string>
 
     <!--  Settings   -->
     <!-- Add to strings.xml file -->
@@ -136,6 +146,26 @@
 
     <!--  ChangeProfile   -->
     <string name="savechanges">Save Changes</string>
+    <string name="toolbar_change_profile_title">Change Profile</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_email">Email</string>
+    <string name="button_change_image">Change Image</string>
+    <string name="button_save_profile">Save Profile</string>
+    <string name="dialog_image_source_title">Select Image Source</string>
+    <string name="dialog_option_camera">Camera</string>
+    <string name="dialog_option_gallery">Gallery</string>
+    <string name="dialog_negative_button_cancel">Cancel</string>
+    <string name="toast_permission_camera_required">Camera permission is required to take photos</string>
+    <string name="toast_error_create_image_file">Error membuat file gambar</string>
+    <string name="toast_error_processing_image">Error processing image: %s</string>
+    <string name="toast_error_initializing_viewmodel">Initialization error: %s</string>
+    <string name="toast_name_empty">Name cannot be empty</string>
+    <string name="dialog_confirmation_title">Confirm Changes</string>
+    <string name="dialog_confirmation_message">Are you sure you want to change your profile data?</string>
+    <string name="dialog_positive_button_yes">Yes</string>
+    <string name="dialog_negative_button_no">No</string>
+    <string name="profile_update_success_message">Profile updated successfully!</string>
+    <string name="profile_update_failure_message">Failed to update profile: %s</string>
 
     <!--  ShareApps  -->
     <string name="text_sqan_qr">Ask your friend to scan this QR code to get the PARE AI app.</string>

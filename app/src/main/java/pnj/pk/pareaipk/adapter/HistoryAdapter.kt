@@ -2,6 +2,7 @@ package pnj.pk.pareaipk.adapter
 
 import android.app.AlertDialog
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -15,6 +16,45 @@ class HistoryAdapter(
     private val onDeleteClick: (HistoryEntity) -> Unit,
     private val onDetailClick: (HistoryEntity) -> Unit
 ) : ListAdapter<HistoryEntity, HistoryAdapter.ScanHistoryViewHolder>(ScanHistoryDiffCallback()) {
+
+    private var isSelectionMode = false
+    private val selectedItems = mutableSetOf<String>() // Store selected item IDs
+    private var onSelectionChangedListener: ((Boolean) -> Unit)? = null
+
+    fun setSelectionMode(enabled: Boolean) {
+        isSelectionMode = enabled
+        if (!enabled) {
+            selectedItems.clear()
+        }
+        notifyDataSetChanged()
+    }
+
+    fun selectAll(selectAll: Boolean) {
+        selectedItems.clear()
+        if (selectAll) {
+            currentList.forEach { item ->
+                selectedItems.add(item.id.toString())
+            }
+        }
+        notifyDataSetChanged()
+        onSelectionChangedListener?.invoke(selectedItems.isNotEmpty())
+    }
+
+    fun getSelectedItems(): List<HistoryEntity> {
+        return currentList.filter { selectedItems.contains(it.id.toString()) }
+    }
+
+    fun hasItemsSelected(): Boolean {
+        return selectedItems.isNotEmpty()
+    }
+
+    fun areAllItemsSelected(): Boolean {
+        return selectedItems.size == currentList.size && currentList.isNotEmpty()
+    }
+
+    fun setOnSelectionChangedListener(listener: (Boolean) -> Unit) {
+        onSelectionChangedListener = listener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScanHistoryViewHolder {
         val binding = ItemScanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -40,12 +80,41 @@ class HistoryAdapter(
                         .into(image)
                 }
 
-                buttonDelete.setOnClickListener {
-                    showDeleteConfirmationDialog(scanHistory)
+                // Show/hide checkbox based on selection mode
+                itemCheckBox.visibility = if (isSelectionMode) View.VISIBLE else View.GONE
+
+                // Set checkbox state
+                itemCheckBox.isChecked = selectedItems.contains(scanHistory.id.toString())
+
+                // Handle checkbox changes
+                itemCheckBox.setOnCheckedChangeListener { _, isChecked ->
+                    if (isChecked) {
+                        selectedItems.add(scanHistory.id.toString())
+                    } else {
+                        selectedItems.remove(scanHistory.id.toString())
+                    }
+                    onSelectionChangedListener?.invoke(selectedItems.isNotEmpty())
                 }
 
-                buttonDetailHistory.setOnClickListener {
-                    onDetailClick(scanHistory)
+                // In selection mode, clicking the item should toggle checkbox
+                itemView.setOnClickListener {
+                    if (isSelectionMode) {
+                        itemCheckBox.isChecked = !itemCheckBox.isChecked
+                    }
+                }
+
+                // Hide/show action buttons based on selection mode
+                buttonDelete.visibility = if (isSelectionMode) View.GONE else View.VISIBLE
+                buttonDetailHistory.visibility = if (isSelectionMode) View.GONE else View.VISIBLE
+
+                if (!isSelectionMode) {
+                    buttonDelete.setOnClickListener {
+                        showDeleteConfirmationDialog(scanHistory)
+                    }
+
+                    buttonDetailHistory.setOnClickListener {
+                        onDetailClick(scanHistory)
+                    }
                 }
             }
         }

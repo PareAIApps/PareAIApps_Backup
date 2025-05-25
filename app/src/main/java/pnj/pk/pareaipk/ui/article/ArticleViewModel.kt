@@ -33,8 +33,14 @@ class ArticleViewModel : ViewModel() {
         _imageUrl.value = imageUrl
     }
 
-    // For sharing functionality
+    // For sharing functionality - now includes created_at (date)
     fun getShareText(): String {
-        return "${_title.value ?: ""}\n\n${_description.value ?: ""}\n\nDibagikan dari aplikasi PAREAI"
+        val dateText = if (_date.value?.isNotEmpty() == true) "\n${_date.value}\n" else "\n"
+        return "${_title.value ?: ""}$dateText\n${_description.value ?: ""}\n\nDibagikan dari aplikasi PAREAI"
+    }
+
+    // Get image URL for sharing
+    fun getImageUrlForShare(): String {
+        return _imageUrl.value ?: ""
     }
 }

@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -167,7 +168,7 @@ class SettingsFragment : Fragment() {
     private fun logout() {
         try {
             // Tampilkan dialog konfirmasi menggunakan strings dari resources
-            androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            val dialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
                 .setTitle(getString(R.string.logout_dialog_title))
                 .setMessage(getString(R.string.logout_dialog_message))
                 .setPositiveButton(getString(R.string.logout_dialog_positive)) { _, _ ->
@@ -187,7 +188,16 @@ class SettingsFragment : Fragment() {
                     dialog.dismiss()
                 }
                 .setCancelable(true)
-                .show()
+                .create()
+
+            // Show dialog first, then modify button color
+            dialog.show()
+
+            // Set positive button color to red
+            dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE)?.setTextColor(
+                ContextCompat.getColor(requireContext(), android.R.color.holo_red_dark)
+            )
+
         } catch (e: Exception) {
             Log.e(TAG, "Error during logout: ${e.message}", e)
         }

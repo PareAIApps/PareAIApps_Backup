@@ -45,7 +45,7 @@ class ChangeProfileActivity : AppCompatActivity() {
         if (isGranted) {
             openCamera()
         } else {
-            Toast.makeText(this, "Izin kamera diperlukan untuk mengambil foto", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.toast_permission_camera_required), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -102,7 +102,7 @@ class ChangeProfileActivity : AppCompatActivity() {
             Log.d(TAG, "ViewModel initialized successfully")
         } catch (e: Exception) {
             Log.e(TAG, "Error initializing ViewModel: ${e.message}", e)
-            Toast.makeText(this, "Error initializing: ${e.message}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.toast_error_initializing_viewmodel, e.message), Toast.LENGTH_LONG).show()
         }
     }
 
@@ -121,17 +121,17 @@ class ChangeProfileActivity : AppCompatActivity() {
     }
 
     private fun showImageSourceDialog() {
-        val options = arrayOf("Kamera", "Galeri")
+        val options = arrayOf(getString(R.string.dialog_option_camera), getString(R.string.dialog_option_gallery))
 
         val dialog = AlertDialog.Builder(this)
-            .setTitle("Pilih Sumber Gambar")
+            .setTitle(getString(R.string.dialog_image_source_title))
             .setItems(options) { _, which ->
                 when (which) {
                     0 -> checkCameraPermissionAndOpen()
                     1 -> openGallery()
                 }
             }
-            .setNegativeButton("Batal") { dialog, _ ->
+            .setNegativeButton(getString(R.string.dialog_negative_button_cancel)) { dialog, _ ->
                 dialog.dismiss()
             }
             .create()
@@ -174,7 +174,7 @@ class ChangeProfileActivity : AppCompatActivity() {
             takePictureLauncher.launch(takePictureIntent)
         } catch (ex: IOException) {
             Log.e(TAG, "Error creating image file: ${ex.message}", ex)
-            Toast.makeText(this, "Error creating image file", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.toast_error_create_image_file), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -244,7 +244,7 @@ class ChangeProfileActivity : AppCompatActivity() {
                     binding.progressBar.visibility = View.GONE
                     Toast.makeText(
                         this@ChangeProfileActivity,
-                        "Error processing image: ${e.message}",
+                        getString(R.string.toast_error_processing_image, e.message),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -321,18 +321,18 @@ class ChangeProfileActivity : AppCompatActivity() {
     private fun showConfirmationDialog() {
         val name = binding.etUsername.text.toString().trim()
         if (name.isEmpty()) {
-            Toast.makeText(this, "Nama tidak boleh kosong", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.toast_name_empty), Toast.LENGTH_SHORT).show()
             return
         }
 
         val dialog = AlertDialog.Builder(this)
-            .setTitle("Konfirmasi Perubahan")
-            .setMessage("Apakah Anda yakin ingin mengubah data profil?")
-            .setPositiveButton("Ya") { _, _ ->
+            .setTitle(getString(R.string.dialog_confirmation_title))
+            .setMessage(getString(R.string.dialog_confirmation_message))
+            .setPositiveButton(getString(R.string.dialog_positive_button_yes)) { _, _ ->
                 // If user selects Yes, proceed with saving profile
                 saveProfile()
             }
-            .setNegativeButton("Tidak") { dialog, _ ->
+            .setNegativeButton(getString(R.string.dialog_negative_button_no)) { dialog, _ ->
                 // If user selects No, close dialog without changes
                 dialog.dismiss()
             }
@@ -345,8 +345,9 @@ class ChangeProfileActivity : AppCompatActivity() {
         val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
         val negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
 
+        val redColor = resources.getColor(R.color.red, theme)
         val greenColor = resources.getColor(R.color.green_light, theme)
-        positiveButton.setTextColor(greenColor)
+        positiveButton.setTextColor(redColor)
         negativeButton.setTextColor(greenColor)
     }
 
