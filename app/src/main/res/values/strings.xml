@@ -140,6 +140,14 @@
     <string name="about_us">Tentang Kami</string>
     <string name="title_home">Beranda</string>
 
+    <!-- Indonesian strings.xml (values-id/strings.xml) -->
+    <string name="select_language">Pilih Bahasa</string>
+    <string name="choose_your_language">Pilih bahasa yang Anda inginkan:</string>
+    <string name="apply">Terapkan</string>
+
+    <string name="daily_reminder_title">Pengingat Harian</string>
+    <string name="daily_reminder_content">Ayo scan padi dan baca artikel hari ini!</string>
+
     <!--  Accout Settings   -->
     <string name="username">Nama Pengguna</string>
     <string name="edit_profile">Ubah Profil</string>

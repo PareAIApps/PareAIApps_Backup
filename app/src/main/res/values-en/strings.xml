@@ -139,6 +139,13 @@
     <string name="logout">Logout</string>
     <string name="about_us">About Us</string>
     <string name="title_home">Home</string>
+    <!-- English strings.xml -->
+    <string name="select_language">Select Language</string>
+    <string name="choose_your_language">Choose your preferred language:</string>
+    <string name="apply">Apply</string>
+
+    <string name="daily_reminder_title">Daily Reminder</string>
+    <string name="daily_reminder_content">Lets scan the rice and read todays article!</string>
 
 <!--  Account Settings   -->
     <string name="username">Username</string>

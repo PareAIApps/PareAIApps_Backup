@@ -67,8 +67,9 @@ class DailyReminderWorker(
 
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification)
-            .setContentTitle("Pengingat Harian")
-            .setContentText("Ayo scan padi dan baca artikel hari ini!")
+            // Use getString(R.string.<string_name>) to access your strings
+            .setContentTitle(context.getString(R.string.daily_reminder_title))
+            .setContentText(context.getString(R.string.daily_reminder_content))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)

@@ -2,22 +2,66 @@ package pnj.pk.pareaipk
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+import pnj.pk.pareaipk.database.repository.UserRepository
+import pnj.pk.pareaipk.database.room.UserRoomDatabase
 import pnj.pk.pareaipk.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
+    private val TAG = "MainActivity"
     private lateinit var binding: ActivityMainBinding
     private lateinit var navView: BottomNavigationView
+    private val activityScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Apply user language before setting up UI
+        applyUserLanguageAndSetupUI()
+    }
+
+    private fun applyUserLanguageAndSetupUI() {
+        activityScope.launch {
+            try {
+                val auth = FirebaseAuth.getInstance()
+                val currentUser = auth.currentUser
+
+                if (currentUser?.email != null) {
+                    val database = UserRoomDatabase.getDatabase(this@MainActivity)
+                    val userRepository = UserRepository(database, auth)
+
+                    // Ensure user settings are initialized
+                    userRepository.initializeUserSettings()
+
+                    // Apply the saved language
+                    applyUserLanguage()
+
+                    Log.d(TAG, "Applied user language in MainActivity for: ${currentUser.email}")
+                }
+
+                // Setup UI after language is applied
+                setupUI()
+
+            } catch (e: Exception) {
+                Log.e(TAG, "Error applying language in MainActivity: ${e.message}", e)
+                // Setup UI anyway
+                setupUI()
+            }
+        }
+    }
+
+    private fun setupUI() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
