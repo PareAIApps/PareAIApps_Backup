@@ -102,16 +102,16 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tilUsername"
                 android:layout_marginBottom="32dp"
-                android:textColorHint="@color/black_secondary"
+                android:textColorHint="@color/black_disabled"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                app:boxStrokeColor="@color/green_light"
-                app:hintTextColor="@color/green_light">
+                app:boxStrokeColor="@color/black_disabled"
+                app:hintTextColor="@color/black_disabled">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black_secondary"
+                    android:textColor="@color/black_disabled"
                     android:hint="@string/email"
                     android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>

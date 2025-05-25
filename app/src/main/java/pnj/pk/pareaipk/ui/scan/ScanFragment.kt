@@ -1,6 +1,7 @@
 package pnj.pk.pareaipk.ui.scan
 
 import android.Manifest
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -18,7 +20,6 @@ import pnj.pk.pareaipk.R
 import pnj.pk.pareaipk.databinding.FragmentScanBinding
 import pnj.pk.pareaipk.utils.getImageUri
 import pnj.pk.pareaipk.utils.uriToFile
-import kotlin.getValue
 
 class ScanFragment : Fragment() {
 
@@ -33,7 +34,9 @@ class ScanFragment : Fragment() {
             currentImageUri = uri
             showImage()
         } else {
-            Toast.makeText(requireContext(), getString(R.string.img_cant_found), Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.img_cant_found), Toast.LENGTH_SHORT)
+                .show()
+            showDefaultImage()
         }
     }
 
@@ -43,10 +46,10 @@ class ScanFragment : Fragment() {
         if (isSuccess && currentImageUri != null) {
             showImage()
         } else {
-            // Reset currentImageUri jika kamera dibatalkan
-            binding.placeholderImage.setImageResource(R.drawable.ic_launcher_foreground)
             currentImageUri = null
-            Toast.makeText(requireContext(), getString(R.string.img_cant_found), Toast.LENGTH_SHORT).show()
+            showDefaultImage()
+            Toast.makeText(requireContext(), getString(R.string.img_cant_found), Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
@@ -54,7 +57,11 @@ class ScanFragment : Fragment() {
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
         if (!isGranted) {
-            Toast.makeText(requireContext(), getString(R.string.camera_permission), Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.camera_permission),
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 
@@ -63,10 +70,15 @@ class ScanFragment : Fragment() {
     ): View {
         binding = FragmentScanBinding.inflate(inflater, container, false)
 
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+
+
         currentImageUri = savedInstanceState?.getParcelable(STATE_IMAGE_URI)
 
         if (currentImageUri != null) {
             showImage()
+        } else {
+            showDefaultImage()
         }
 
         checkAndRequestPermission()
@@ -74,6 +86,14 @@ class ScanFragment : Fragment() {
         binding.btnGaleri.setOnClickListener { startGallery() }
         binding.btnKamera.setOnClickListener { startCamera() }
         binding.btnCekApel.setOnClickListener { analyzeImage() }
+
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.dialog_title_instruction))
+            .setMessage(getString(R.string.dialog_message_instruction))
+            .setPositiveButton(getString(R.string.ok)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
 
         return binding.root
     }
@@ -83,10 +103,10 @@ class ScanFragment : Fragment() {
     }
 
     private fun startCamera() {
-        // Pastikan selalu membuat URI baru untuk foto
         currentImageUri = getImageUri(requireContext())
         if (currentImageUri == null) {
-            Toast.makeText(requireContext(), getString(R.string.uri_photo_fail), Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.uri_photo_fail), Toast.LENGTH_SHORT)
+                .show()
             return
         }
         launcherIntentCamera.launch(currentImageUri!!)
@@ -95,9 +115,11 @@ class ScanFragment : Fragment() {
     private fun showImage() {
         currentImageUri?.let {
             binding.placeholderImage.setImageURI(it)
-        } ?: run {
-            Toast.makeText(requireContext(), getString(R.string.img_cant_found), Toast.LENGTH_SHORT).show()
-        }
+        } ?: showDefaultImage()
+    }
+
+    private fun showDefaultImage() {
+        binding.placeholderImage.setImageResource(R.mipmap.gallery)
     }
 
     private fun analyzeImage() {
@@ -106,13 +128,15 @@ class ScanFragment : Fragment() {
             if (imageFile.exists()) {
                 moveToResult(uri)
             } else {
-                // Reset gambar dan URI jika file tidak ada
-                binding.placeholderImage.setImageResource(R.drawable.ic_launcher_foreground)
+                showDefaultImage()
                 currentImageUri = null
-                Toast.makeText(requireContext(), getString(R.string.img_empty), Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.img_empty), Toast.LENGTH_SHORT)
+                    .show()
             }
         } ?: run {
-            Toast.makeText(requireContext(), getString(R.string.img_empty), Toast.LENGTH_SHORT).show()
+            showDefaultImage()
+            Toast.makeText(requireContext(), getString(R.string.img_empty), Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
@@ -130,7 +154,10 @@ class ScanFragment : Fragment() {
     }
 
     private fun allPermissionsGranted() =
-        ContextCompat.checkSelfPermission(requireContext(), REQUIRED_PERMISSION) == PackageManager.PERMISSION_GRANTED
+        ContextCompat.checkSelfPermission(
+            requireContext(),
+            REQUIRED_PERMISSION
+        ) == PackageManager.PERMISSION_GRANTED
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

@@ -74,6 +74,8 @@
     <string name="gallery">Galeri</string>
     <string name="check_padi">Cek Padi</string>
     <string name="confidence">Tingkat Kepercayaan:&#160;</string>
+    <string name="dialog_title_instruction">Petunjuk</string>
+    <string name="dialog_message_instruction">Silakan pilih gambar dari galeri atau ambil dengan kamera, lalu tekan tombol scan.</string>
 
     <!--   About   -->
     <string name="background">

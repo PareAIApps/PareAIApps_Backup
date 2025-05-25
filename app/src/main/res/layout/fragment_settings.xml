@@ -276,15 +276,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
-                        android:textColor="@color/black_hint"
+                        android:textColor="@color/red"
                         android:text="@string/logout"
                         android:textSize="16sp"
                         android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:src="@drawable/ic_arrow_right" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>

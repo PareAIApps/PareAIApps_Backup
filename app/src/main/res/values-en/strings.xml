@@ -74,6 +74,8 @@
     <string name="gallery">Gallery</string>
     <string name="check_padi">Check Padi</string>
     <string name="confidence">Confidence:&#160;</string>
+    <string name="dialog_title_instruction">Instruction</string>
+    <string name="dialog_message_instruction">Please select an image from the gallery or take one with the camera, then press the scan button.</string>
 
 
     <!--   About   -->

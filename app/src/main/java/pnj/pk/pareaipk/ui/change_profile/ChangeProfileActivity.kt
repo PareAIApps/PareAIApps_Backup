@@ -345,9 +345,8 @@ class ChangeProfileActivity : AppCompatActivity() {
         val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
         val negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
 
-        val redColor = resources.getColor(R.color.red, theme)
         val greenColor = resources.getColor(R.color.green_light, theme)
-        positiveButton.setTextColor(redColor)
+        positiveButton.setTextColor(greenColor)
         negativeButton.setTextColor(greenColor)
     }
 

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,6 +48,8 @@ class HistoryFragment : Fragment() {
     ): View {
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
         return binding.root
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -97,6 +100,7 @@ class HistoryFragment : Fragment() {
             binding.cancelButton.visibility = View.VISIBLE
             binding.selectedCountTextView.visibility = View.VISIBLE
             binding.fabDelete.visibility = View.GONE // **Hide FAB Delete**
+            binding.historyTitleTextView.visibility = View.GONE
 
             // Hide filter elements
             binding.filterButton.visibility = View.GONE
@@ -114,6 +118,7 @@ class HistoryFragment : Fragment() {
             binding.cancelButton.visibility = View.GONE
             binding.selectedCountTextView.visibility = View.GONE
             binding.fabDelete.visibility = View.VISIBLE // **Show FAB Delete**
+            binding.historyTitleTextView.visibility = View.VISIBLE
 
             // Show filter elements
             binding.filterButton.visibility = View.VISIBLE

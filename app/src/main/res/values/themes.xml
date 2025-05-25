@@ -12,7 +12,7 @@
         <item name="colorOnSecondary">@color/black</item>
 
         <!-- Status bar color -->
-        <item name="android:statusBarColor">@color/green_dark</item>
+        <item name="android:statusBarColor">@color/green_light</item>
     </style>
 
     <!-- Tema tanpa action bar -->
