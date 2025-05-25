@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_primary"
     tools:context=".ui.history.HistoryFragment">
 
     <LinearLayout
@@ -109,7 +110,7 @@
         android:insetBottom="0dp"
         android:insetLeft="0dp"
         android:insetRight="0dp"
-        app:icon="@drawable/ic_delete_float"
+        app:icon="@drawable/ic_trash"
         app:iconSize="28dp"
         app:iconTint="@color/red"
         app:iconGravity="textStart"

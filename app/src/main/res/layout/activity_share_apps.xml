@@ -97,6 +97,7 @@
                         android:id="@+id/user_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black_secondary"
                         android:text="@string/username"
                         android:textSize="16sp"
                         android:textStyle="bold" />

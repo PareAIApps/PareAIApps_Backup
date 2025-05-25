@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_primary"
     tools:context=".ui.change_profile.ChangeProfileActivity">
 
     <!-- Toolbar -->
@@ -80,6 +81,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/profileImageContainer"
                 android:layout_marginBottom="16dp"
+                app:cursorColor="@color/green_light"
+                android:textColorHint="@color/black_secondary"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:boxStrokeColor="@color/green_light"
                 app:hintTextColor="@color/green_light">
@@ -88,6 +91,7 @@
                     android:id="@+id/etUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black_secondary"
                     android:hint="@string/username"
                     android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -98,6 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tilUsername"
                 android:layout_marginBottom="32dp"
+                android:textColorHint="@color/black_secondary"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:boxStrokeColor="@color/green_light"
                 app:hintTextColor="@color/green_light">
@@ -106,6 +111,7 @@
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black_secondary"
                     android:hint="@string/email"
                     android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -115,6 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tilEmail"
+                android:textColor="@color/white_primary"
                 android:text="@string/savechanges"
                 android:padding="12dp"
                 android:textSize="16sp"

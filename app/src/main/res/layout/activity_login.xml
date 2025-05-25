@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
+    android:background="@color/white_primary"
     tools:context=".ui.login.LoginActivity">
 
     <!-- ProgressBar (hidden by default, positioned at the center) -->
@@ -53,7 +54,7 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
-                android:textColor="@color/black" />
+                android:textColor="@color/black_secondary" />
 
             <!-- Email Label -->
             <TextView
@@ -62,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/email"
                 android:textSize="16sp"
-                android:textColor="@color/black"
+                android:textColor="@color/black_secondary"
                 android:layout_marginBottom="1dp"
                 android:layout_gravity="start" />
 
@@ -73,12 +74,14 @@
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginBottom="16dp"
+                app:cursorColor="@color/green_light"
                 android:layout_marginStart="1dp"
                 android:layout_marginEnd="1dp">
                 <pnj.pk.pareaipk.custom_view.EmailEditText
                     android:id="@+id/emailInput"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
+                    android:textColor="@color/black_secondary"
                     android:background="@drawable/rounded"
                     android:inputType="textEmailAddress"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -89,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/password"
                 android:textSize="16sp"
-                android:textColor="@color/black"
+                android:textColor="@color/black_secondary"
                 android:layout_marginBottom="1dp"
                 android:layout_gravity="start" />
 
@@ -101,11 +104,13 @@
                 app:endIconMode="password_toggle"
                 android:layout_marginBottom="16dp"
                 android:layout_marginStart="1dp"
+                app:cursorColor="@color/green_light"
                 android:layout_marginEnd="1dp">
                 <pnj.pk.pareaipk.custom_view.PasswordEditText
                     android:id="@+id/passwordInput"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
+                    android:textColor="@color/black_secondary"
                     android:background="@drawable/rounded"
                     android:inputType="textPassword"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -150,7 +155,7 @@
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="1"
-                    android:background="@color/black" />
+                    android:background="@color/black_secondary" />
 
                 <!-- OR Text -->
                 <TextView
@@ -159,7 +164,7 @@
                     android:text="@string/option_sign_in"
                     android:textSize="18sp"
                     android:gravity="center"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_secondary"
                     android:layout_marginHorizontal="8dp" />
 
                 <!-- Right Line -->
@@ -167,7 +172,7 @@
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="1"
-                    android:background="@color/black" />
+                    android:background="@color/black_secondary" />
             </LinearLayout>
 
             <!-- Google Sign-In Button -->

@@ -212,7 +212,7 @@ class HistoryFragment : Fragment() {
                 deleteSelectedItems(selectedItems)
             }
             .setNegativeButton(getString(R.string.cancel), null)
-            .setIcon(R.drawable.ic_delete)
+            .setIcon(R.drawable.ic_trash)
             .create()
 
         dialog.setOnShowListener {

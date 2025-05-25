@@ -128,7 +128,7 @@ class HistoryAdapter(
                     onDeleteClick(scanHistory)
                 }
                 .setNegativeButton(R.string.delete_confirmation_negative, null) // Do nothing if canceled
-                .setIcon(R.drawable.ic_delete) // Optional: use your existing delete icon
+                .setIcon(R.drawable.ic_trash) // Optional: use your existing delete icon
                 .show()
         }
     }

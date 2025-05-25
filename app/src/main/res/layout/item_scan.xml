@@ -59,7 +59,7 @@
                     android:text="@string/scan_result"
                     android:textStyle="bold"
                     android:textSize="18sp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_secondary"
                     android:maxLines="2"
                     android:ellipsize="end"/>
 
@@ -71,7 +71,7 @@
                     android:text="@string/date"
                     android:textSize="12sp"
                     android:layout_marginBottom="20dp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_hint"
                     android:drawableStart="@drawable/ic_calendar"
                     android:drawablePadding="8dp"
                     android:gravity="center_vertical"/>
@@ -122,7 +122,7 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/ic_delete"
+                    android:src="@drawable/ic_trash"
                     app:tint="@color/red"
                     android:contentDescription="@string/icon"/>
 

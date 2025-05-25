@@ -61,6 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:background="@color/white_primary"
                 android:padding="8dp">
 
                 <!-- Account Settings -->
@@ -83,6 +84,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
+                        android:textColor="@color/black_hint"
                         android:text="@string/account_settings"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -120,6 +122,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
+                        android:textColor="@color/black_hint"
+
                         android:text="@string/notification"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -158,6 +162,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
+                        android:textColor="@color/black_hint"
                         android:text="@string/translate"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -195,6 +200,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
+                        android:textColor="@color/black_hint"
                         android:text="@string/share_apps"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -232,6 +238,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
+                        android:textColor="@color/black_hint"
                         android:text="@string/about_us"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -269,6 +276,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
+                        android:textColor="@color/black_hint"
                         android:text="@string/logout"
                         android:textSize="16sp"
                         android:textStyle="bold" />

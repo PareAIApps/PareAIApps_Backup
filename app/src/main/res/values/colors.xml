@@ -14,6 +14,6 @@
     <color name="black_disabled">#666666</color>
     <color name="black_hint">#808080</color>
     <color name="white_secondary">#E6E9E5</color>
-
-
+    <color name="dark_blue">#00008B</color>
+    <color name="dark_grey">#A9A9A9</color>
 </resources>
