@@ -41,6 +41,7 @@ class HistoryFragment : Fragment() {
     }
     private var currentFilter: String = "" // Initialize later after context is available
     private var isSelectionMode = false
+    private var isUpdatingSelectAll = false // Flag untuk mencegah recursive calls
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -134,8 +135,17 @@ class HistoryFragment : Fragment() {
     private fun setupSelectAllFunctionality() {
         // Handle select all checkbox
         binding.historyCheckBox.setOnCheckedChangeListener { _, isChecked ->
-            scanHistoryAdapter.selectAll(isChecked)
+            if (!isUpdatingSelectAll) {
+                scanHistoryAdapter.selectAll(isChecked)
+            }
         }
+    }
+
+    private fun updateSelectAllCheckbox(areAllSelected: Boolean) {
+        // Prevent recursive calls
+        isUpdatingSelectAll = true
+        binding.historyCheckBox.isChecked = areAllSelected
+        isUpdatingSelectAll = false
     }
 
     private fun toggleSelectAll() {
@@ -252,13 +262,17 @@ class HistoryFragment : Fragment() {
 
         // Set up selection change listener
         scanHistoryAdapter.setOnSelectionChangedListener { hasSelection ->
-            // Update the main checkbox based on adapter selection state
             if (isSelectionMode) {
-                binding.historyCheckBox.isChecked = scanHistoryAdapter.areAllItemsSelected()
-
                 // Update selected count display
                 val selectedCount = scanHistoryAdapter.getSelectedItems().size
                 updateSelectedCountDisplay(selectedCount)
+            }
+        }
+
+        // Set up select all state change listener - NEW
+        scanHistoryAdapter.setOnSelectAllStateChangedListener { areAllSelected ->
+            if (isSelectionMode) {
+                updateSelectAllCheckbox(areAllSelected)
             }
         }
 

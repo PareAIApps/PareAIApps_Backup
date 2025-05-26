@@ -20,6 +20,7 @@ class HistoryAdapter(
     private var isSelectionMode = false
     private val selectedItems = mutableSetOf<String>() // Store selected item IDs
     private var onSelectionChangedListener: ((Boolean) -> Unit)? = null
+    private var onSelectAllStateChangedListener: ((Boolean) -> Unit)? = null
 
     fun setSelectionMode(enabled: Boolean) {
         isSelectionMode = enabled
@@ -52,8 +53,16 @@ class HistoryAdapter(
         return selectedItems.size == currentList.size && currentList.isNotEmpty()
     }
 
+    fun getSelectedItemsCount(): Int {
+        return selectedItems.size
+    }
+
     fun setOnSelectionChangedListener(listener: (Boolean) -> Unit) {
         onSelectionChangedListener = listener
+    }
+
+    fun setOnSelectAllStateChangedListener(listener: (Boolean) -> Unit) {
+        onSelectAllStateChangedListener = listener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScanHistoryViewHolder {
@@ -88,12 +97,7 @@ class HistoryAdapter(
 
                 // Handle checkbox changes
                 itemCheckBox.setOnCheckedChangeListener { _, isChecked ->
-                    if (isChecked) {
-                        selectedItems.add(scanHistory.id.toString())
-                    } else {
-                        selectedItems.remove(scanHistory.id.toString())
-                    }
-                    onSelectionChangedListener?.invoke(selectedItems.isNotEmpty())
+                    handleItemCheckChange(scanHistory.id.toString(), isChecked)
                 }
 
                 // In selection mode, clicking the item should toggle checkbox
@@ -117,6 +121,21 @@ class HistoryAdapter(
                     }
                 }
             }
+        }
+
+        private fun handleItemCheckChange(itemId: String, isChecked: Boolean) {
+            if (isChecked) {
+                selectedItems.add(itemId)
+            } else {
+                selectedItems.remove(itemId)
+            }
+
+            // Notify selection changed
+            onSelectionChangedListener?.invoke(selectedItems.isNotEmpty())
+
+            // Check if "Select All" state should change
+            val areAllSelected = selectedItems.size == currentList.size && currentList.isNotEmpty()
+            onSelectAllStateChangedListener?.invoke(areAllSelected)
         }
 
         private fun showDeleteConfirmationDialog(scanHistory: HistoryEntity) {

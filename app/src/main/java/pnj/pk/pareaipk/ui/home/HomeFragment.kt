@@ -94,6 +94,11 @@ class HomeFragment : Fragment() {
             startActivity(Intent.createChooser(emailIntent, getString(R.string.send_email_to_us)))
         }
 
+        // Setup See All Articles button click listener
+        binding.buttonSeeAllArticles.setOnClickListener {
+            findNavController().navigate(R.id.navigation_article, null, navOptions)
+        }
+
         // Setup articles using ViewModel
         setupArticles()
 
@@ -119,7 +124,9 @@ class HomeFragment : Fragment() {
 
         // Observe articles from ViewModel
         homeViewModel.articles.observe(viewLifecycleOwner) { articles ->
-            articleAdapter = ArticleAdapter(articles) { article ->
+            // Limit articles to top 5, similar to history
+            val top5Articles = articles.take(5)
+            articleAdapter = ArticleAdapter(top5Articles) { article ->
                 val intent = Intent(requireContext(), ArticleActivity::class.java).apply {
                     putExtra(ArticleActivity.EXTRA_ARTICLE_TITLE, article.label)
                     putExtra(ArticleActivity.EXTRA_ARTICLE_DATE, article.createdAt)

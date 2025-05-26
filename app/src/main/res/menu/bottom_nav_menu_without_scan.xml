@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
@@ -11,10 +10,13 @@
         android:icon="@drawable/ic_article"
         android:title="@string/article" />
 
+    <!-- Spacer item agar Scan di tengah -->
     <item
-        android:id="@+id/navigation_scan"
-        android:icon="@drawable/ic_scan"
-        android:title="@string/title_scan" />
+        android:id="@+id/navigation_spacer"
+        android:title=""
+        android:icon="@android:color/transparent"
+        android:enabled="false"
+        android:checkable="false" />
 
     <item
         android:id="@+id/navigation_history"

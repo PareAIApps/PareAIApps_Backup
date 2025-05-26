@@ -27,6 +27,7 @@
     <string name="delete">Delete</string>
     <string name="all">All</string>
     <string name="cancel">Cancel</string>
+    <string name="article">Article</string>
 
     <!--  Home  -->
     <string name="welcome">Welcome to Pare AI</string>
@@ -36,6 +37,7 @@
     <string name="history_list">History List</string>
     <string name="see_all">See All</string>
     <string name="article_list">Article List</string>
+    <string name="see_all_articles">See All Articles</string>
 
     <!--  Article   -->
     <string name="detail_article">Article Detail</string>
@@ -145,6 +147,9 @@
     <string name="select_language">Select Language</string>
     <string name="choose_your_language">Choose your preferred language:</string>
     <string name="apply">Apply</string>
+    <string name="notification_channel_name">Daily Reminder</string>
+    <string name="notification_channel_description">Pengingat harian untuk menggunakan aplikasi PARE AI</string>
+
 
     <string name="daily_reminder_title">Daily Reminder</string>
     <string name="daily_reminder_content">Lets scan the rice and read todays article!</string>

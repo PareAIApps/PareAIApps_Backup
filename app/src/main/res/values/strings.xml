@@ -27,6 +27,7 @@
     <string name="delete">Hapus</string>
     <string name="all">Semua</string>
     <string name="cancel">Batal</string>
+    <string name="article">Artikel</string>
 
     <!--  Home  -->
     <string name="welcome">Selamat Datang di Pare AI</string>
@@ -36,6 +37,7 @@
     <string name="history_list">Daftar Riwayat</string>
     <string name="see_all">Lihat Semua</string>
     <string name="article_list">Daftar Artikel</string>
+    <string name="see_all_articles">Lihat Semua Artikel</string>
 
     <!--  Article   -->
     <string name="detail_article">Detail Artikel</string>
@@ -141,6 +143,9 @@
     <string name="logout">Keluar</string>
     <string name="about_us">Tentang Kami</string>
     <string name="title_home">Beranda</string>
+    <string name="notification_channel_name">Daily Reminder</string>
+    <string name="notification_channel_description">Pengingat harian untuk menggunakan aplikasi PARE AI</string>
+
 
     <!-- Indonesian strings.xml (values-id/strings.xml) -->
     <string name="select_language">Pilih Bahasa</string>
@@ -210,5 +215,7 @@
     <string name="privacy_info_4"> Anda memiliki hak untuk:\n- Mengakses dan memperbarui informasi akun Anda\n- Menghapus akun dan data yang terkait\n- Menolak pemberitahuan atau email dari kami</string>
 
     <string name="privacy_info_5">Kebijakan ini dapat diperbarui sewaktu-waktu. Perubahan signifikan akan diberitahukan kepada pengguna melalui email atau notifikasi aplikasi.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

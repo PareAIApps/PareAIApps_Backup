@@ -70,10 +70,8 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/date"
                     android:textSize="12sp"
-                    android:layout_marginBottom="20dp"
                     android:textColor="@color/black_hint"
                     android:drawableStart="@drawable/ic_calendar"
-                    android:drawablePadding="8dp"
                     android:gravity="center_vertical"/>
             </LinearLayout>
 
@@ -82,7 +80,7 @@
                 android:id="@+id/buttonDetailHistory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="28dp"
                 android:orientation="horizontal"
                 android:padding="8dp"
                 android:background="@drawable/detail_button_background"

@@ -50,85 +50,112 @@
                     android:gravity="center" />
             </LinearLayout>
 
-            <!-- CardView 1 -->
+            <!-- CardView 1 (Tutorial) -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/card1"
                 android:layout_width="0dp"
                 android:layout_height="130dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginTop="8dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
                 app:layout_constraintTop_toBottomOf="@id/bannerLayout"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/card2">
+                app:layout_constraintEnd_toEndOf="parent">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:background="@color/white_primary"
-                    android:padding="12dp"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:src="@drawable/ic_play"
-                        android:contentDescription="@string/icon"
-                        android:scaleType="center"
-                        app:tint="@color/black_quaternary"/>
+                    android:padding="16dp"
+                    android:clipChildren="false"
+                    android:clipToPadding="false">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="140dp"
                         android:text="@string/tutorial_apps"
-                        android:textSize="16sp"
+                        android:textSize="22sp"
                         android:textStyle="bold"
-                        android:textColor="@color/black_disabled"/>
-                </LinearLayout>
+                        android:textColor="@color/black_disabled"
+                        android:maxWidth="180dp"
+                        android:lines="2"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:lineSpacingExtra="4dp" />
+
+                    <ImageView
+                        android:layout_width="148dp"
+                        android:layout_height="48dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="-32dp"
+                        android:layout_marginBottom="0dp"
+                        android:contentDescription="@string/icon"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/tutorial_illustration_fix"
+                        android:elevation="8dp" />
+
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- CardView 2 -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/card2"
                 android:layout_width="0dp"
                 android:layout_height="130dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="20dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp"
-                app:layout_constraintTop_toBottomOf="@id/bannerLayout"
-                app:layout_constraintStart_toEndOf="@id/card1"
+                app:layout_constraintTop_toBottomOf="@id/card1"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:background="@color/white_primary"
-                    android:padding="12dp"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:src="@drawable/ic_chat"
-                        android:contentDescription="@string/icon"
-                        android:scaleType="center"
-                        app:tint="@color/black_quaternary"/>
+                    android:padding="16dp"
+                    android:clipChildren="false"
+                    android:clipToPadding="false">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="140dp"
                         android:text="@string/contact_us"
-                        android:textSize="16sp"
+                        android:textSize="22sp"
                         android:textStyle="bold"
-                        android:textColor="@color/black_disabled"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+                        android:textColor="@color/black_disabled"
+                        android:maxWidth="180dp"
+                        android:lines="2"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:lineSpacingExtra="4dp" />
 
+                    <ImageView
+                        android:layout_width="148dp"
+                        android:layout_height="48dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="-32dp"
+                        android:layout_marginBottom="0dp"
+                        android:contentDescription="@string/icon"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/contact_us_illustration"
+                        android:elevation="8dp" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
             <!-- Header History -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/historyHeaderLayout"
@@ -200,7 +227,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- RecyclerView Article - FIXED -->
+            <!-- RecyclerView Article -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewArticle"
                 android:layout_width="match_parent"
@@ -212,6 +239,25 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_article"
                 app:layout_constraintTop_toBottomOf="@id/articleHeaderLayout" />
+
+            <!-- Button See All Articles -->
+            <Button
+                android:id="@+id/buttonSeeAllArticles"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/see_all_articles"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/green_light"
+                android:background="@drawable/filter_button_background"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintTop_toBottomOf="@id/recyclerViewArticle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

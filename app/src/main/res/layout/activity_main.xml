@@ -8,8 +8,6 @@
         android:id="@+id/nav_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
         android:background="@color/white_primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -17,7 +15,31 @@
         app:labelVisibilityMode="labeled"
         app:itemIconTint="@color/nav_item_color"
         app:itemTextColor="@color/nav_item_color"
-        app:menu="@menu/bottom_nav_menu" />
+        app:menu="@menu/bottom_nav_menu_without_scan" />
+
+    <!-- Floating Scan Button -->
+    <LinearLayout
+        android:id="@+id/floating_scan_button"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="-23dp"
+        android:background="@drawable/floating_scan_background"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:elevation="8dp"
+        app:layout_constraintBottom_toTopOf="@id/nav_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:src="@mipmap/ic_scan"
+            app:tint="@color/white_primary" />
+
+    </LinearLayout>
 
     <fragment
         android:id="@+id/nav_host_fragment_activity_main"
