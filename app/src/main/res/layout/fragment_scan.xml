@@ -41,7 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:background="#E9F0F4"
+                    android:background="@color/white"
                     tools:src="@mipmap/gallery"
                     android:contentDescription="@string/illustration"/>
             </com.google.android.material.card.MaterialCardView>

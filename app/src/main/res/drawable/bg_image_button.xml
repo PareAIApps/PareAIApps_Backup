@@ -3,7 +3,7 @@
     android:shape="rectangle">
 
     <!-- background putih -->
-    <solid android:color="@android:color/white"/>
+    <solid android:color="@color/white"/>
 
     <!-- ukuran kotak 78×78dp (sama dengan ImageView) -->
     <size

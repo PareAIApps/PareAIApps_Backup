@@ -9,7 +9,7 @@
     android:layout_marginVertical="8dp"
     app:cardCornerRadius="12dp"
     app:cardElevation="4dp"
-    app:cardBackgroundColor="#FFFFFF"
+    app:cardBackgroundColor="@color/white"
     tools:context=".ui.scan.ScanFragment">
 
     <LinearLayout
@@ -89,8 +89,8 @@
                 android:focusable="true">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:src="@drawable/ic_info"
                     app:tint="@color/green_light"
                     android:contentDescription="@string/icon"/>
@@ -118,8 +118,8 @@
                 android:focusable="true">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:src="@drawable/ic_trash"
                     app:tint="@color/red"
                     android:contentDescription="@string/icon"/>

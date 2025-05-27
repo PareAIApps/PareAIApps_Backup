@@ -5,9 +5,9 @@
     <string name="title_settings">Pengaturan</string>
     <string name="web_client_id">910333591798-k2nap1mdpicksmf8nn6g8eq6qd2v1jbh.apps.googleusercontent.com</string>
     <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="forgot_password">Lupa Password?</string>
-    <string name="login">Login</string>
+    <string name="password">Kata Sandi</string>
+    <string name="forgot_password">Lupa Kata Sandi?</string>
+    <string name="login">Masuk</string>
     <string name="register">Register</string>
     <string name="illustration">Ilustrasi</string>
     <string name="icon">Icon</string>
@@ -28,6 +28,7 @@
     <string name="all">Semua</string>
     <string name="cancel">Batal</string>
     <string name="article">Artikel</string>
+    <string name="loading">Memuat...</string>
 
     <!--  Home  -->
     <string name="welcome">Selamat Datang di Pare AI</string>
@@ -38,6 +39,8 @@
     <string name="see_all">Lihat Semua</string>
     <string name="article_list">Daftar Artikel</string>
     <string name="see_all_articles">Lihat Semua Artikel</string>
+    <string name="error_loading_articles">Gagal Memuat Artikel</string>
+    <string name="error_loading_description">Terjadi kesalahan saat memuat artikel.\nSilakan coba lagi dengan menekan tombol refresh.</string>
 
     <!--  Article   -->
     <string name="detail_article">Detail Artikel</string>
@@ -45,21 +48,24 @@
     <string name="description_article">Ini adalah deskripsi lengkap dari artikel. Konten ini menjelaskan secara rinci isi artikel yang dipilih oleh pengguna.</string>
     <string name="share_article">Bagikan Artikel</string>
     <string name="subtitle">Deskripsi singkat artikel.</string>
+    <string name="refresh_articles">Perbarui Artikel</string>
+    <string name="refresh_description">Artikel belum tersedia saat ini.\nCoba muat ulang untuk melihat artikel terbaru.</string>
+    <string name="refresh_title_articles">Tidak Ada Artikel</string>
 
     <!--  Login  -->
     <string name="sign_in_google">Masuk Dengan Google</string>
-    <string name="option_sign_in">Atau Login Dengan</string>
+    <string name="option_sign_in">Atau Masuk Dengan</string>
     <string name="email_invalid">Format email tidak valid</string>
     <string name="password_short">Kata sandi tidak boleh kurang dari 6 karakter</string>
     <string name="not_have_account">Belum punya akun?&#160;</string>
 
     <!--  Register   -->
-    <string name="confirm_password">Konfirmasi Password</string>
+    <string name="confirm_password">Konfirmasi Kata Sandi</string>
     <string name="have_account">Sudah punya akun?&#160;</string>
 
     <!--  Forgot Passoword  -->
-    <string name="change_password">Ganti Password</string>
-    <string name="forgot_password_description">Masukkan email Anda untuk menerima tautan reset password</string>
+    <string name="change_password">Ganti Kata Sandi</string>
+    <string name="forgot_password_description">Masukkan email Anda untuk menerima tautan reset kata sandi</string>
     <string name="reset_link_sent">Tautan reset kata sandi telah dikirim ke %1$s</string>
     <string name="ok">OK</string>
     <string name="enter_email">Harap masukkan email Anda.</string>
@@ -129,6 +135,12 @@
     <string name="item_selected_single">%d Item Dipilih</string>
     <string name="delete_one_item_confirmation">Apakah Anda yakin ingin menghapus 1 item riwayat ini?</string>
     <string name="delete_multiple_items_confirmation">Apakah Anda yakin ingin menghapus %d item riwayat ini?</string>
+    <!-- Empty State Strings -->
+    <string name="no_scan_history">Belum Ada Riwayat Scan</string>
+    <string name="start_scanning_description">Mulai scan padi untuk melihat riwayat diagnosa penyakit</string>
+    <string name="start_scanning">Mulai Scan</string>
+    <string name="scan_tip">Arahkan kamera ke padi untuk deteksi penyakit atau memilih gambar melalui galeri</string>
+    <string name="empty_history_illustration">Ilustrasi riwayat kosong</string>
 
     <!--  Settings   -->
     <!-- Tambahkan di file strings.xml -->

@@ -19,4 +19,7 @@
         <item name="android:colorControlActivated">#4CAF50</item>
     </style>
 
+    <dimen name="icon_padding">12dp</dimen>
+    <dimen name="icon_size">24dp</dimen>
+
 </resources>

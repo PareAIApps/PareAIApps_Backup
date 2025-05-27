@@ -10,6 +10,7 @@ import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import pnj.pk.pareaipk.R
 import pnj.pk.pareaipk.adapter.HistoryAdapter
@@ -27,16 +28,16 @@ class HistoryFragment : Fragment() {
         listOf(
             getString(R.string.all), // Changed to string resource
             "Bacterial Leaf Blight",
-            "Bacterial Leaf Streak",
-            "Bacterial Panicle Blight",
-            "Blast",
             "Brown Spot",
-            "Dead Heart",
-            "Downy Mildew",
             "False Smut",
-            "Healty",
+            "Healthy Plant",
             "Hispa",
-            "Tungro"
+            "Leaf Blast",
+            "Neck Blast",
+            "Sheath Blight Rot",
+            "Stemborer",
+            "Hispa",
+            "Wereng"
         )
     }
     private var currentFilter: String = "" // Initialize later after context is available
@@ -67,6 +68,7 @@ class HistoryFragment : Fragment() {
         setupSelectionToggle()
         setupActionButtons()
         setupSelectAllFunctionality()
+        setupEmptyStateButton() // Add this new setup
         observeScanHistory()
     }
 
@@ -210,6 +212,39 @@ class HistoryFragment : Fragment() {
         // Cancel button
         binding.cancelButton.setOnClickListener {
             toggleSelectionMode() // Exit selection mode
+        }
+    }
+
+    // New method to handle empty state button
+    private fun setupEmptyStateButton() {
+        binding.scanButton.setOnClickListener {
+            navigateToScanFragment()
+        }
+    }
+
+    private fun navigateToScanFragment() {
+        try {
+            // Option 1: Using Navigation Component (recommended if you're using it)
+            findNavController().navigate(R.id.navigation_scan)
+
+        } catch (e: Exception) {
+            // Option 2: Fallback - Switch bottom navigation tab if using BottomNavigationView
+            try {
+                val activity = requireActivity()
+                if (activity is androidx.appcompat.app.AppCompatActivity) {
+                    // Assuming you have a BottomNavigationView in your MainActivity
+                    val bottomNav = activity.findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.scanButton)
+                    bottomNav?.selectedItemId = R.id.navigation_scan
+                }
+            } catch (ex: Exception) {
+                // Option 3: Last resort - create new fragment instance
+                // Only use this if you're not using Navigation Component at all
+                val scanFragment = pnj.pk.pareaipk.ui.scan.ScanFragment()
+                parentFragmentManager.beginTransaction()
+                    .replace(android.R.id.content, scanFragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
         }
     }
 

@@ -1,11 +1,13 @@
 package pnj.pk.pareaipk.ui.home
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.LinearInterpolator
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -30,7 +32,8 @@ class HomeFragment : Fragment() {
     private lateinit var historyHorizontalAdapter: HistoryHorizontalAdapter
     private lateinit var articleAdapter: ArticleAdapter
     private val historyViewModel: HistoryViewModel by viewModels()
-    private val homeViewModel: HomeViewModel by viewModels() // Add HomeViewModel
+    private val homeViewModel: HomeViewModel by viewModels()
+    private var refreshAnimator: ObjectAnimator? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +43,14 @@ class HomeFragment : Fragment() {
         val root = binding.root
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
+        setupHistorySection()
+        setupArticleSection()
+        setupClickListeners()
+
+        return root
+    }
+
+    private fun setupHistorySection() {
         // Setup histori
         historyHorizontalAdapter = HistoryHorizontalAdapter(emptyList()) { scanHistory ->
             val intent = Intent(requireContext(), DetailHistoryActivity::class.java).apply {
@@ -71,7 +82,70 @@ class HomeFragment : Fragment() {
                 binding.recyclerViewHistoryHorizontal.adapter = historyHorizontalAdapter
             }
         }
+    }
 
+    private fun setupArticleSection() {
+        // Initialize empty adapter
+        articleAdapter = ArticleAdapter(emptyList()) { article ->
+            val intent = Intent(requireContext(), ArticleActivity::class.java).apply {
+                putExtra(ArticleActivity.EXTRA_ARTICLE_TITLE, article.label)
+                putExtra(ArticleActivity.EXTRA_ARTICLE_DATE, article.createdAt)
+                putExtra(ArticleActivity.EXTRA_ARTICLE_DESCRIPTION, article.description)
+                putExtra(ArticleActivity.EXTRA_ARTICLE_IMAGE, article.imageUrl)
+            }
+            startActivity(intent)
+        }
+
+        binding.recyclerViewArticle.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = articleAdapter
+        }
+
+        // Observe articles from ViewModel
+        homeViewModel.articles.observe(viewLifecycleOwner) { articles ->
+            updateArticleUI(articles, isLoading = false)
+
+            // Limit articles to top 5, similar to history
+            val top5Articles = articles.take(5)
+            articleAdapter = ArticleAdapter(top5Articles) { article ->
+                val intent = Intent(requireContext(), ArticleActivity::class.java).apply {
+                    putExtra(ArticleActivity.EXTRA_ARTICLE_TITLE, article.label)
+                    putExtra(ArticleActivity.EXTRA_ARTICLE_DATE, article.createdAt)
+                    putExtra(ArticleActivity.EXTRA_ARTICLE_DESCRIPTION, article.description)
+                    putExtra(ArticleActivity.EXTRA_ARTICLE_IMAGE, article.imageUrl)
+                }
+                startActivity(intent)
+            }
+            binding.recyclerViewArticle.adapter = articleAdapter
+        }
+
+        // Observe loading state
+        homeViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                updateArticleUI(emptyList(), isLoading = true)
+            }
+        }
+
+        // Observe error messages
+        homeViewModel.error.observe(viewLifecycleOwner) { errorMsg ->
+            if (errorMsg.isNotEmpty()) {
+                Toast.makeText(requireContext(), errorMsg, Toast.LENGTH_SHORT).show()
+                // Show empty state when there's an error
+                updateArticleUI(emptyList(), isLoading = false, hasError = true)
+            }
+        }
+
+        // Setup refresh button for articles
+        binding.fabRefreshArticle.setOnClickListener {
+            startRefreshAnimation()
+            homeViewModel.fetchArticles()
+        }
+
+        // Fetch articles
+        homeViewModel.fetchArticles()
+    }
+
+    private fun setupClickListeners() {
         val navOptions = NavOptions.Builder()
             .setPopUpTo(R.id.navigation_home, true)
             .build()
@@ -98,64 +172,67 @@ class HomeFragment : Fragment() {
         binding.buttonSeeAllArticles.setOnClickListener {
             findNavController().navigate(R.id.navigation_article, null, navOptions)
         }
-
-        // Setup articles using ViewModel
-        setupArticles()
-
-        return root
     }
 
-    private fun setupArticles() {
-        // Initialize empty adapter
-        articleAdapter = ArticleAdapter(emptyList()) { article ->
-            val intent = Intent(requireContext(), ArticleActivity::class.java).apply {
-                putExtra(ArticleActivity.EXTRA_ARTICLE_TITLE, article.label)
-                putExtra(ArticleActivity.EXTRA_ARTICLE_DATE, article.createdAt)
-                putExtra(ArticleActivity.EXTRA_ARTICLE_DESCRIPTION, article.description)
-                putExtra(ArticleActivity.EXTRA_ARTICLE_IMAGE, article.imageUrl)
+    private fun updateArticleUI(articles: List<Any>, isLoading: Boolean, hasError: Boolean = false) {
+        when {
+            isLoading -> {
+                // Show loading state
+                binding.recyclerViewArticle.visibility = View.GONE
+                binding.articleEmptyLayout.visibility = View.GONE
+                binding.buttonSeeAllArticles.visibility = View.GONE
+                binding.articleLoadingLayout.visibility = View.VISIBLE
+                stopRefreshAnimation()
             }
-            startActivity(intent)
-        }
+            articles.isEmpty() -> {
+                // Show empty state
+                binding.recyclerViewArticle.visibility = View.GONE
+                binding.articleLoadingLayout.visibility = View.GONE
+                binding.buttonSeeAllArticles.visibility = View.GONE // Hide button when no articles
+                binding.articleEmptyLayout.visibility = View.VISIBLE
+                stopRefreshAnimation()
 
-        binding.recyclerViewArticle.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = articleAdapter
-        }
-
-        // Observe articles from ViewModel
-        homeViewModel.articles.observe(viewLifecycleOwner) { articles ->
-            // Limit articles to top 5, similar to history
-            val top5Articles = articles.take(5)
-            articleAdapter = ArticleAdapter(top5Articles) { article ->
-                val intent = Intent(requireContext(), ArticleActivity::class.java).apply {
-                    putExtra(ArticleActivity.EXTRA_ARTICLE_TITLE, article.label)
-                    putExtra(ArticleActivity.EXTRA_ARTICLE_DATE, article.createdAt)
-                    putExtra(ArticleActivity.EXTRA_ARTICLE_DESCRIPTION, article.description)
-                    putExtra(ArticleActivity.EXTRA_ARTICLE_IMAGE, article.imageUrl)
+                // Update empty state message based on error
+                if (hasError) {
+                    binding.emptyArticleTitle.text = getString(R.string.error_loading_articles)
+                    binding.emptyArticleDescription.text = getString(R.string.error_loading_description)
+                } else {
+                    binding.emptyArticleTitle.text = getString(R.string.refresh_title_articles)
+                    binding.emptyArticleDescription.text = getString(R.string.refresh_description)
                 }
-                startActivity(intent)
             }
-            binding.recyclerViewArticle.adapter = articleAdapter
-        }
-
-        // Observe loading state
-        homeViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            // You can show/hide a progress indicator here if needed
-        }
-
-        // Observe error messages
-        homeViewModel.error.observe(viewLifecycleOwner) { errorMsg ->
-            if (errorMsg.isNotEmpty()) {
-                Toast.makeText(requireContext(), errorMsg, Toast.LENGTH_SHORT).show()
+            else -> {
+                // Show articles
+                binding.articleLoadingLayout.visibility = View.GONE
+                binding.articleEmptyLayout.visibility = View.GONE
+                binding.recyclerViewArticle.visibility = View.VISIBLE
+                binding.buttonSeeAllArticles.visibility = View.VISIBLE // Show button when articles are available
+                stopRefreshAnimation()
             }
         }
+    }
 
-        // Fetch articles
-        homeViewModel.fetchArticles()
+    private fun startRefreshAnimation() {
+        stopRefreshAnimation()
+        refreshAnimator = ObjectAnimator.ofFloat(binding.fabRefreshArticle, "rotation", 0f, 360f).apply {
+            duration = 1000
+            repeatCount = ObjectAnimator.INFINITE
+            interpolator = LinearInterpolator()
+            start()
+        }
+    }
+
+    private fun stopRefreshAnimation() {
+        refreshAnimator?.let { animator ->
+            animator.cancel()
+            binding.fabRefreshArticle.rotation = 0f
+        }
+        refreshAnimator = null
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        stopRefreshAnimation()
         _binding = null
     }
 }

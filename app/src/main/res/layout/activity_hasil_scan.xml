@@ -107,7 +107,7 @@
                             android:text="@string/confidence"
                             android:textStyle="bold"
                             android:textSize="14sp"
-                            android:textColor="#4A5568"/>
+                            android:textColor="@color/black_quaternary"/>
 
                         <TextView
                             android:id="@+id/confidence_text"
@@ -115,7 +115,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
                             android:textStyle="bold"
-                            android:textColor="#4A5568"
+                            android:textColor="@color/black_quaternary"
                             tools:text="95.5%"/>
                     </LinearLayout>
 
@@ -135,7 +135,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    app:cardBackgroundColor="#FFFFFF">
+                    app:cardBackgroundColor="@color/white">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -150,7 +150,7 @@
                             android:textStyle="bold"
                             android:textSize="18sp"
                             android:layout_marginBottom="5dp"
-                            android:textColor="#2D3748" />
+                            android:textColor="@color/black_secondary" />
 
                         <TextView
                             android:id="@+id/history_description"
@@ -158,7 +158,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
                             android:justificationMode="inter_word"                            android:layout_margin="1dp"
-                            android:textColor="#4A5568"
+                            android:textColor="@color/black_quaternary"
                             tools:text="Detailed description of the classification and its unique characteristics."
                             android:layout_marginBottom="16dp"/> <!-- Same margin as Saran card -->
                     </LinearLayout>
@@ -170,7 +170,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    app:cardBackgroundColor="#FFFFFF">
+                    app:cardBackgroundColor="@color/white">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -184,7 +184,7 @@
                             android:text="@string/suggestion"
                             android:textStyle="bold"
                             android:textSize="18sp"
-                            android:textColor="#2D3748"
+                            android:textColor="@color/black_secondary"
                             android:layout_marginBottom="5dp"/>
 
                         <TextView
@@ -192,9 +192,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
-                            android:justificationMode="inter_word"                            android:layout_margin="1dp"
-
-                            android:textColor="#4A5568"
+                            android:justificationMode="inter_word"
+                            android:layout_margin="1dp"
+                            android:textColor="@color/black_quaternary"
                             tools:text="Personalized care tips and recommendations."/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -204,7 +204,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    app:cardBackgroundColor="#FFFFFF">
+                    app:cardBackgroundColor="@color/white">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -218,7 +218,7 @@
                             android:text="@string/receipt"
                             android:textStyle="bold"
                             android:textSize="18sp"
-                            android:textColor="#2D3748"
+                            android:textColor="@color/black_secondary"
                             android:layout_marginBottom="5dp"/>
 
                         <TextView
@@ -227,7 +227,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
                             android:layout_margin="1dp"
-                            android:textColor="#4A5568"
+                            android:textColor="@color/black_quaternary"
                             tools:text="Recommended recipes based on the scan result."/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -237,7 +237,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    app:cardBackgroundColor="#FFFFFF">
+                    app:cardBackgroundColor="@color/white">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -251,7 +251,7 @@
                             android:text="@string/tutorial"
                             android:textStyle="bold"
                             android:textSize="18sp"
-                            android:textColor="#2D3748"
+                            android:textColor="@color/black_secondary"
                             android:layout_marginBottom="5dp"/>
 
                         <TextView
@@ -260,7 +260,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
                             android:layout_margin="1dp"
-                            android:textColor="#4A5568"
+                            android:textColor="@color/black_quaternary"
                             tools:text="Step-by-step guide or educational material."/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -271,7 +271,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:textColor="#718096"
+                    android:textColor="@color/black_hint"
                     android:textAlignment="center"
                     android:layout_marginTop="10dp"
                     tools:text="Created at: 2024-03-15 10:30:45"/>

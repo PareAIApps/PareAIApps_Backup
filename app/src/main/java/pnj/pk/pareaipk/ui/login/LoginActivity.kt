@@ -3,6 +3,7 @@ package pnj.pk.pareaipk.ui.login
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -36,6 +37,7 @@ class LoginActivity : AppCompatActivity() {
 
         // Observe user LiveData
         loginViewModel.user.observe(this, Observer { user ->
+            hideProgressBar() // Hide progress bar when login completes
             if (user != null) {
                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                 finish()
@@ -46,6 +48,7 @@ class LoginActivity : AppCompatActivity() {
 
         // Observe error LiveData
         loginViewModel.loginError.observe(this, Observer { errorMessage ->
+            hideProgressBar() // Hide progress bar when error occurs
             errorMessage?.let {
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
                 showErrorDialog(it)  // Menampilkan dialog error
@@ -57,6 +60,7 @@ class LoginActivity : AppCompatActivity() {
             val password = binding.passwordInput.text.toString().trim()
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
+                showProgressBar() // Show progress bar for email login
                 loginViewModel.signInWithEmail(email, password)
             } else {
                 Toast.makeText(this, "Email dan password tidak boleh kosong.", Toast.LENGTH_SHORT).show()
@@ -64,6 +68,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.signInButton.setOnClickListener {
+            showProgressBar() // Show progress bar when Google Sign-In starts
             signInWithGoogle()
         }
 
@@ -74,6 +79,18 @@ class LoginActivity : AppCompatActivity() {
         binding.forgotPasswordText.setOnClickListener {
             startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
         }
+    }
+
+    private fun showProgressBar() {
+        // Show loading overlay with semi-transparent background
+        binding.loadingOverlay.visibility = View.VISIBLE
+        // Progress bar is inside the overlay, so it will be visible automatically
+    }
+
+    private fun hideProgressBar() {
+        // Hide loading overlay
+        binding.loadingOverlay.visibility = View.GONE
+        // All interactions are automatically restored when overlay is hidden
     }
 
     private fun showErrorDialog(message: String) {
@@ -104,7 +121,9 @@ class LoginActivity : AppCompatActivity() {
                 )
                 handleGoogleSignIn(result)
             } catch (e: Exception) {
+                hideProgressBar() // Hide progress bar on error
                 Log.d("LoginActivity", "Google Sign-In Error: ${e.message}")
+                Toast.makeText(this@LoginActivity, "Google Sign-In failed: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -117,14 +136,20 @@ class LoginActivity : AppCompatActivity() {
                         val googleIdTokenCredential = GoogleIdTokenCredential.createFrom(credential.data)
                         loginViewModel.signInWithGoogle(googleIdTokenCredential.idToken)
                     } catch (e: GoogleIdTokenParsingException) {
+                        hideProgressBar() // Hide progress bar on parsing error
                         Log.e("LoginActivity", "Invalid Google ID token", e)
+                        Toast.makeText(this, "Invalid Google ID token", Toast.LENGTH_SHORT).show()
                     }
                 } else {
+                    hideProgressBar() // Hide progress bar on unexpected credential type
                     Log.e("LoginActivity", "Unexpected type of credential")
+                    Toast.makeText(this, "Unexpected credential type", Toast.LENGTH_SHORT).show()
                 }
             }
             else -> {
+                hideProgressBar() // Hide progress bar on unexpected credential
                 Log.e("LoginActivity", "Unexpected type of credential")
+                Toast.makeText(this, "Unexpected credential type", Toast.LENGTH_SHORT).show()
             }
         }
     }

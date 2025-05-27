@@ -5,29 +5,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:background="@color/white_primary"
     tools:context=".ui.login.LoginActivity">
 
-    <!-- ProgressBar (hidden by default, positioned at the center) -->
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
-        android:indeterminate="true"
-        android:indeterminateTint="@color/green_light"
-        android:elevation="4dp"/>
-
     <!-- ScrollView for login content -->
     <ScrollView
+        android:id="@+id/scrollViewContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true">
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,9 +60,10 @@
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginBottom="16dp"
-                app:cursorColor="@color/green_light"
                 android:layout_marginStart="1dp"
-                android:layout_marginEnd="1dp">
+                android:layout_marginEnd="1dp"
+                app:cursorColor="@color/green_light">
+
                 <pnj.pk.pareaipk.custom_view.EmailEditText
                     android:id="@+id/emailInput"
                     android:layout_width="match_parent"
@@ -104,8 +91,9 @@
                 app:endIconMode="password_toggle"
                 android:layout_marginBottom="16dp"
                 android:layout_marginStart="1dp"
-                app:cursorColor="@color/green_light"
-                android:layout_marginEnd="1dp">
+                android:layout_marginEnd="1dp"
+                app:cursorColor="@color/green_light">
+
                 <pnj.pk.pareaipk.custom_view.PasswordEditText
                     android:id="@+id/passwordInput"
                     android:layout_width="match_parent"
@@ -141,8 +129,7 @@
                 app:strokeColor="@color/green_light"
                 app:backgroundTint="@color/green_light"/>
 
-
-            <!-- Divider for Google Sign-In (OR) with lines on both sides -->
+            <!-- Divider -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -150,14 +137,12 @@
                 android:gravity="center"
                 android:layout_marginBottom="10dp">
 
-                <!-- Left Line -->
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="1"
                     android:background="@color/black_secondary" />
 
-                <!-- OR Text -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -167,7 +152,6 @@
                     android:textColor="@color/black_secondary"
                     android:layout_marginHorizontal="8dp" />
 
-                <!-- Right Line -->
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
@@ -200,6 +184,7 @@
                 android:orientation="horizontal"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -216,4 +201,35 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+    <!-- Loading Overlay outside ScrollView, full screen -->
+    <FrameLayout
+        android:id="@+id/loadingOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/green_light"
+            android:elevation="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="60dp"
+            android:text="@string/loading"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+    </FrameLayout>
+
 </RelativeLayout>

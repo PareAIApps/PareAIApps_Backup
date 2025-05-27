@@ -1,7 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <solid android:color="@android:color/transparent" />
-    <stroke android:width="1dp" android:color="@color/red" />
-    <corners android:radius="8dp" />
-</shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Saat tombol ditekan -->
+    <item android:state_pressed="true">
+        <layer-list>
+            <!-- Shadow layer (darker translucent background) -->
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="#33FF0000" /> <!-- semi-transparent black for shadow -->
+                    <corners android:radius="12dp" />
+                </shape>
+            </item>
+            <!-- Foreground layer (the button itself) -->
+            <item android:top="2dp" android:left="2dp">
+                <shape android:shape="rectangle">
+                    <solid android:color="@android:color/transparent" />
+                    <corners android:radius="12dp" />
+                    <stroke
+                        android:width="1dp"
+                        android:color="@color/red" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <!-- Default state -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <corners android:radius="12dp" />
+            <stroke
+                android:width="1dp"
+                android:color="@color/red" />
+        </shape>
+    </item>
+</selector>

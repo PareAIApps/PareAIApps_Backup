@@ -40,7 +40,7 @@
                 android:text="@string/title_article"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/black" />
+                android:textColor="@color/black_secondary" />
 
             <TextView
                 android:id="@+id/textDescription"

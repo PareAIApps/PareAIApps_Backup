@@ -28,6 +28,7 @@
     <string name="all">All</string>
     <string name="cancel">Cancel</string>
     <string name="article">Article</string>
+    <string name="loading">Loading...</string>
 
     <!--  Home  -->
     <string name="welcome">Welcome to Pare AI</string>
@@ -38,6 +39,8 @@
     <string name="see_all">See All</string>
     <string name="article_list">Article List</string>
     <string name="see_all_articles">See All Articles</string>
+    <string name="error_loading_articles">Failed to Load Article</string>
+    <string name="error_loading_description">An error occurred while loading the article.\nPlease try again by pressing the refresh button.</string>
 
     <!--  Article   -->
     <string name="detail_article">Article Detail</string>
@@ -45,6 +48,9 @@
     <string name="description_article">This is the complete description of the article. This content explains in detail the content of the article selected by the user.</string>
     <string name="share_article">Share Article</string>
     <string name="subtitle">Brief description of the article.</string>
+    <string name="refresh_articles">Refresh Articles</string>
+    <string name="refresh_description">Article is not available at this time.\nTry reloading to see the latest article.</string>
+    <string name="refresh_title_articles">No Articles</string>
 
     <!--  Login  -->
     <string name="sign_in_google">Sign In With Google</string>
@@ -74,7 +80,7 @@
     <string name="img_empty">Please insert the image file first</string>
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
-    <string name="check_padi">Check Padi</string>
+    <string name="check_padi">Check Rice Plant</string>
     <string name="confidence">Confidence:&#160;</string>
     <string name="dialog_title_instruction">Instruction</string>
     <string name="dialog_message_instruction">Please select an image from the gallery or take one with the camera, then press the scan button.</string>
@@ -129,6 +135,12 @@
     <string name="item_selected_single">%d Item Selected</string>
     <string name="delete_one_item_confirmation">Are you sure you want to delete this 1 history item?</string>
     <string name="delete_multiple_items_confirmation">Are you sure you want to delete %d history items?</string>
+    <!-- Empty State Strings -->
+    <string name="no_scan_history">No Scan History Yet</string>
+    <string name="start_scanning_description">Start scanning rice plant to see history of disease diagnosis</string>
+    <string name="start_scanning">Start Scan</string>
+    <string name="scan_tip">Point the camera at the rice plan for disease detection or select an image from the gallery</string>
+    <string name="empty_history_illustration">Empty history illustration</string>
 
     <!--  Settings   -->
     <!-- Add to strings.xml file -->
