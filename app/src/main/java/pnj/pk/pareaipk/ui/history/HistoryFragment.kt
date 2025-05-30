@@ -27,16 +27,14 @@ class HistoryFragment : Fragment() {
     private val filterLabels by lazy {
         listOf(
             getString(R.string.all), // Changed to string resource
-            "Bacterial Leaf Blight",
-            "Brown Spot",
-            "False Smut",
-            "Healthy Plant",
+            "Bercak Coklat",
+            "Noda Paslu",
+            "Tanaman Sehat",
             "Hispa",
-            "Leaf Blast",
-            "Neck Blast",
-            "Sheath Blight Rot",
-            "Stemborer",
-            "Hispa",
+            "Blast Daun",
+            "Blast Leher",
+            "Busuk Pelepah Daun",
+            "Penggerek Batang",
             "Wereng"
         )
     }

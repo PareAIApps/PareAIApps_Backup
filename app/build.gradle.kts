@@ -83,6 +83,10 @@ dependencies {
     // DataStore Preferences for settings storage
     implementation (libs.androidx.datastore.preferences)
 
+    implementation (libs.androidx.swiperefreshlayout)
+
+    implementation (libs.androidx.core.splashscreen)
+
     testImplementation(libs.mockito.core)
     testImplementation(libs.mockito.inline)
 

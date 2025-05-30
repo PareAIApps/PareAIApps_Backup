@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- File ini opsional - buat jika ingin lebih custom -->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@color/white" />
+    <foreground>
+        <bitmap
+            android:gravity="center"
+            android:src="@mipmap/logo_png_fix" />
+    </foreground>
+</adaptive-icon>

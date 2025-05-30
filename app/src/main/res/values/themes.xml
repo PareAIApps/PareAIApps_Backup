@@ -15,6 +15,20 @@
         <item name="android:statusBarColor">@color/green_light</item>
     </style>
 
+    <!-- Theme untuk Android 12+ (API 31+) -->
+    <style name="SplashTheme" parent="Theme.SplashScreen">
+        <!-- Icon splash screen menggunakan logo Anda -->
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/splash_icon</item>
+        <!-- Background splash screen -->
+        <item name="android:windowSplashScreenBackground">@color/white</item>
+        <!-- Background di belakang icon (transparan agar sesuai dengan background utama) -->
+        <item name="android:windowSplashScreenIconBackgroundColor">@android:color/transparent</item>
+        <!-- Durasi splash screen (opsional) -->
+        <item name="android:windowSplashScreenAnimationDuration">1000</item>
+        <!-- Theme setelah splash screen -->
+        <item name="postSplashScreenTheme">@style/Theme.Pare_ai_pk.NoActionBar</item>
+    </style>
+
     <!-- Tema tanpa action bar -->
     <style name="Theme.Pare_ai_pk.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/white</item>

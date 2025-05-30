@@ -6,7 +6,9 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
@@ -63,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
                 showProgressBar() // Show progress bar for email login
                 loginViewModel.signInWithEmail(email, password)
             } else {
-                Toast.makeText(this, "Email dan password tidak boleh kosong.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.email_password_empty), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -95,10 +97,33 @@ class LoginActivity : AppCompatActivity() {
 
     private fun showErrorDialog(message: String) {
         val builder = android.app.AlertDialog.Builder(this)
-        builder.setTitle("Login Gagal")
-        builder.setMessage(message)
-        builder.setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
-        builder.show()
+        builder.setTitle(getString(R.string.internet_connection_warning_title))
+        builder.setMessage(getString(R.string.internet_connection_warning_message))
+        builder.setPositiveButton(getString(R.string.ok)) { dialog, _ -> dialog.dismiss() }
+
+        val dialog = builder.create()
+        dialog.show()
+
+        // Set the OK button color to green_light
+        val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+        positiveButton.setTextColor(ContextCompat.getColor(this, R.color.green_light))
+    }
+
+    private fun showInternetStabilityWarning() {
+        val builder = android.app.AlertDialog.Builder(this)
+        builder.setTitle(getString(R.string.login_failed_title))
+        builder.setMessage(getString(R.string.google_account_selection_message))
+        builder.setPositiveButton(getString(R.string.ok)) { dialog, _ ->
+            dialog.dismiss()
+        }
+        builder.setCancelable(false) // Prevent dismissing by clicking outside
+
+        val dialog = builder.create()
+        dialog.show()
+
+        // Set the OK button color to green_light
+        val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+        positiveButton.setTextColor(ContextCompat.getColor(this, R.color.green_light))
     }
 
     private fun signInWithGoogle() {
@@ -123,7 +148,8 @@ class LoginActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 hideProgressBar() // Hide progress bar on error
                 Log.d("LoginActivity", "Google Sign-In Error: ${e.message}")
-                Toast.makeText(this@LoginActivity, "Google Sign-In failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                // Show internet stability warning when Google Sign-In fails
+                showInternetStabilityWarning()
             }
         }
     }
@@ -138,18 +164,18 @@ class LoginActivity : AppCompatActivity() {
                     } catch (e: GoogleIdTokenParsingException) {
                         hideProgressBar() // Hide progress bar on parsing error
                         Log.e("LoginActivity", "Invalid Google ID token", e)
-                        Toast.makeText(this, "Invalid Google ID token", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, getString(R.string.invalid_google_token), Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     hideProgressBar() // Hide progress bar on unexpected credential type
                     Log.e("LoginActivity", "Unexpected type of credential")
-                    Toast.makeText(this, "Unexpected credential type", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.unexpected_credential_type), Toast.LENGTH_SHORT).show()
                 }
             }
             else -> {
                 hideProgressBar() // Hide progress bar on unexpected credential
                 Log.e("LoginActivity", "Unexpected type of credential")
-                Toast.makeText(this, "Unexpected credential type", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.unexpected_credential_type), Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -26,6 +26,7 @@ class ScanFragment : Fragment() {
     private lateinit var binding: FragmentScanBinding
     private val scanViewModel: ScanViewModel by viewModels()
     private var currentImageUri: Uri? = null
+    private var tempImageUri: Uri? = null // Untuk menyimpan URI sementara dari kamera
 
     private val launcherGallery = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
@@ -34,22 +35,28 @@ class ScanFragment : Fragment() {
             currentImageUri = uri
             showImage()
         } else {
+            // Jika tidak memilih gambar dari galeri, tidak melakukan apa-apa
+            // Gambar sebelumnya tetap ditampilkan
             Toast.makeText(requireContext(), getString(R.string.img_cant_found), Toast.LENGTH_SHORT)
                 .show()
-            showDefaultImage()
         }
     }
 
     private val launcherIntentCamera = registerForActivityResult(
         ActivityResultContracts.TakePicture()
     ) { isSuccess ->
-        if (isSuccess && currentImageUri != null) {
+        if (isSuccess && tempImageUri != null) {
+            // Jika berhasil mengambil foto, update currentImageUri dengan tempImageUri
+            currentImageUri = tempImageUri
             showImage()
         } else {
-            currentImageUri = null
-            showDefaultImage()
-            Toast.makeText(requireContext(), getString(R.string.img_cant_found), Toast.LENGTH_SHORT)
-                .show()
+            // Jika gagal atau dibatalkan, reset tempImageUri saja
+            // currentImageUri tetap tidak berubah
+            tempImageUri = null
+            if (!isSuccess) {
+                Toast.makeText(requireContext(), getString(R.string.img_cant_found), Toast.LENGTH_SHORT)
+                    .show()
+            }
         }
     }
 
@@ -72,7 +79,6 @@ class ScanFragment : Fragment() {
 
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
-
         currentImageUri = savedInstanceState?.getParcelable(STATE_IMAGE_URI)
 
         if (currentImageUri != null) {
@@ -87,14 +93,6 @@ class ScanFragment : Fragment() {
         binding.btnKamera.setOnClickListener { startCamera() }
         binding.btnCekApel.setOnClickListener { analyzeImage() }
 
-        AlertDialog.Builder(requireContext())
-            .setTitle(getString(R.string.dialog_title_instruction))
-            .setMessage(getString(R.string.dialog_message_instruction))
-            .setPositiveButton(getString(R.string.ok)) { dialog, _ ->
-                dialog.dismiss()
-            }
-            .show()
-
         return binding.root
     }
 
@@ -103,13 +101,13 @@ class ScanFragment : Fragment() {
     }
 
     private fun startCamera() {
-        currentImageUri = getImageUri(requireContext())
-        if (currentImageUri == null) {
+        tempImageUri = getImageUri(requireContext())
+        if (tempImageUri == null) {
             Toast.makeText(requireContext(), getString(R.string.uri_photo_fail), Toast.LENGTH_SHORT)
                 .show()
             return
         }
-        launcherIntentCamera.launch(currentImageUri!!)
+        launcherIntentCamera.launch(tempImageUri!!)
     }
 
     private fun showImage() {
@@ -119,14 +117,23 @@ class ScanFragment : Fragment() {
     }
 
     private fun showDefaultImage() {
-        binding.placeholderImage.setImageResource(R.mipmap.gallery)
+        binding.placeholderImage.setImageResource(R.mipmap.scan_illustration)
     }
 
     private fun analyzeImage() {
         currentImageUri?.let { uri ->
             val imageFile = uriToFile(uri, requireContext())
             if (imageFile.exists()) {
-                moveToResult(uri)
+                // Tampilkan loading overlay
+                showLoading(true)
+
+                // Simulasi delay untuk proses scan (opsional, hapus jika tidak diperlukan)
+                binding.root.postDelayed({
+                    // Sembunyikan loading overlay
+                    showLoading(false)
+                    moveToResult(uri)
+                }, 2000) // 2 detik delay, sesuaikan dengan kebutuhan atau hapus jika tidak diperlukan
+
             } else {
                 showDefaultImage()
                 currentImageUri = null
@@ -145,6 +152,15 @@ class ScanFragment : Fragment() {
             putExtra(HasilScanActivity.KEY_IMG_URI, uri.toString())
         }
         startActivity(intent)
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.loadingOverlay.visibility = if (isLoading) View.VISIBLE else View.GONE
+
+        // Disable/enable buttons saat loading
+        binding.btnCekApel.isEnabled = !isLoading
+        binding.btnKamera.isEnabled = !isLoading
+        binding.btnGaleri.isEnabled = !isLoading
     }
 
     private fun checkAndRequestPermission() {

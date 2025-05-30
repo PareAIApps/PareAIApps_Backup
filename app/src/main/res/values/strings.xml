@@ -58,6 +58,13 @@
     <string name="email_invalid">Format email tidak valid</string>
     <string name="password_short">Kata sandi tidak boleh kurang dari 6 karakter</string>
     <string name="not_have_account">Belum punya akun?&#160;</string>
+    <string name="email_password_empty">Email dan password tidak boleh kosong.</string>
+    <string name="internet_connection_warning_title">Peringatan Koneksi Internet</string>
+    <string name="internet_connection_warning_message">Pastikan koneksi internet Anda stabil dan coba lagi.</string>
+    <string name="login_failed_title">Login Gagal</string>
+    <string name="google_account_selection_message">Pastikan memilih akun google.</string>
+    <string name="invalid_google_token">Invalid Google ID token</string>
+    <string name="unexpected_credential_type">Unexpected credential type</string>
 
     <!--  Register   -->
     <string name="confirm_password">Konfirmasi Kata Sandi</string>
